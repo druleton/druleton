@@ -83,3 +83,17 @@ function markup_h1_li {
 function markup_debug {
   echo -e "${LBLACK}$1${RESTORE}"
 }
+
+##
+# Show a horizontal devider.
+##
+function markup_devider {
+  echo "================================================================================"
+}
+
+##
+# Show a horizontal devider within a h1.
+##
+function markup_h1_devider {
+  markup_h1 "================================================================================"
+}

@@ -51,10 +51,10 @@ function backup_run {
 
   # Inform about backup.
   echo
-  markup_h1 "================================================================================"
+  markup_h1_devider
   markup_success " Backup created in"
   markup_h1 " ${LWHITE}$BACKUP_DESTINATION${RESTORE}"
-  markup_h1 "================================================================================"
+  markup_h1_devider
   echo
 }
 

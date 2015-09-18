@@ -15,15 +15,15 @@ source $(dirname $0)/src/bootstrap.sh
 
 # Show script information.
 echo
-markup_h1 "================================================================================"
-markup_h1 " Reset website ${LWHITE}$SITE_NAME${LBLUE}"
-markup_h1 "================================================================================"
+markup_h1_devider
+markup_h1 " ${LWHITE}Reset${LBLUE} website ${WHITE}$SITE_NAME"
+markup_h1_devider
 markup_h1_li "The database will be deleted."
 markup_h1_li "The files directory will be deleted, all files will be destroyed."
 markup_h1_li "The settings.php file will be deleted."
 markup_h1_li "The database will be overwritten."
 markup_h1_li "This will install the website."
-markup_h1 "${LBLUE}================================================================================"
+markup_h1_devider
 echo
 
 
@@ -66,12 +66,12 @@ cd "$DIR_CURRENT"
 
 
 # Finish message.
-markup_h1 "================================================================================"
+markup_h1_devider
 markup_success " Finished"
-markup_h1 "================================================================================"
+markup_h1_devider
 markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
 markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
-markup_h1 "================================================================================"
+markup_h1_devider
 echo
 
 

@@ -14,9 +14,9 @@ source $(dirname $0)/src/bootstrap.sh
 
 # Show script information.
 echo
-markup_h1 "================================================================================"
-markup_h1 " Install website ${LWHITE}$SITE_NAME${LBLUE}"
-markup_h1 "================================================================================"
+markup_h1_devider
+markup_h1 " ${LWHITE}Install${LBLUE} website ${WHITE}$SITE_NAME"
+markup_h1_devider
 if [ -d "$DIR_WEB" ]; then
   markup_h1_li "A backup of the web directory and the database will be created."
   markup_h1_li "The web directory will be deleted and all files will be destroyed."
@@ -24,7 +24,7 @@ if [ -d "$DIR_WEB" ]; then
 fi
 markup_h1_li "Drupal core, contrib modules and themes will be downloaded."
 markup_h1_li "Drupal will be installed using the $SITE_PROFILE profile."
-markup_h1 "================================================================================"
+markup_h1_devider
 echo
 
 
@@ -61,12 +61,12 @@ cd "$DIR_CURRENT"
 
 
 # Finish message.
-markup_h1 "================================================================================"
+markup_h1_devider
 markup_success " Finished"
-markup_h1 "================================================================================"
+markup_h1_devider
 markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
 markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
-markup_h1 "================================================================================"
+markup_h1_devider
 echo
 
 
