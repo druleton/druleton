@@ -47,7 +47,7 @@ function help_run_load {
 
 
 # Detect if the help is called.
-if [ $( option_is_set "--help" ) -eq ]; then
+if [ $( option_is_set "--help" ) -eq 1 ]; then
   help_run
 fi
 if [ $( option_is_set "-h" ) -eq 1 ]; then
