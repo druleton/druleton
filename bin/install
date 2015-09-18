@@ -29,15 +29,17 @@ echo
 
 
 # Confirm deletion of files & DB.
-read -p "Are you sure? (y/N) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  markup_warning "! Installation aborted"
+if [ $(option_is_set "--no-confirm") -ne 1 ]; then
+  read -p "Are you sure? (y/N) " -n 1 -r
   echo
-  exit 1
-fi
 
-echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    markup_warning "! Installation aborted"
+    echo
+    exit 1
+  fi
+  echo
+fi
 
 
 # Change the working directory.

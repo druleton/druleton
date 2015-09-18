@@ -1,3 +1,5 @@
   --help (-h)           Show this help text.
+  --hook-info           Show information about the available hooks.
   --no-color            Disable all colored output.
+  --no-confirm          Skip the confirmation step when the script starts.
   --verbose (-v)        Verbose.
