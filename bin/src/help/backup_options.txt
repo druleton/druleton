@@ -1,0 +1,3 @@
+  --only-db             Backup only the database.
+  --only-files          Backup only the sites/default/files directory.
+  --only-web            Backup only the web directory.

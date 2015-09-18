@@ -1,0 +1,3 @@
+  There is only one argument: the name of the directory within in the backup
+  directory that should be used as the source for the restore.
+  A list of all backups to choose from will be listed if no argument is passed.

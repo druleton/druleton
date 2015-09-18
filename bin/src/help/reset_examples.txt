@@ -1,0 +1,2 @@
+  * bin/reset           Without arguments, the environment is dev.
+  * bin/reset prd       Environment = prd.

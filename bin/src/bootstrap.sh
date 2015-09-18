@@ -51,3 +51,6 @@ source "$DIR_CONFIG/config.sh"
 # Check if there is a working Drupal.
 # Check if there is currently a working Drupal installation.
 DRUPAL_INSTALLED=$( drupal_is_installed )
+
+# Load Help.
+source "$DIR_SRC/include/help.sh"

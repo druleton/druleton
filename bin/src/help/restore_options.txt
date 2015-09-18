@@ -1,0 +1,9 @@
+  --no-backup           Do not take a backup before restoring another backup.
+  --no-login            Do not open a webbrowser and login to the website when
+                        the restore process is finished.
+  --only-db             Restore only the database. This will keep the web
+                        directory and its files.
+  --only-files          Restore only the sites/default/files directory. This
+                        will keep the existing web and database data.
+  --only-web            Restore only the web directory. This will keep the
+                        existing database data.

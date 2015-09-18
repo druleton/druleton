@@ -1,0 +1,3 @@
+  The reset script takes one argument: the environment that needs to be
+  installed (e.g. prd, tst, dev, ...).
+  The default environment is dev.

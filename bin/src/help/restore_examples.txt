@@ -1,0 +1,3 @@
+  * bin/restore         Start the restore script, a menu of backup options will
+                        be listed to choose from.
+  * bin/restore v1.0    Restore the backup located in the backup/v1.0 directory.

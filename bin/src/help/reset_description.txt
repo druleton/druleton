@@ -1,0 +1,6 @@
+The reset script will reset an existing installation by deleting the database,
+the sites/default/files directory and running the Drupal installer.
+
+  * A backup of the web directory and the database will be created.
+  * The web directory will be deleted and all files will be destroyed.
+  * The database will be overwritten.

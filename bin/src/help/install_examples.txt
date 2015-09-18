@@ -1,0 +1,2 @@
+  * bin/install         Without arguments, the environment is dev.
+  * bin/install prd     Environment = prd.
