@@ -7,8 +7,20 @@
 ################################################################################
 
 
+# Do we need to and can we run a backup?
+backup_run_active=1
+if [ $(option_is_set "--no-backup") -eq 1 ]; then
+  backup_run_active=0
+fi
+if [ $(drupal_is_installed) -eq 0 ]; then
+  backup_run_active=0
+fi
+
+
 # Run any script before we login into Drupal.
-hook_invoke "backup_before"
+if [ $backup_run_active -eq 1 ]; then
+  hook_invoke "backup_before"
+fi
 
 
 ##
@@ -59,12 +71,13 @@ function backup_run {
 }
 
 
-# Check if there is a working Drupal.
-if [ `drupal_is_installed` -eq 1 ]; then
+# Run the backup function.
+if [ $backup_run_active -eq 1 ]; then
   backup_run
-  echo
 fi
 
 
 # Run any script after we login into Drupal.
-hook_invoke "backup_after"
+if [ $backup_run_active -eq 1 ]; then
+  hook_invoke "backup_after"
+fi
