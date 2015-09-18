@@ -47,15 +47,9 @@ function help_run_load {
 
 
 # Detect if the help is called.
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    --help)
-      help_run
-      ;;
-    -h)
-      help_run
-      ;;
-  esac
-  shift
-done
-
+if [ $( option_is_set "--help" ) -eq 1 ]; then
+  help_run
+fi
+if [ $( option_is_set "-h" ) -eq 1 ]; then
+  help_run
+fi
