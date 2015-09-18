@@ -1,8 +1,13 @@
 #!/bin/bash
 
 ################################################################################
-# Script to reset the environment by deleting the DB & Files directory and
-# reinstall Drupal.
+# Script to restore a local environment from a backup.
+#
+# This will list all available backups and ask you what backup to restore from.
+#
+# This will restore:
+# - The database.
+# - The /web directory.
 #
 # ! Do not change this file !
 # All configuration is in the config directory
@@ -16,14 +21,12 @@ source $(dirname $0)/src/bootstrap.sh
 # Show script information.
 echo
 markup_h1 "================================================================================"
-markup_h1 " Reset website ${LWHITE}$SITE_NAME${LBLUE}"
+markup_h1 " Restore website ${LWHITE}$SITE_NAME${LBLUE}"
 markup_h1 "================================================================================"
-markup_h1_li "The database will be deleted."
-markup_h1_li "The files directory will be deleted, all files will be destroyed."
-markup_h1_li "The settings.php file will be deleted."
-markup_h1_li "The database will be overwritten."
-markup_h1_li "This will install the website."
-markup_h1 "${LBLUE}================================================================================"
+markup_h1 " This will restore:"
+markup_h1_li "The database."
+markup_h1_li "The /web directory."
+markup_h1 "================================================================================"
 echo
 
 
@@ -31,19 +34,12 @@ echo
 read -p "Are you sure? (y/N) " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  markup_warning "! Reset aborted"
+  markup_warning "! Restore aborted"
   echo
   exit 1
 fi
 
 echo
-
-
-# Check first if there is a Drupal core avaibale in the web folder.
-if [ ! -f "$DIR_WEB/index.php" ]; then
-  markup_error "No drupal core available."
-  echo "You need to run the bin/install script to install Drupal."
-fi
 
 
 # Change the working directory.
@@ -52,11 +48,7 @@ cd "$DIR_ROOT"
 
 # Run script steps.
 source "$DIR_SRC/script_before.sh"
-source "$DIR_SRC/backup.sh"
-source "$DIR_SRC/cleanup.sh"
-source "$DIR_SRC/drupal_install.sh"
-source "$DIR_SRC/drupal_modules_disable.sh"
-source "$DIR_SRC/drupal_modules_enable.sh"
+source "$DIR_SRC/restore.sh"
 source "$DIR_SRC/drupal_login.sh"
 source "$DIR_SRC/script_after.sh"
 

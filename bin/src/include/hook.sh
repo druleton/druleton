@@ -31,7 +31,10 @@ function hook_invoke {
 function hook_invoke_script {
   hook_invoke_script="$1"
   if [ -f "$hook_invoke_script" ]; then
-    echo -e "${LWHITE}>${LBLUE} Run hook ${RESTORE}$hook_invoke_script"
+    echo -e "${LWHITE}>${LBLUE} Run hook${RESTORE}"
+    markup_debug "$hook_invoke_script"
+    echo
     source "$hook_invoke_script"
+    echo
   fi
 }

@@ -45,6 +45,7 @@ cd "$DIR_ROOT"
 
 # Run script steps.
 source "$DIR_SRC/script_before.sh"
+source "$DIR_SRC/backup.sh"
 source "$DIR_SRC/cleanup.sh"
 source "$DIR_SRC/drupal_make.sh"
 source "$DIR_SRC/drupal_install.sh"

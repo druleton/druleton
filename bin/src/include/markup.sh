@@ -74,3 +74,12 @@ function markup_li {
 function markup_h1_li {
   echo -e " ${BLUE}•${LBLUE} $1"
 }
+
+##
+# Show text as a debug message.
+#
+# @param The text to show in the debug message.
+##
+function markup_debug {
+  echo -e "${LBLACK}$1${RESTORE}"
+}

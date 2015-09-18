@@ -14,7 +14,11 @@ hook_invoke "drupal_login_before"
 
 # Open on-time-login in browser.
 markup_h1 "Open browser and login"
-drush uli -l "$SITE_URL" /
+if [ `drupal_is_installed` -eq 1 ]; then
+  drush --root="$DIR_WEB" uli -l "$SITE_URL" /
+else
+  message_error "No working Drupal installation to login to."
+fi
 echo
 
 

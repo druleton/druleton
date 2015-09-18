@@ -15,6 +15,7 @@ BLUE='\033[00;34m'
 MAGENTA='\033[00;35m'
 CYAN='\033[00;36m'
 WHITE='\033[00;37m'
+GREY='\033[01;30m'
 
 # Bold (lighter)
 LBLACK='\033[01;30m'

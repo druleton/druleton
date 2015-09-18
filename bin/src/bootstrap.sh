@@ -37,21 +37,17 @@ DIR_BACKUP="$DIR_ROOT/backup"
 DIR_BUILD="$DIR_ROOT/build"
 
 
-# Check if there is currently a working Drupal installation.
-DRUPAL_INSTALLED=0
-DRUPAL_INSTALLED_SUCCESS=`drush --root="$DIR_WEB" \
-status grep "Drupal bootstrap" \
-| grep "Successful"`
-if [[ "$DRUPAL_INSTALLED_SUCCESS" != "" ]]; then
-  DRUPAL_INSTALLED=1
-fi
-
-
 # Include helpers.
 source "$DIR_SRC/include/colors.sh"
 source "$DIR_SRC/include/markup.sh"
 source "$DIR_SRC/include/message.sh"
 source "$DIR_SRC/include/hook.sh"
+source "$DIR_SRC/include/drupal.sh"
 
 # Load the config file.
 source "$DIR_CONFIG/config.sh"
+
+
+# Check if there is a working Drupal.
+# Check if there is currently a working Drupal installation.
+DRUPAL_INSTALLED=$( drupal_is_installed )
