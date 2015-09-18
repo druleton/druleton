@@ -1,0 +1,71 @@
+#!/bin/bash
+
+################################################################################
+# Script to install a new site based on the configuration.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+
+# Show script information.
+echo
+markup_h1 "================================================================================"
+markup_h1 " Install website ${LWHITE}$SITE_NAME${LBLUE}"
+markup_h1 "================================================================================"
+if [ -d "$DIR_WEB" ]; then
+  markup_h1_li "The web directory will be deleted and all files will be destroyed."
+  markup_h1_li "The database will be overwritten."
+fi
+markup_h1_li "Drupal core, contrib modules and themes will be downloaded."
+markup_h1_li "Drupal will be installed using the $SITE_PROFILE profile."
+markup_h1 "================================================================================"
+echo
+
+
+# Confirm deletion of files & DB.
+read -p "Are you sure? (y/N) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  markup_warning "! Installation aborted"
+  echo
+  exit 1
+fi
+
+echo
+
+
+# Change the working directory.
+cd "$DIR_ROOT"
+
+
+# Run script steps.
+source "$DIR_SRC/script_before.sh"
+source "$DIR_SRC/cleanup.sh"
+source "$DIR_SRC/drupal_make.sh"
+source "$DIR_SRC/drupal_install.sh"
+source "$DIR_SRC/drupal_modules_disable.sh"
+source "$DIR_SRC/drupal_modules_enable.sh"
+source "$DIR_SRC/drupal_login.sh"
+source "$DIR_SRC/script_after.sh"
+
+
+# Go back from where this script was called.
+cd "$DIR_CURRENT"
+
+
+# Finish message.
+markup_h1 "================================================================================"
+markup_success " Finished"
+markup_h1 "================================================================================"
+markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
+markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
+markup_h1 "================================================================================"
+echo
+
+
+exit 0

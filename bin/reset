@@ -1,0 +1,77 @@
+#!/bin/bash
+
+################################################################################
+# Script to reset the environment by deleting the DB & Files directory and
+# reinstall Drupal.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+
+# Show script information.
+echo
+markup_h1 "================================================================================"
+markup_h1 " Reset website ${LWHITE}$SITE_NAME${LBLUE}"
+markup_h1 "================================================================================"
+markup_h1_li "The database will be deleted."
+markup_h1_li "The files directory will be deleted, all files will be destroyed."
+markup_h1_li "The settings.php file will be deleted."
+markup_h1_li "The database will be overwritten."
+markup_h1_li "This will install the website."
+markup_h1 "${LBLUE}================================================================================"
+echo
+
+
+# Confirm deletion of files & DB.
+read -p "Are you sure? (y/N) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  markup_warning "! Reset aborted"
+  echo
+  exit 1
+fi
+
+echo
+
+
+# Check first if there is a Drupal core avaibale in the web folder.
+if [ ! -f "$DIR_WEB/index.php" ]; then
+  markup_error "No drupal core available."
+  echo "You need to run the bin/install script to install Drupal."
+fi
+
+
+# Change the working directory.
+cd "$DIR_ROOT"
+
+
+# Run script steps.
+source "$DIR_SRC/script_before.sh"
+source "$DIR_SRC/cleanup.sh"
+source "$DIR_SRC/drupal_install.sh"
+source "$DIR_SRC/drupal_modules_disable.sh"
+source "$DIR_SRC/drupal_modules_enable.sh"
+source "$DIR_SRC/drupal_login.sh"
+source "$DIR_SRC/script_after.sh"
+
+
+# Go back from where this script was called.
+cd "$DIR_CURRENT"
+
+
+# Finish message.
+markup_h1 "================================================================================"
+markup_success " Finished"
+markup_h1 "================================================================================"
+markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
+markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
+markup_h1 "================================================================================"
+echo
+
+
+exit 0
