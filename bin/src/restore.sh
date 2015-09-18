@@ -25,6 +25,7 @@ function restore_run {
   fi
 
   backup_directories=( $( ls -r "$DIR_BACKUP" ) )
+  backup_directory=""
 
   if [ ${#backup_directories[@]} -eq 0 ]; then
     message_error "No backups available."
@@ -45,9 +46,20 @@ function restore_run {
         ;;
 
       *)
-        backup_directory="$opt"
-        break
+        # Check if one of the allowed choises is selected.
+        for backup_directory_i in ${backup_directories[@]}; do
+          if [ "$backup_directory_i" = "$opt" ]; then
+            backup_directory="$backup_directory_i"
+            break
+          fi
+        done
+
+        if [ "$backup_directory" != "" ]; then
+          break
+        fi
+        message_warning "Illegal choise"
         ;;
+
     esac
   done
 
