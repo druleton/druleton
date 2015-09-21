@@ -184,10 +184,11 @@ function restore_run_database {
 # @param The backup directory from where to restore the database.
 ##
 function restore_run_files {
-  local backup_directory="$DIR_BACKUP/$1"
+  local directory="$1"
+  local backup_directory="$DIR_BACKUP/$directory"
 
   # We can only restore if we have the proper backup file.
-  if [ ! -f "$backup_directory/files.tar.gz" ]; then
+  if [ $(restore_run_directory_has_files_backup "$directory") -eq 0 ]; then
     message_error "The files directory backup file does not exist."
     echo
     return 1
@@ -199,7 +200,11 @@ function restore_run_files {
 
   # Restore the files directory from the backup.
   cd "$DIR_WEB/sites/default"
-  tar -xzf "$backup_directory/files.tar.gz"
+  if [ -f "$backup_directory/files.tar.gz" ]; then
+    tar -xzf "$backup_directory/files.tar.gz"
+  else
+    tar --strip-components=3 -xzf "$backup_directory/web.tar.gz" "web/sites/default/files"
+  fi
 
   # Return the result.
   if [ $? -ne 0 ]; then
@@ -309,7 +314,7 @@ function restore_run_directory_has_db_backup {
 function restore_run_directory_has_files_backup {
   local directory="$1"
 
-  if [ -f "$DIR_BACKUP/$directory/files.tar.gz" ]; then
+  if [ -f "$DIR_BACKUP/$directory/files.tar.gz" ] || [ $(restore_run_directory_has_web_backup "$directory") -eq 1 ]; then
     echo 1
     return
   fi
