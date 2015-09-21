@@ -1,4 +1,3 @@
-  --keep-files          Do not delete the sites/default/files directory.
   --no-backup           Do not take a backup before the reset is run.
   --no-login            Do not open a webbrowser and login to the website when
                         the reset is finished.
