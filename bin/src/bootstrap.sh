@@ -16,6 +16,7 @@
 #  $DIR_BACKUP  : the directory where backups will be stored.
 #  $DIR_BUILD   : the directory where the build will be stored.
 #  $DRUPAL_INSTALLED : Is there a working Drupal instalation 1/0.
+#  $CONFIRMED   : is the --confirm or -y option passed to the script.
 ################################################################################
 
 
@@ -52,6 +53,13 @@ source "$DIR_CONFIG/config.sh"
 # Check if there is a working Drupal.
 # Check if there is currently a working Drupal installation.
 DRUPAL_INSTALLED=$( drupal_is_installed )
+
+# Check if a confirmed option is given.
+if [ $(option_is_set "--confirm") -eq 1 ] || [ $(option_is_set "-y") -eq 1 ]; then
+  CONFIRMED=1
+else
+ CONFIRMED=0
+fi
 
 # Load Help.
 source "$DIR_SRC/include/help.sh"
