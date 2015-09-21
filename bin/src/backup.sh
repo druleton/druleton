@@ -33,8 +33,12 @@ function backup_run {
   local backup_current_dir=$( pwd )
 
   # Create backup directory.
-  local backup_timestamp=`date +%Y%m%d_%H%M%S`
-  local backup_destination="$DIR_BACKUP/$backup_timestamp"
+  if [ -z $SCRIPT_ARGUMENT ]; then
+    local backup_timestamp=`date +%Y%m%d_%H%M%S`
+    local backup_destination="$DIR_BACKUP/$backup_timestamp"
+  else
+    local backup_destination="$DIR_BACKUP/$SCRIPT_ARGUMENT"
+  fi
   mkdir -p "$backup_destination"
 
 
