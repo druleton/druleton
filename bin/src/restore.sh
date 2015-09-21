@@ -81,16 +81,19 @@ function restore_run_directory {
   local backup_directory="$DIR_BACKUP/$1"
   if [ ! -d "$backup_directory" ]; then
     message_error "The backup directory does not exist."
+    echo
     return 1
   fi
 
   if [ ! -f "$backup_directory/db.tar.gz" ]; then
     message_error "The database backup file does not exist."
+    echo
     return 1
   fi
 
   if [ ! -f "$backup_directory/web.tar.gz" ]; then
     message_error "The web directory backup file does not exist."
+    echo
     return 1
   fi
 
@@ -167,8 +170,14 @@ function restore_run_directory_has_full_backup {
 }
 
 
-# Run the restore function.
-restore_run
+# Run a restore for the requested directory name.
+if [ ! -z "$SCRIPT_ARGUMENT" ]; then
+  restore_run_directory "$SCRIPT_ARGUMENT"
+# Or show a list to choose from.
+else
+  restore_run
+fi
+
 if [ "$?" -eq 1 ]; then
   exit
 fi

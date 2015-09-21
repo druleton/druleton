@@ -26,6 +26,10 @@ markup_h1_devider
 markup_h1 " This will restore:"
 markup_h1_li "The database."
 markup_h1_li "The /web directory."
+if [ ! -z "$SCRIPT_ARGUMENT" ]; then
+  echo
+  markup_h1 " The backup will be restored from backup/${LWHITE}$SCRIPT_ARGUMENT${LBLUE}"
+fi
 markup_h1_devider
 echo
 
