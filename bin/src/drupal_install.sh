@@ -6,9 +6,6 @@
 # - drupal_install_after  : Scripts that should run after Drupal is installed.
 ################################################################################
 
-# Go into drupal dir
-cd "$DIR_WEB"
-
 
 # Run any script before we run the Drupal installer.
 hook_invoke "drupal_install_before"
@@ -16,7 +13,7 @@ hook_invoke "drupal_install_before"
 
 # Install Drupal with the configuration parameters.
 markup_h1 "Install Drupal"
-drush -y si \
+drupal_drush -y si \
   --account-name="$ACCOUNT_NAME" \
   --account-pass="$ACCOUNT_PASS" \
   --account-mail="$ACCOUNT_MAIL" \

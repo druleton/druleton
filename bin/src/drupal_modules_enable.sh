@@ -46,7 +46,7 @@ function drupal_modules_enable_run {
 
   # Enable all modules in configuration.
   for module_enable in ${MODULES_ENABLE[@]}; do
-    drush -y en ${module_enable}
+    drupal_drush -y en ${module_enable}
   done
   echo
 }

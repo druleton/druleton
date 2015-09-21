@@ -101,7 +101,7 @@ function restore_run_directory {
   markup_h1 "Restore from backup (can take a while...)"
 
   # Delete the database content.
-  drush --root="$DIR_WEB" -y sql-drop
+  drupal_drush -y sql-drop
 
   # Delete the web directory.
   drupal_sites_default_unprotect
@@ -120,7 +120,7 @@ function restore_run_directory {
   # Restore the database from the backup.
   cd "$backup_directory"
   tar -xzf "db.tar.gz"
-  drush --root="$DIR_WEB" sql-cli < "db.sql"
+  drupal_drush sql-cli < "db.sql"
   if [ $? -eq 0 ]; then
     message_success "Database is restored."
   else

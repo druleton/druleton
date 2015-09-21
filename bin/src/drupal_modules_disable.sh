@@ -46,7 +46,7 @@ function drupal_modules_disable_run {
 
   # Disable all modules in configuration.
   for module_disable in ${MODULES_DISABLE[@]}; do
-    drush -y dis ${module_disable}
+    drupal_drush -y dis ${module_disable}
   done
   echo
 }

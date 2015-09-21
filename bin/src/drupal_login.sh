@@ -18,7 +18,7 @@ if [ $(option_is_set "--no-login") -ne 1 ]; then
   # Open on-time-login in browser.
   markup_h1 "Open browser and login"
   if [ `drupal_is_installed` -eq 1 ]; then
-    drush --root="$DIR_WEB" uli -l "$SITE_URL" /
+    drupal_drush uli -l "$SITE_URL" /
   else
     message_error "No working Drupal installation to login to."
   fi
