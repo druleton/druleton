@@ -59,7 +59,7 @@ function backup_run {
   # Default backup DB & Web directory.
   if [ $only_db -eq 0 ] && [ $only_web -eq 0 ] && [ $only_files -eq 0 ]; then
     backup_run_database "$backup_destination"
-    backup_run_files_directory "$backup_destination"
+    backup_run_web_directory "$backup_destination"
   fi
 
   # Back to where we started.
