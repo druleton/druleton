@@ -24,10 +24,11 @@ function restore_run {
     return 1
   fi
 
-  backup_directories=( $( ls -r "$DIR_BACKUP" ) )
-  backup_directory=""
+  # Scan the backup directory.
+  restore_run_scan_directory
 
-  if [ ${#backup_directories[@]} -eq 0 ]; then
+  # We should have at minimum one full backup.
+  if [ ${#BACKUP_DIRECTORIES[@]} -eq 0 ]; then
     message_error "No backups available."
     echo
     return 1
@@ -36,7 +37,7 @@ function restore_run {
   # Show the select menu.
   PS3="Please enter your choice: "
   markup_h2 "Select the backup to restore from:"
-  select opt in "${backup_directories[@]}" "Cancel"; do
+  select opt in "${BACKUP_DIRECTORIES[@]}" "Cancel"; do
     case $opt in
       "Cancel")
         echo
@@ -47,7 +48,7 @@ function restore_run {
 
       *)
         # Check if one of the allowed choises is selected.
-        for backup_directory_i in ${backup_directories[@]}; do
+        for backup_directory_i in ${BACKUP_DIRECTORIES[@]}; do
           if [ "$backup_directory_i" = "$opt" ]; then
             backup_directory="$backup_directory_i"
             break
@@ -77,7 +78,7 @@ function restore_run {
 function restore_run_directory {
   markup_h1 "Backup directory : ${LWHITE}$1${LBLUE}"
 
-  backup_directory="$DIR_BACKUP/$1"
+  local backup_directory="$DIR_BACKUP/$1"
   if [ ! -d "$backup_directory" ]; then
     message_error "The backup directory does not exist."
     return 1
@@ -131,9 +132,46 @@ function restore_run_directory {
   return 0
 }
 
+##
+# Scan the backup directory for full backups.
+#
+# Only directories who have a db & web backup will be listed.
+# The result will be stored in the $BACKUP_DIRECTORIES variable.
+##
+function restore_run_scan_directory {
+  BACKUP_DIRECTORIES=()
 
-# Check if there is a working Drupal.
+  local directories=( $( ls -r "$DIR_BACKUP" ) )
+  for directory in ${directories[@]}; do
+    local directory_is_valid=$(restore_run_directory_has_full_backup "$directory")
+    if [ $directory_is_valid -eq 1 ]; then
+      BACKUP_DIRECTORIES+=("$directory")
+    fi
+  done
+}
+
+##
+# Helper to check if the directory has a full backup.
+#
+# @param the directory name within the backup directory.
+##
+function restore_run_directory_has_full_backup {
+  local directory="$1"
+
+  if [ -f "$DIR_BACKUP/$directory/db.tar.gz" ] && [ -f "$DIR_BACKUP/$directory/web.tar.gz" ]; then
+    echo 1
+    return
+  fi
+
+  echo 0
+}
+
+
+# Run the restore function.
 restore_run
+if [ "$?" -eq 1 ]; then
+  exit
+fi
 
 
 # Run any script after we login into Drupal.
