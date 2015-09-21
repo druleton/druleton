@@ -7,7 +7,6 @@
 
 # Files to be deleted before the script is run.
 CLEANUP_FILES=(
-  "$DIR_WEB/sites/default/settings.php"
 )
 
 # Directories to be deleted before the script is run.
