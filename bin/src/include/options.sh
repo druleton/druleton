@@ -4,8 +4,14 @@
 
 # Loop trough the arguments and store them in the options array.
 SCRIPT_OPTIONS=()
+SCRIPT_ARGUMENT=""
 while [ "$#" -gt 0 ]; do
-  SCRIPT_OPTIONS+=("$1")
+  if [[ $1 == -* ]]; then
+    SCRIPT_OPTIONS+=("$1")
+  else
+    SCRIPT_ARGUMENT="$1"
+  fi
+
   shift
 done
 
