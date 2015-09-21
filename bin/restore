@@ -18,14 +18,31 @@
 source $(dirname $0)/src/bootstrap.sh
 
 
+# Get the backup options.
+OPTION_RESTORE_ONLY_DB=$( option_is_set "--only-db" )
+OPTION_RESTORE_ONLY_FILES=$( option_is_set "--only-files" )
+OPTION_RESTORE_ONLY_WEB=$( option_is_set "--only-web" )
+
+
 # Show script information.
 echo
 markup_h1_devider
 markup_h1 " ${LWHITE}Restore${LBLUE} website ${WHITE}$SITE_NAME"
 markup_h1_devider
 markup_h1 " This will restore:"
-markup_h1_li "The database."
-markup_h1_li "The /web directory."
+if [ $OPTION_RESTORE_ONLY_DB -eq 1 ]; then
+  markup_h1_li "The database."
+fi
+if [ $OPTION_RESTORE_ONLY_FILES -eq 1 ]; then
+  markup_h1_li "The sites/default/files directory."
+fi
+if [ $OPTION_RESTORE_ONLY_WEB -eq 1 ]; then
+  markup_h1_li "The /web directory."
+fi
+if [ $OPTION_RESTORE_ONLY_DB -ne 1 ] && [ $OPTION_RESTORE_ONLY_FILES -ne 1 ] && [ $OPTION_RESTORE_ONLY_WEB -ne 1 ]; then
+  markup_h1_li "The database."
+  markup_h1_li "The /web directory."
+fi
 if [ ! -z "$SCRIPT_ARGUMENT" ]; then
   echo
   markup_h1 " The backup will be restored from backup/${LWHITE}$SCRIPT_ARGUMENT${LBLUE}"
