@@ -17,7 +17,7 @@ if [ $(drupal_is_installed) -eq 0 ]; then
 fi
 
 
-# Run any script before we login into Drupal.
+# Run any script before we create backups.
 if [ $backup_run_active -eq 1 ]; then
   hook_invoke "backup_before"
 fi
@@ -30,31 +30,36 @@ function backup_run {
   markup_h1 "Create backup (can take a while...)"
 
   # Dir where the script is before backup is created.
-  backup_current_dir=$( pwd )
+  local backup_current_dir=$( pwd )
 
   # Create backup directory.
-  BACKUP_TIMESTAMP=`date +%Y%m%d_%H%M%S`
-  BACKUP_DESTINATION="$DIR_BACKUP/$BACKUP_TIMESTAMP"
-  mkdir -p "$BACKUP_DESTINATION"
+  local backup_timestamp=`date +%Y%m%d_%H%M%S`
+  local backup_destination="$DIR_BACKUP/$backup_timestamp"
+  mkdir -p "$backup_destination"
 
-  # Take a backup of the database.
-  cd "$BACKUP_DESTINATION"
-  drush --root="$DIR_WEB" sql-dump > "$BACKUP_DESTINATION/db.sql"
-  if [[ $? -eq 0 ]]; then
-    tar -czf "db.tar.gz" "db.sql"
-    rm "$BACKUP_DESTINATION/db.sql"
-    message_success "Backup database."
-  else
-    message_error "Can not backup database."
+
+  # Backup only the database.
+  local only_db=$( option_is_set "--only-db" )
+  if [ $only_db -eq 1 ]; then
+    backup_run_database "$backup_destination"
   fi
 
-  # Take a backup of the web directory.
-  cd "$DIR_ROOT"
-  tar -czf "$BACKUP_DESTINATION/web.tar.gz" "web"
-  if [[ $? -eq 0 ]]; then
-    message_success "Backup web directory."
-  else
-    message_error "Can not backup web directory."
+  # Backup only the sites/default/files.
+  local only_files=$( option_is_set "--only-files" )
+  if [ $only_files -eq 1 ]; then
+    backup_run_files_directory "$backup_destination"
+  fi
+
+  # Backup the whole web directory.
+  local only_web=$( option_is_set "--only-web" )
+  if [ $only_web -eq 1 ]; then
+    backup_run_web_directory "$backup_destination"
+  fi
+
+  # Default backup DB & Web directory.
+  if [ $only_db -eq 0 ] && [ $only_web -eq 0 ] && [ $only_files -eq 0 ]; then
+    backup_run_database "$backup_destination"
+    backup_run_files_directory "$backup_destination"
   fi
 
   # Back to where we started.
@@ -65,19 +70,81 @@ function backup_run {
   echo
   markup_h1_devider
   markup_success " Backup created in"
-  markup_h1 " ${LWHITE}$BACKUP_DESTINATION${RESTORE}"
+  markup_h1 " ${LWHITE}$backup_destination${RESTORE}"
   markup_h1_devider
   echo
 }
 
+##
+# Backup the database.
+#
+# @param Directory (path) where the backup should be stored.
+##
+function backup_run_database {
+  local backup_destination="$1"
 
-# Run the backup function.
+  cd "$backup_destination"
+  drush --root="$DIR_WEB" sql-dump > "$backup_destination/db.sql"
+  if [[ $? -eq 0 ]]; then
+    tar -czf "db.tar.gz" "db.sql"
+    rm "$backup_destination/db.sql"
+    message_success "Backup database."
+    return 0
+  else
+    message_error "Can not backup database."
+    return 1
+  fi
+}
+
+##
+# Backup the files directory.
+#
+# @param Directory (path) where the backup should be stored.
+##
+function backup_run_files_directory {
+  local backup_destination="$1"
+
+  # Take a backup of the web directory.
+  cd "$DIR_WEB/sites/default"
+  tar -czf "$backup_destination/files.tar.gz" "files"
+  if [[ $? -eq 0 ]]; then
+    message_success "Backup files directory."
+    return 0
+  else
+    message_error "Can not backup files directory."
+    return 1
+  fi
+}
+
+##
+# Backup the web directory.
+#
+# @param Directory (path) where the backup should be stored.
+##
+function backup_run_web_directory {
+  local backup_destination="$1"
+
+  # Take a backup of the web directory.
+  cd "$DIR_ROOT"
+  tar -czf "$backup_destination/web.tar.gz" "web"
+  if [[ $? -eq 0 ]]; then
+    message_success "Backup web directory."
+    return 0
+  else
+    message_error "Can not backup web directory."
+    return 1
+  fi
+}
+
+
+
 if [ $backup_run_active -eq 1 ]; then
+
+  # Run the backup function.
   backup_run
-fi
 
 
-# Run any script after we login into Drupal.
-if [ $backup_run_active -eq 1 ]; then
+  # Run any script after we took the backup.
   hook_invoke "backup_after"
+
 fi
