@@ -78,25 +78,12 @@ function restore_run {
 function restore_run_directory {
   markup_h1 "Backup directory : ${LWHITE}$1${LBLUE}"
 
-  local backup_directory="$DIR_BACKUP/$1"
-  if [ ! -d "$backup_directory" ]; then
+  local backup_directory="$1"
+  if [ ! -d "$DIR_BACKUP/$backup_directory" ]; then
     message_error "The backup directory does not exist."
     echo
     return 1
   fi
-
-  if [ ! -f "$backup_directory/db.tar.gz" ]; then
-    message_error "The database backup file does not exist."
-    echo
-    return 1
-  fi
-
-  if [ ! -f "$backup_directory/web.tar.gz" ]; then
-    message_error "The web directory backup file does not exist."
-    echo
-    return 1
-  fi
-
 
   # ! Create a backup of the current active environment.
   echo
@@ -104,35 +91,42 @@ function restore_run_directory {
 
   markup_h1 "Restore from backup (can take a while...)"
 
-  # Delete the database content.
-  drupal_drush -y sql-drop
+  # Get the options.
+  local only_db=$( option_is_set "--only-db" )
+  local only_web=$( option_is_set "--only-web" )
+  local only_files=$( option_is_set "--only-files" )
 
-  # Delete the web directory.
-  drupal_sites_default_unprotect
-  rm -R "$DIR_WEB"
-
-  # Restore the web directory from the backup.
-  cd "$DIR_ROOT"
-  tar -xzf "$backup_directory/web.tar.gz"
-  if [ $? -eq 0 ]; then
-    message_success "Web directory is restored."
-  else
-    message_error "Can not restore web directory."
-    return 1
+  # Restore default?
+  local restore_default=1
+  if [ $only_db -ne 0 ] || [ $only_web -ne 0 ] || [ $only_files -ne 0 ]; then
+    restore_default=0
   fi
 
-  # Restore the database from the backup.
-  cd "$backup_directory"
-  tar -xzf "db.tar.gz"
-  drupal_drush sql-cli < "db.sql"
-  if [ $? -eq 0 ]; then
-    message_success "Database is restored."
-  else
-    message_error "Can not restore database."
-    return 1
+  # Restore only the database.
+  if [ $only_db -eq 1 ] || [ $restore_default -eq 1 ]; then
+    restore_run_database "$backup_directory"
+    if [ $? -ne 0 ]; then
+      exit
+    fi
   fi
 
-  return 0
+  # Restore only the whole web directory.
+  if [ $only_web -eq 1 ] || [ $restore_default -eq 1 ]; then
+    restore_run_web "$backup_directory"
+    if [ $? -ne 0 ]; then
+      exit
+    fi
+  fi
+
+  # Restore only the sites/default/files.
+  if [ $only_files -eq 1 ]; then
+    restore_run_files "$backup_directory"
+    if [ $? -ne 0 ]; then
+      exit
+    fi
+  fi
+
+  echo
 }
 
 ##
@@ -146,7 +140,7 @@ function restore_run_scan_directory {
 
   local directories=( $( ls -r "$DIR_BACKUP" ) )
   for directory in ${directories[@]}; do
-    local directory_is_valid=$(restore_run_directory_has_full_backup "$directory")
+    local directory_is_valid=$(restore_run_directory_has_backup "$directory")
     if [ $directory_is_valid -eq 1 ]; then
       BACKUP_DIRECTORIES+=("$directory")
     fi
@@ -154,20 +148,191 @@ function restore_run_scan_directory {
 }
 
 ##
-# Helper to check if the directory has a full backup.
+# Restore the database.
+#
+# @param The backup directory from where to restore the database.
+##
+function restore_run_database {
+  local backup_directory="$DIR_BACKUP/$1"
+
+  # We can only restore if we have the proper backup file.
+  if [ ! -f "$backup_directory/db.tar.gz" ]; then
+    message_error "The database backup file does not exist."
+    echo
+    return 1
+  fi
+
+  # Delete the database content.
+  drupal_drush -y sql-drop
+
+  # Restore the database from the backup.
+  cd "$backup_directory"
+  tar -xzf "db.tar.gz"
+  drupal_drush sql-cli < "db.sql"
+
+  # Return the result.
+  if [ $? -ne 0 ]; then
+    message_error "Can not restore database."
+    return 1
+  fi
+  message_success "Database is restored."
+}
+
+##
+# Restore the files directory.
+#
+# @param The backup directory from where to restore the database.
+##
+function restore_run_files {
+  local backup_directory="$DIR_BACKUP/$1"
+
+  # We can only restore if we have the proper backup file.
+  if [ ! -f "$backup_directory/files.tar.gz" ]; then
+    message_error "The files directory backup file does not exist."
+    echo
+    return 1
+  fi
+
+  # Delete the files directory.
+  drupal_sites_default_unprotect
+  rm -R "$DIR_WEB/sites/default/files"
+
+  # Restore the files directory from the backup.
+  cd "$DIR_WEB/sites/default"
+  tar -xzf "$backup_directory/files.tar.gz"
+
+  # Return the result.
+  if [ $? -ne 0 ]; then
+    message_error "Can not restore files directory."
+    return 1
+  fi
+  message_success "Files directory is restored."
+}
+
+##
+# Restore the web directory.
+#
+# @param The backup directory from where to restore the web directory.
+##
+function restore_run_web {
+  local backup_directory="$DIR_BACKUP/$1"
+
+  # We can only restore if we have the proper backup file.
+  if [ ! -f "$backup_directory/web.tar.gz" ]; then
+    message_error "The web directory backup file does not exist."
+    echo
+    return 1
+  fi
+
+  # Delete the web directory.
+  drupal_sites_default_unprotect
+  rm -R "$DIR_WEB"
+
+  # Restore the web directory from the backup.
+  cd "$DIR_ROOT"
+  tar -xzf "$backup_directory/web.tar.gz"
+
+  # Return the result.
+  if [ $? -ne 0 ]; then
+    message_error "Can not restore web directory."
+    return 1
+  fi
+  message_success "Web directory is restored."
+}
+
+##
+# Check if the given directory has a full backup.
 #
 # @param the directory name within the backup directory.
 ##
-function restore_run_directory_has_full_backup {
+function restore_run_directory_has_backup {
   local directory="$1"
 
-  if [ -f "$DIR_BACKUP/$directory/db.tar.gz" ] && [ -f "$DIR_BACKUP/$directory/web.tar.gz" ]; then
+  local only_db=$( option_is_set "--only-db" )
+  local only_web=$( option_is_set "--only-web" )
+  local only_files=$( option_is_set "--only-files" )
+
+  # Restore default?
+  local restore_default=1
+  if [ $only_db -ne 0 ] || [ $only_web -ne 0 ] || [ $only_files -ne 0 ]; then
+    restore_default=0
+  fi
+
+  # Restore only the database.
+  if [ $only_db -eq 1 ] || [ $restore_default -eq 1 ]; then
+    if [ $(restore_run_directory_has_db_backup "$directory") -eq 0 ]; then
+      echo 0
+      return
+    fi
+  fi
+
+  # Restore only the sites/default/files.
+  if [ $only_files -eq 1 ]; then
+    if [ $(restore_run_directory_has_files_backup "$directory") -eq 0 ]; then
+      echo 0
+      return
+    fi
+  fi
+
+  # Restore only the whole web directory.
+  if [ $only_web -eq 1 ] || [ $restore_default -eq 1 ]; then
+    if [ $(restore_run_directory_has_web_backup "$directory") -eq 0 ]; then
+      echo 0
+      return
+    fi
+  fi
+
+  echo 1
+}
+
+##
+# Check if the given directory has a db backup.
+#
+# @param the directory name within the backup directory.
+##
+function restore_run_directory_has_db_backup {
+  local directory="$1"
+
+  if [ -f "$DIR_BACKUP/$directory/db.tar.gz" ]; then
     echo 1
     return
   fi
 
   echo 0
 }
+
+##
+# Check if the given directory has a files backup.
+#
+# @param the directory name within the backup directory.
+##
+function restore_run_directory_has_files_backup {
+  local directory="$1"
+
+  if [ -f "$DIR_BACKUP/$directory/files.tar.gz" ]; then
+    echo 1
+    return
+  fi
+
+  echo 0
+}
+
+##
+# Check if the given directory has a web backup.
+#
+# @param the directory name within the backup directory.
+##
+function restore_run_directory_has_web_backup {
+  local directory="$1"
+
+  if [ -f "$DIR_BACKUP/$directory/web.tar.gz" ]; then
+    echo 1
+    return
+  fi
+
+  echo 0
+}
+
 
 
 # Run a restore for the requested directory name.
