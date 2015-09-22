@@ -23,8 +23,6 @@
 # Get the script name
 SCRIPT_NAME=$( basename $0 )
 
-# Get the environment.
-ENVIRONMENT="dev"
 
 # Define all paths.
 DIR_CURRENT=${PWD}
@@ -49,6 +47,8 @@ source "$DIR_SRC/include/drupal.sh"
 # Load the config file.
 source "$DIR_CONFIG/config.sh"
 
+# Get the environment.
+ENVIRONMENT=$(option_get_environment)
 
 # Check if there is a working Drupal.
 # Check if there is currently a working Drupal installation.

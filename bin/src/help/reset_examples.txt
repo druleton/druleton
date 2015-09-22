@@ -1,2 +1,2 @@
-  * bin/reset           Without arguments, the environment is dev.
-  * bin/reset prd       Environment = prd.
+  * bin/reset           Reset the platform.
+  * bin/reset --env=prd Reset the platform for the "prd" environment.

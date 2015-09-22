@@ -1,3 +1,4 @@
+  --env=<name>          The environment to run the script for (default : dev)
   --help (-h)           Show this help text.
   --hook-info           Show information about the available hooks.
   --no-color            Disable all colored output.

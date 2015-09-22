@@ -1,2 +1,3 @@
   * bin/install         Without arguments, the environment is dev.
-  * bin/install prd     Environment = prd.
+  * bin/install --env=prd
+                        Install the website for the "prd" environment.

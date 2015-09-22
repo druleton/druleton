@@ -16,7 +16,7 @@ source $(dirname $0)/src/bootstrap.sh
 # Show script information.
 echo
 markup_h1_devider
-markup_h1 " ${LWHITE}Reset${LBLUE} website ${WHITE}$SITE_NAME"
+markup_h1 " ${LWHITE}Reset${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
 markup_h1_devider
 markup_h1_li "The database will be deleted."
 markup_h1_li "The files directory will be deleted, all files will be destroyed."

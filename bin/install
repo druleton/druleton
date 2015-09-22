@@ -15,7 +15,7 @@ source $(dirname $0)/src/bootstrap.sh
 # Show script information.
 echo
 markup_h1_devider
-markup_h1 " ${LWHITE}Install${LBLUE} website ${WHITE}$SITE_NAME"
+markup_h1 " ${LWHITE}Install${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
 markup_h1_devider
 if [ -d "$DIR_WEB" ]; then
   markup_h1_li "A backup of the web directory and the database will be created."

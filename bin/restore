@@ -27,7 +27,7 @@ OPTION_RESTORE_ONLY_WEB=$( option_is_set "--only-web" )
 # Show script information.
 echo
 markup_h1_devider
-markup_h1 " ${LWHITE}Restore${LBLUE} website ${WHITE}$SITE_NAME"
+markup_h1 " ${LWHITE}Restore${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
 markup_h1_devider
 markup_h1 " This will restore:"
 if [ $OPTION_RESTORE_ONLY_DB -eq 1 ]; then
