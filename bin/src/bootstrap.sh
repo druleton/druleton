@@ -41,7 +41,6 @@ source "$DIR_SRC/include/options.sh"
 source "$DIR_SRC/include/colors.sh"
 source "$DIR_SRC/include/markup.sh"
 source "$DIR_SRC/include/message.sh"
-source "$DIR_SRC/include/hook.sh"
 source "$DIR_SRC/include/drupal.sh"
 
 # Load the config file.
@@ -63,3 +62,6 @@ fi
 
 # Load Help.
 source "$DIR_SRC/include/help.sh"
+
+# Load hook info.
+source "$DIR_SRC/include/hook.sh"

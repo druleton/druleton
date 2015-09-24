@@ -3,6 +3,15 @@
 ################################################################################
 
 ##
+# Prints a line with support for color variables (eg. ${LWHITE}, ${YELLOW}).
+#
+# @param string test to show in the markup.
+##
+function markup {
+  echo -e "$1"
+}
+
+##
 # Show a line as a main header (h1).
 #
 # This will result in text in blue.
@@ -10,7 +19,7 @@
 # @param string test to show in the markup
 ##
 function markup_h1 {
-  echo -e "${LBLUE}$1${RESTORE}"
+  markup "${LBLUE}$1${RESTORE}"
 }
 
 ##
@@ -21,7 +30,7 @@ function markup_h1 {
 # @param string text to show in the markup
 ##
 function markup_h2 {
-  echo -e "${LWHITE}$1${RESTORE}"
+  markup "${YELLOW}$1${RESTORE}"
 }
 
 ##
@@ -32,7 +41,7 @@ function markup_h2 {
 # @param string text to show in the markup.
 ##
 function markup_success {
-  echo -e "${GREEN}$1${RESTORE}"
+  markup "${GREEN}$1${RESTORE}"
 }
 
 ##
@@ -43,7 +52,7 @@ function markup_success {
 # @param string text to show in the markup.
 ##
 function markup_warning {
-  echo -e "${YELLOW}$1${YELLOW}"
+  markup "${YELLOW}$1${YELLOW}"
 }
 
 ##
@@ -54,7 +63,7 @@ function markup_warning {
 # @param string text to show in the markup.
 ##
 function markup_error {
-  echo -e "${RED}$1${RED}"
+  markup "${RED}$1${RED}"
 }
 
 ##
@@ -63,7 +72,7 @@ function markup_error {
 # @param The text to show in the bullet.
 ##
 function markup_li {
-  echo -e " • $1"
+  markup " • $1"
 }
 
 ##
@@ -72,7 +81,7 @@ function markup_li {
 # @param The text to show in the bullet.
 ##
 function markup_h1_li {
-  echo -e " ${BLUE}•${LBLUE} $1"
+  markup " ${BLUE}•${LBLUE} $1"
 }
 
 ##
@@ -81,14 +90,14 @@ function markup_h1_li {
 # @param The text to show in the debug message.
 ##
 function markup_debug {
-  echo -e "${LBLACK}$1${RESTORE}"
+  markup -e "${LBLACK}$1${RESTORE}"
 }
 
 ##
 # Show a horizontal devider.
 ##
 function markup_devider {
-  echo "================================================================================"
+  markup "================================================================================"
 }
 
 ##

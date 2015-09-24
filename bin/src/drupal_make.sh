@@ -37,7 +37,7 @@ function drupal_make_run {
 
   # Check if there are make files in the config.
   if [ ${#MAKE_FILES[@]} -eq 0 ]; then
-    echo "No make files in configuration."
+    markup "No make files in configuration."
     return
   fi
 

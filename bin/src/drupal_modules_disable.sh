@@ -40,7 +40,7 @@ function drupal_modules_disable_run {
 
   # Check if there are modules to disable.
   if [ ${#MODULES_DISABLE[@]} -eq 0 ]; then
-    echo "No modules to disable."
+    markup "No modules to disable."
     return
   fi
 

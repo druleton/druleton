@@ -41,7 +41,7 @@ function help_run {
 ##
 function help_run_load {
   if [ -f "$1" ]; then
-    cat "$1"
+    markup "$(cat $1)"
   fi
 }
 

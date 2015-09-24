@@ -8,7 +8,7 @@
 # @param string message
 ##
 function message_success {
-  echo -e "${GREEN}✓${RESTORE} $1"
+  markup "${GREEN}✓${RESTORE} $1"
 }
 
 ##
@@ -17,7 +17,7 @@ function message_success {
 # @param string message
 ##
 function message_warning {
-  echo -e " ${YELLOW}!${RESTORE} $1"
+  markup " ${YELLOW}!${RESTORE} $1"
 }
 
 ##
@@ -26,5 +26,5 @@ function message_warning {
 # @param string message
 ##
 function message_error {
-  echo -e " ${RED}✗${RED} $1"
+  markup " ${RED}✗${RED} $1"
 }

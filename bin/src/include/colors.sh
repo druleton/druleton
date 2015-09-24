@@ -2,9 +2,8 @@
 # Include script that holds the color definitions for text.
 ################################################################################
 
-
 # Define the colors only if the are wanted.
-if [ $( option_is_set "--no-colors" ) -ne 1 ]; then
+if [ $( option_is_set "--no-color" ) -ne 1 ]; then
 
   # Restore to default colours
   RESTORE='\033[0m'

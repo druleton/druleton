@@ -40,7 +40,7 @@ function drupal_modules_enable_run {
 
   # Check if there are modules to enable.
   if [ ${#MODULES_ENABLE[@]} -eq 0 ]; then
-    echo "No modules to enable."
+    markup "No modules to enable."
     return
   fi
 
