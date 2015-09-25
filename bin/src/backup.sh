@@ -51,13 +51,6 @@ function backup_run {
     backup_default=0
   fi
 
-  # Backup only the database.
-  if [ $only_db -eq 1 ] || [ $backup_default -eq 1 ]; then
-    backup_run_database "$backup_destination"
-  else
-    markup_debug "Database backup skipped"
-  fi
-
   # Backup only the sites/default/files.
   if [ $only_files -eq 1 ]; then
     backup_run_files_directory "$backup_destination"
@@ -70,6 +63,13 @@ function backup_run {
     backup_run_web_directory "$backup_destination"
   else
     markup_debug "Web directory backup skipped"
+  fi
+
+  # Backup only the database.
+  if [ $only_db -eq 1 ] || [ $backup_default -eq 1 ]; then
+    backup_run_database "$backup_destination"
+  else
+    markup_debug "Database backup skipped"
   fi
 
   # Back to where we started.

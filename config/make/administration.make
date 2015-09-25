@@ -3,6 +3,9 @@ api = 2
 
 ; Modules to make the life of a Drupal admin more pleasant.
 
+projects[admin_menu][subdir] = "contrib"
+projects[admin_menu][version] = "3.0-rc5"
+
 projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.5"
 

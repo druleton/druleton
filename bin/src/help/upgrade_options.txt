@@ -1,0 +1,3 @@
+  --no-backup           Do not take a backup before the upgrade is run.
+  --no-login            Do not open a webbrowser and login to the website when
+                        the upgrade is finished.

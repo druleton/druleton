@@ -102,16 +102,6 @@ function restore_run_directory {
     restore_default=0
   fi
 
-  # Restore only the database.
-  if [ $only_db -eq 1 ] || [ $restore_default -eq 1 ]; then
-    restore_run_database "$backup_directory"
-    if [ $? -ne 0 ]; then
-      exit
-    fi
-  else
-    markup_debug "Database restore skipped"
-  fi
-
   # Restore only the whole web directory.
   if [ $only_web -eq 1 ] || [ $restore_default -eq 1 ]; then
     restore_run_web "$backup_directory"
@@ -130,6 +120,16 @@ function restore_run_directory {
     fi
   else
     markup_debug "Files directory restore skipped"
+  fi
+
+  # Restore only the database.
+  if [ $only_db -eq 1 ] || [ $restore_default -eq 1 ]; then
+    restore_run_database "$backup_directory"
+    if [ $? -ne 0 ]; then
+      exit
+    fi
+  else
+    markup_debug "Database restore skipped"
   fi
 
   echo

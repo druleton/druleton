@@ -51,8 +51,16 @@ function drupal_make_run {
 }
 
 
+# Make sure that the web directory does not exists.
+if [ -d "$DIR_WEB" ]; then
+  drupal_sites_default_unprotect
+  rm -R "$DIR_WEB"
+fi
+
+
 # Make Drupal core.
 markup_h1 "Download Drupal core"
+markup_h2 "_core.make"
 drush make "$DIR_CONFIG/make/_core.make" "$DIR_WEB"
 echo
 
