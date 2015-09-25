@@ -28,6 +28,7 @@ function cleanup_run {
   # Check if file exists.
   cleanup_file="$1"
   if [ ! -f "$cleanup_file" ]; then
+    markup_debug "File does not exists: $cleanup_file"
     return
   fi;
 
@@ -54,7 +55,7 @@ function cleanup_run_files {
   fi
 
   for cleanup_file in ${CLEANUP_FILES_CONFIG[@]}; do
-    markup_h2 "File : ${cleanup_file}"
+    markup "${cleanup_file}"
 
     # Delete the file.
     if [ -f "${cleanup_file}" ]; then
@@ -88,7 +89,7 @@ function cleanup_run_directories {
   fi
 
   for cleanup_directory in ${CLEANUP_DIRECTORIES_CONFIG[@]}; do
-    markup_h2 "Directory : ${cleanup_directory}"
+    markup "${cleanup_directory}"
 
     # Delete the directory.
     if [ -d "${cleanup_directory}" ]; then

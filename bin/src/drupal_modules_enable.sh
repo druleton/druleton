@@ -27,11 +27,12 @@ hook_invoke drupal_modules_enable_before
 ##
 function drupal_modules_enable_run {
   # Reset the variable.
-  MODULES_ENABLE=()
-  drupal_modules_enable_file="$1"
+  local MODULES_ENABLE=()
+  local drupal_modules_enable_file="$1"
 
   # Check if file exists.
   if [ ! -f "$drupal_modules_enable_file" ]; then
+    markup_debug "No modules enable file $drupal_modules_enable_file"
     return
   fi
 

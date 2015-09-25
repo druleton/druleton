@@ -17,25 +17,25 @@ function hook_invoke {
   local hook_invoke_name="$1"
 
   # Invoke the script for the script name.
-  hook_invoke_script "$DIR_CONFIG/$SCRIPT_NAME/$hook_invoke_name.sh"
+  hook_invoke_script "$SCRIPT_NAME/${hook_invoke_name}.sh"
 
   # Invoke the script for the script and environment name.
-  hook_invoke_script "$DIR_CONFIG/$SCRIPT_NAME/$hook_invoke_name_$ENVIRONMENT.sh"
+  hook_invoke_script "$SCRIPT_NAME/${hook_invoke_name}_$ENVIRONMENT.sh"
 }
 
 ##
 # Check if the hook script exists, if so include it so it is run.
 #
-# @param full file path of the hook script to run.
+# @param file path within the config folder of the hook script to run.
 ##
 function hook_invoke_script {
-  hook_invoke_script="$1"
+  local hook_invoke_script="$1"
   if [ -f "$hook_invoke_script" ]; then
-    markup "${LWHITE}>${LBLUE} Run hook${RESTORE}"
-    markup_debug "$hook_invoke_script"
+    markup_debug "Run hook : $hook_invoke_script" 1
+    source "$DIR_CONFIG/$hook_invoke_script"
     echo
-    source "$hook_invoke_script"
-    echo
+  else
+    markup_debug "Hook not implemented : $hook_invoke_script"
   fi
 }
 

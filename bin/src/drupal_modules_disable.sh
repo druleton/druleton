@@ -27,11 +27,12 @@ hook_invoke drupal_modules_disable_before
 ##
 function drupal_modules_disable_run {
   # Reset the variable.
-  MODULES_DISABLE=()
-  drupal_modules_disabe_file="$1"
+  local MODULES_DISABLE=()
+  local drupal_modules_disabe_file="$1"
 
   # Check if file exists.
   if [ ! -f "$drupal_modules_disabe_file" ]; then
+    markup_debug "No modules disable file $drupal_modules_disabe_file"
     return
   fi
 

@@ -24,11 +24,12 @@ hook_invoke drupal_make_before
 ##
 function drupal_make_run {
   # Reset the variable.
-  MAKE_FILES=()
-  drupal_make_file="$1"
+  local MAKE_FILES=()
+  local drupal_make_file="$1"
 
   # Check if file exists.
   if [ ! -f "$drupal_make_file" ]; then
+    markup_debug "Make file does not exists : $drupal_make_file"
     return
   fi
 

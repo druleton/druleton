@@ -88,9 +88,17 @@ function markup_h1_li {
 # Show text as a debug message.
 #
 # @param The text to show in the debug message.
+# @param Should there be a newline after the debug message.
 ##
 function markup_debug {
-  markup -e "${LBLACK}$1${RESTORE}"
+  if [ $(option_is_set "-v") -ne 1 ] && [ $(option_is_set "--verbose") -ne 1 ]; then
+    return
+  fi
+
+  markup  "${GREY}$1${RESTORE}"
+  if [ ! -z "$2" ]; then
+    echo
+  fi
 }
 
 ##

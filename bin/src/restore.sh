@@ -108,6 +108,8 @@ function restore_run_directory {
     if [ $? -ne 0 ]; then
       exit
     fi
+  else
+    markup_debug "Database restore skipped"
   fi
 
   # Restore only the whole web directory.
@@ -116,6 +118,8 @@ function restore_run_directory {
     if [ $? -ne 0 ]; then
       exit
     fi
+  else
+    markup_debug "Web directory restore skipped"
   fi
 
   # Restore only the sites/default/files.
@@ -124,6 +128,8 @@ function restore_run_directory {
     if [ $? -ne 0 ]; then
       exit
     fi
+  else
+    markup_debug "Files directory restore skipped"
   fi
 
   echo
@@ -132,8 +138,8 @@ function restore_run_directory {
 ##
 # Scan the backup directory for full backups.
 #
-# Only directories who have a db & web backup will be listed.
-# The result will be stored in the $BACKUP_DIRECTORIES variable.
+# Only directories who have the neccesary backup parts (eg. db, web, files) will
+# be included.
 ##
 function restore_run_scan_directory {
   BACKUP_DIRECTORIES=()
@@ -143,6 +149,8 @@ function restore_run_scan_directory {
     local directory_is_valid=$(restore_run_directory_has_backup "$directory")
     if [ $directory_is_valid -eq 1 ]; then
       BACKUP_DIRECTORIES+=("$directory")
+    else
+      markup_debug "Directory does not have the backup ($directory)."
     fi
   done
 }

@@ -28,4 +28,6 @@ if [ $(option_is_set "--no-login") -ne 1 ]; then
   # Run any script after we login into Drupal.
   hook_invoke "drupal_login_after"
 
+else
+  markup_debug "Drupal login is disabled" 1
 fi

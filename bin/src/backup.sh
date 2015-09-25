@@ -41,34 +41,39 @@ function backup_run {
   fi
   mkdir -p "$backup_destination"
 
+  local only_db=$( option_is_set "--only-db" )
+  local only_web=$( option_is_set "--only-web" )
+  local only_files=$( option_is_set "--only-files" )
+
+  # Backup default?
+  local backup_default=1
+  if [ $only_db -ne 0 ] || [ $only_web -ne 0 ] || [ $only_files -ne 0 ]; then
+    backup_default=0
+  fi
 
   # Backup only the database.
-  local only_db=$( option_is_set "--only-db" )
-  if [ $only_db -eq 1 ]; then
+  if [ $only_db -eq 1 ] || [ $backup_default -eq 1 ]; then
     backup_run_database "$backup_destination"
+  else
+    markup_debug "Database backup skipped"
   fi
 
   # Backup only the sites/default/files.
-  local only_files=$( option_is_set "--only-files" )
   if [ $only_files -eq 1 ]; then
     backup_run_files_directory "$backup_destination"
+  else
+    markup_debug "Files directory backup skipped"
   fi
 
   # Backup the whole web directory.
-  local only_web=$( option_is_set "--only-web" )
-  if [ $only_web -eq 1 ]; then
+  if [ $only_web -eq 1 ] || [ $backup_default -eq 1 ]; then
     backup_run_web_directory "$backup_destination"
-  fi
-
-  # Default backup DB & Web directory.
-  if [ $only_db -eq 0 ] && [ $only_web -eq 0 ] && [ $only_files -eq 0 ]; then
-    backup_run_database "$backup_destination"
-    backup_run_web_directory "$backup_destination"
+  else
+    markup_debug "Web directory backup skipped"
   fi
 
   # Back to where we started.
   cd "$backup_current_dir"
-
 
   # Inform about backup.
   echo
@@ -151,4 +156,6 @@ if [ $backup_run_active -eq 1 ]; then
   # Run any script after we took the backup.
   hook_invoke "backup_after"
 
+else
+  markup_debug "Backup is disabled." 1
 fi
