@@ -1,6 +1,10 @@
 ################################################################################
-# Include script that enable modules as defined in the
-# $MODULES_ENABLE array(s).
+# Functionality to enable modules based on config files.
+################################################################################
+
+
+##
+# Function to enable modules as defined in the $MODULES_ENABLE array(s).
 #
 # This script will try to load the enable config from 4 files:
 #   1. config/drupal_modules_enable.sh
@@ -13,19 +17,35 @@
 #                                  are enabled.
 # - drupal_modules_enable_after  : Scripts that should run after the modules
 #                                  are enabled.
-################################################################################
+#
+# The hooks will be called without and with environment suffix.
+##
+function drupal_modules_enable_run {
+  # Run any script before we run the make files.
+  hook_invoke drupal_modules_enable_before
 
+  # 1. Enable modules.
+  drupal_modules_enable_run_file "$DIR_CONFIG/drupal_modules_enable.sh"
 
-# Run any script before we run the make files.
-hook_invoke drupal_modules_enable_before
+  # 2. Enable modules specific for the environment.
+  drupal_modules_enable_run_file "$DIR_CONFIG/drupal_modules_enable_$ENVIRONMENT.sh"
 
+  # 3. Enable modules specific for the script name.
+  drupal_modules_enable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_enable.sh"
+
+  # 4. Enable modules specific for the script name and environment.
+  drupal_modules_enable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_enable_$ENVIRONMENT.sh"
+
+  # Run any script after we did run the make files.
+  hook_invoke drupal_modules_enable_after
+}
 
 ##
 # Run the make files.
 #
 # @param The file name of the script that contains the config array.
 ##
-function drupal_modules_enable_run {
+function drupal_modules_enable_run_file {
   # Reset the variable.
   local MODULES_ENABLE=()
   local drupal_modules_enable_file="$1"
@@ -51,20 +71,3 @@ function drupal_modules_enable_run {
   done
   echo
 }
-
-
-# 1. Enable modules.
-drupal_modules_enable_run "$DIR_CONFIG/drupal_modules_enable.sh"
-
-# 2. Enable modules specific for the environment.
-drupal_modules_enable_run "$DIR_CONFIG/drupal_modules_enable_$ENVIRONMENT.sh"
-
-# 3. Enable modules specific for the script name.
-drupal_modules_enable_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_enable.sh"
-
-# 4. Enable modules specific for the script name and environment.
-drupal_modules_enable_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_enable_$ENVIRONMENT.sh"
-
-
-# Run any script after we did run the make files.
-hook_invoke drupal_modules_enable_after

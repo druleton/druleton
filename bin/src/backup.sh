@@ -1,32 +1,35 @@
 ################################################################################
-# Include script that backups the current active Drupal installation (if any).
-#
-# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
-# - backup_before : Scripts that should run before the backup is created.
-# - backup_after  : Scripts that should run after the backup is created.
+# Functionality to backup a local (working) Drupal environment.
 ################################################################################
 
 
-# Do we need to and can we run a backup?
-backup_run_active=1
-if [ $(option_is_set "--no-backup") -eq 1 ]; then
-  backup_run_active=0
-fi
-if [ $(drupal_is_installed) -eq 0 ]; then
-  backup_run_active=0
-fi
+##
+# Function to run the actual backup (if not disabled).
+#
+# This function will trigger 2 "hooks" in the config/<script-name>/ directory:
+# - backup_before : Scripts that should run before the backup is created.
+# - backup_after  : Scripts that should run after the backup is created.
+#
+# The hooks will be called without and with environment suffix.
+##
+function backup_run {
+  # Check if the backup is not disabled.
+  if [ $(option_is_set "--no-backup") -eq 1 ]; then
+    markup_debug "Backup is disabled (--no-backup)."
+    return
+  fi
 
-
-# Run any script before we create backups.
-if [ $backup_run_active -eq 1 ]; then
   hook_invoke "backup_before"
-fi
-
+  backup_run_all
+  hook_invoke "backup_after"
+}
 
 ##
 # Function to create a backup of a working Drupal environment.
+#
+# @return The directory where the backup file(s) are saved.
 ##
-function backup_run {
+function backup_run_all {
   markup_h1 "Create backup (can take a while...)"
 
   # Dir where the script is before backup is created.
@@ -145,17 +148,44 @@ function backup_run_web_directory {
   fi
 }
 
+##
+# Backup the sites/default directory of a working environment.
+#
+# This is not a backup like the files or web directory backups: it will move the
+# directory to backup/sites-default. This is used to temporarely stroing the
+# directory while performing a site upgrade.
+#
+# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
+# - backup_sites_default_before : Scripts that should run before the backup is
+#                                 taken.
+# - backup_sites_default_after  : Scripts that should run after the backup is
+#                                 taken.
+#
+# The hooks will be called without and with environment suffix.
+##
+function backup_run_sites_default_directory {
+  hook_invoke backup_sites_default_before
 
+  markup_h1 "Move sites/default into safety."
+  local backup_directory="$DIR_BACKUP"
+  if [ -d "$backup_directory" ]; then
+    mkdir -p "$backup_directory"
+  fi
 
-if [ $backup_run_active -eq 1 ]; then
+  if [ -f "$backup_directory/sites-default" ]; then
+    rm -R "$backup_directory/sites-default"
+  fi
 
-  # Run the backup function.
-  backup_run
+  drupal_sites_default_unprotect
+  mv "$DIR_WEB/sites/default" "$backup_directory/sites-default"
+  if [[ $? -eq 1 ]]; then
+    markup_error "Error while moving the sites/default directory."
+    echo
+    exit
+  else
+    message_success "Success."
+    echo
+  fi
 
-
-  # Run any script after we took the backup.
-  hook_invoke "backup_after"
-
-else
-  markup_debug "Backup is disabled." 1
-fi
+  hook_invoke backup_sites_default_after
+}

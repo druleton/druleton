@@ -1,19 +1,25 @@
 ################################################################################
-# Include script that runs the code to login into Drupal from CLI and open the
-# site in the default browser.
+# Functionality to login de admin user into the Drupal website.
+################################################################################
+
+
+##
+# Function to login into a Drupal site with the admin user.
 #
 # This script will trigger 2 "hooks" in the config/<script-name>/ directory:
 # - drupal_login_before : Scripts that should run before the user is logged in.
 # - drupal_login_after  : Scripts that should run after the user id logged in.
-################################################################################
+#
+# The hooks will be called without and with environment suffix.
+##
+function drupal_login_run {
+  if [ $(option_is_set "--no-login") -eq 1 ]; then
+    markup_debug "Drupal login is disabled" 1
+    return
+  fi
 
-
-
-if [ $(option_is_set "--no-login") -ne 1 ]; then
-
-  # Run any script before we login into Drupal.
+  # Run hooks before we login into Drupal.
   hook_invoke "drupal_login_before"
-
 
   # Open on-time-login in browser.
   markup_h1 "Open browser and login"
@@ -24,10 +30,6 @@ if [ $(option_is_set "--no-login") -ne 1 ]; then
   fi
   echo
 
-
-  # Run any script after we login into Drupal.
+  # Run hooks after we login into Drupal.
   hook_invoke "drupal_login_after"
-
-else
-  markup_debug "Drupal login is disabled" 1
-fi
+}

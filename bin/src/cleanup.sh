@@ -1,6 +1,11 @@
 ################################################################################
-# Include script that holds the code to cleanup files and directories based
-# on an array of $CLEANUP_FILES and $CLEANUP_DIRECTORIES.
+# Functionality to cleanup files & directories based on config files.
+################################################################################
+
+
+##
+# Cleanup files and directories based on the configuration files that holds an
+# array of $CLEANUP_FILES and $CLEANUP_DIRECTORIES.
 #
 # This script will try to load the cleanup from 2 files:
 #   3. config/<script-name>/cleanup.sh
@@ -9,18 +14,30 @@
 # This script will trigger 2 "hooks" in the config/<script-name>/ directory:
 # - cleanup_before : Scripts that should run before the cleanup is run.
 # - cleanup_after  : Scripts that should run after the cleanup is run.
-################################################################################
+#
+# The hooks will be called without and with environment suffix.
+##
+function cleanup_run {
+  hook_invoke "cleanup_before"
 
+  # Make the default directory and its content writable.
+  drupal_sites_default_unprotect
 
-hook_invoke "cleanup_before"
+  # Cleanup based on script.
+  cleanup_run_config "$DIR_CONFIG/$SCRIPT_NAME/cleanup.sh"
 
+  # Cleanup based on script and environment.
+  cleanup_run_config "$DIR_CONFIG/$SCRIPT_NAME/cleanup_$ENVIRONMENT.sh"
+
+  hook_invoke "cleanup_after"
+}
 
 ##
 # Cleanup based on the given configuration file.
 #
 # @param The file name of the script that contains the config array.
 ##
-function cleanup_run {
+function cleanup_run_config {
   # Reset the variables.
   CLEANUP_FILES=()
   CLEANUP_DIRECTORIES=()
@@ -108,19 +125,3 @@ function cleanup_run_directories {
 
   done
 }
-
-
-# Make the default directory and its content writable.
-if [ -d "$DIR_WEB/sites/default" ]; then
-  chmod -R u+w "$DIR_WEB/sites/default"
-fi
-
-
-# Cleanup based on script.
-cleanup_run "$DIR_CONFIG/$SCRIPT_NAME/cleanup.sh"
-
-# Cleanup based on script and environment.
-cleanup_run "$DIR_CONFIG/$SCRIPT_NAME/cleanup_$ENVIRONMENT.sh"
-
-
-hook_invoke "cleanup_after"

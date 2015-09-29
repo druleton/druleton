@@ -1,6 +1,10 @@
 ################################################################################
-# Include script that disables modules as defined in the
-# $MODULES_DISABLE array(s).
+# Functionality to disable modules based on config files.
+################################################################################
+
+
+##
+# Function to disable modules as defined in the $MODULES_DISABLE array(s).
 #
 # This script will try to load the disable config from 4 files:
 #   1. config/drupal_modules_disable.sh
@@ -13,19 +17,35 @@
 #                                   are disabled.
 # - drupal_modules_disable_after  : Scripts that should run after the modules
 #                                   are disabled.
-################################################################################
+#
+# The hooks will be called without and with environment suffix.
+##
+function drupal_modules_disable_run {
+  # Run any script before we run the make files.
+  hook_invoke drupal_modules_disable_before
 
+  # 1. Disable modules.
+  drupal_modules_disable_run_file "$DIR_CONFIG/drupal_modules_disable.sh"
 
-# Run any script before we run the make files.
-hook_invoke drupal_modules_disable_before
+  # 2. Disable modules specific for the environment.
+  drupal_modules_disable_run_file "$DIR_CONFIG/drupal_modules_disable_$ENVIRONMENT.sh"
 
+  # 3. Disable modules specific for the script name.
+  drupal_modules_disable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_disable.sh"
+
+  # 4. Disable modules specific for the script name and environment.
+  drupal_modules_disable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_disable_$ENVIRONMENT.sh"
+
+  # Run any script after we did run the make files.
+  hook_invoke drupal_modules_disable_after
+}
 
 ##
-# Run the make files.
+# Run the make file.
 #
 # @param The file name of the script that contains the config array.
 ##
-function drupal_modules_disable_run {
+function drupal_modules_disable_run_file {
   # Reset the variable.
   local MODULES_DISABLE=()
   local drupal_modules_disabe_file="$1"
@@ -51,20 +71,3 @@ function drupal_modules_disable_run {
   done
   echo
 }
-
-
-# 1. Disable modules.
-drupal_modules_disable_run "$DIR_CONFIG/drupal_modules_disable.sh"
-
-# 2. Disable modules specific for the environment.
-drupal_modules_disable_run "$DIR_CONFIG/drupal_modules_disable_$ENVIRONMENT.sh"
-
-# 3. Disable modules specific for the script name.
-drupal_modules_disable_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_disable.sh"
-
-# 4. Disable modules specific for the script name and environment.
-drupal_modules_disable_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_disable_$ENVIRONMENT.sh"
-
-
-# Run any script after we did run the make files.
-hook_invoke drupal_modules_disable_after

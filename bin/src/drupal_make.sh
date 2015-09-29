@@ -1,5 +1,11 @@
 ################################################################################
-# Include script that runs make files as defined in the $MAKE_FILES array(s).
+# Functionality to download core and contrib modules & themes using make files.
+################################################################################
+
+
+##
+# Function to download core & contrib modules and themes based on the make
+# files.
 #
 # This script will try to load the make config from 4 files:
 #   1. config/drupal_make.sh
@@ -10,19 +16,50 @@
 # This script will trigger 2 "hooks" in the config/<script-name>/ directory:
 # - drupal_make_before : Scripts that should run before the user is logged in.
 # - drupal_make_after  : Scripts that should run after the user id logged in.
-################################################################################
+#
+# The hooks will be called without and with environment suffix.
+##
+function drupal_make_run {
+  # Run any script before we run the make files.
+  hook_invoke drupal_make_before
 
 
-# Run any script before we run the make files.
-hook_invoke drupal_make_before
+  # Make sure that the web directory does not exists.
+  if [ -d "$DIR_WEB" ]; then
+    drupal_sites_default_unprotect
+    rm -R "$DIR_WEB"
+  fi
 
+
+  # Make Drupal core.
+  markup_h1 "Download Drupal core"
+  markup_h2 "_core.make"
+  drush make "$DIR_CONFIG/make/_core.make" "$DIR_WEB"
+  echo
+
+  # 1. Default make files.
+  drupal_make_run_file "$DIR_CONFIG/drupal_make.sh"
+
+  # 2. Make files specific for the environment.
+  drupal_make_run_file "$DIR_CONFIG/drupal_make_$ENVIRONMENT.sh"
+
+  # 3. Make files specific for the script name.
+  drupal_make_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_make.sh"
+
+  # 4. Make files specific for the script name and environment.
+  drupal_make_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_make_$ENVIRONMENT.sh"
+
+
+  # Run any script after we did run the make files.
+  hook_invoke drupal_make_after
+}
 
 ##
 # Run the make files.
 #
 # @param The file name of the script that contains the config array.
 ##
-function drupal_make_run {
+function drupal_make_run_file {
   # Reset the variable.
   local MAKE_FILES=()
   local drupal_make_file="$1"
@@ -49,33 +86,3 @@ function drupal_make_run {
   done
   echo
 }
-
-
-# Make sure that the web directory does not exists.
-if [ -d "$DIR_WEB" ]; then
-  drupal_sites_default_unprotect
-  rm -R "$DIR_WEB"
-fi
-
-
-# Make Drupal core.
-markup_h1 "Download Drupal core"
-markup_h2 "_core.make"
-drush make "$DIR_CONFIG/make/_core.make" "$DIR_WEB"
-echo
-
-# 1. Default make files.
-drupal_make_run "$DIR_CONFIG/drupal_make.sh"
-
-# 2. Make files specific for the environment.
-drupal_make_run "$DIR_CONFIG/drupal_make_$ENVIRONMENT.sh"
-
-# 3. Make files specific for the script name.
-drupal_make_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_make.sh"
-
-# 4. Make files specific for the script name and environment.
-drupal_make_run "$DIR_CONFIG/$SCRIPT_NAME/drupal_make_$ENVIRONMENT.sh"
-
-
-# Run any script after we did run the make files.
-hook_invoke drupal_make_after

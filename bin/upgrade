@@ -42,6 +42,7 @@ if [ $CONFIRMED -ne 1 ]; then
   echo
 fi
 
+
 # Check first if there is a Drupal core avaibale in the web folder.
 if [ "$DRUPAL_INSTALLED" -ne 1 ]; then
   markup_error "No drupal core available."
@@ -50,23 +51,27 @@ if [ "$DRUPAL_INSTALLED" -ne 1 ]; then
 fi
 
 
-# Change the working directory.
-cd "$DIR_ROOT"
-
-
-# Run script steps.
-source "$DIR_SRC/script_before.sh"
+# Includes.
+source "$DIR_SRC/script.sh"
 source "$DIR_SRC/backup.sh"
-source "$DIR_SRC/backup_sites_default.sh"
 source "$DIR_SRC/drupal_make.sh"
-source "$DIR_SRC/restore_sites_default.sh"
+source "$DIR_SRC/restore.sh"
 source "$DIR_SRC/drupal_upgrade.sh"
 source "$DIR_SRC/drupal_login.sh"
-source "$DIR_SRC/script_after.sh"
 
 
-# Go back from where this script was called.
-cd "$DIR_CURRENT"
+# START Script -----------------------------------------------------------------
+
+script_before_run
+backup_run
+backup_run_sites_default_directory
+drupal_make_run
+restore_run_sites_default_directory
+drupal_upgrade_run
+drupal_login_run
+script_after_run
+
+# END Script -------------------------------------------------------------------
 
 
 # Finish message.

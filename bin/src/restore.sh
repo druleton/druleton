@@ -1,22 +1,43 @@
 ################################################################################
-# Include script that restores the web folder and the database from a backup.
+# Functionality to restore a local Drupal installation from backup files.
+################################################################################
+
+
+##
+# Function to run the restore process.
 #
 # This script will trigger 2 "hooks" in the config/<script-name>/ directory:
 # - restore_before : Scripts that should run before the restore is run.
 # - restore_after  : Scripts that should run after the restore has run.
-################################################################################
-
-
-# Run any script before we login into Drupal.
-hook_invoke "restore_before"
-
-
-##
-# Function to restore a backup.
 #
-# This will read the backup folder and list the available backups.
+# The hooks will be called without and with environment suffix.
 ##
 function restore_run {
+  # Run the before hook(s).
+  hook_invoke "restore_before"
+
+
+  # Run a restore for the requested directory name.
+  if [ ! -z "$SCRIPT_ARGUMENT" ]; then
+    restore_run_directory "$SCRIPT_ARGUMENT"
+
+  # Or show a list to choose from.
+  else
+    restore_run_from_selection
+  fi
+
+  if [ "$?" -eq 1 ]; then
+    exit
+  fi
+
+  # Run the after hook(s).
+  hook_invoke "restore_after"
+}
+
+##
+# Function to restore a backup from a list of available backups.
+##
+function restore_run_from_selection {
   markup_h1 "Available backups"
   if [ ! -d "$DIR_BACKUP" ]; then
     message_error "No backups available."
@@ -104,7 +125,7 @@ function restore_run_directory {
 
   # Restore only the whole web directory.
   if [ $only_web -eq 1 ] || [ $restore_default -eq 1 ]; then
-    restore_run_web "$backup_directory"
+    restore_run_web_directory "$backup_directory"
     if [ $? -ne 0 ]; then
       exit
     fi
@@ -114,7 +135,7 @@ function restore_run_directory {
 
   # Restore only the sites/default/files.
   if [ $only_files -eq 1 ]; then
-    restore_run_files "$backup_directory"
+    restore_run_files_directory "$backup_directory"
     if [ $? -ne 0 ]; then
       exit
     fi
@@ -191,12 +212,12 @@ function restore_run_database {
 #
 # @param The backup directory from where to restore the database.
 ##
-function restore_run_files {
+function restore_run_files_directory {
   local directory="$1"
   local backup_directory="$DIR_BACKUP/$directory"
 
   # We can only restore if we have the proper backup file.
-  if [ $(restore_run_directory_has_files_backup "$directory") -eq 0 ]; then
+  if [ $(restore_run_directory_has_files_directory_backup "$directory") -eq 0 ]; then
     message_error "The files directory backup file does not exist."
     echo
     return 1
@@ -227,7 +248,7 @@ function restore_run_files {
 #
 # @param The backup directory from where to restore the web directory.
 ##
-function restore_run_web {
+function restore_run_web_directory {
   local backup_directory="$DIR_BACKUP/$1"
 
   # We can only restore if we have the proper backup file.
@@ -251,6 +272,54 @@ function restore_run_web {
     return 1
   fi
   message_success "Web directory is restored."
+}
+
+##
+# Function to run the sites/default restore process.
+#
+# This will move the sites/default directory from backup/sites-default back to
+# web/sites/default.
+# Existing web/sites/default directory will be deleted before restore.
+#
+# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
+# - restore_sites_default_before : Scripts that should run before the restore is
+#                                  performed.
+# - restore_sites_default_after  : Scripts that should run after the backup is
+#                                  performed.
+#
+# The hooks will be called without and with environment suffix.
+##
+function restore_run_sites_default_directory {
+  # Trigger the before hook(s).
+  hook_invoke restore_sites_default_before
+
+  markup_h1 "Move sites/default back into place."
+
+  if [ -f "$DIR_BACKUP/sites-default" ]; then
+    markup_error "The sites/default backup does not exists."
+    echo
+    return 1
+  fi
+
+  if [ -d "$DIR_WEB/sites/default" ]; then
+    drupal_sites_default_unprotect
+    rm -R "$DIR_WEB/sites/default"
+  fi
+
+  mv "$DIR_BACKUP/sites-default" "$DIR_WEB/sites/default"
+  drupal_sites_default_protect
+
+  if [[ $? -eq 1 ]]; then
+    markup_error "Could not restore the sites-default directory."
+    echo
+    exit
+  else
+    message_success "Directory restored."
+    echo
+  fi
+
+  # Trigger the after hook(s).
+  hook_invoke restore_sites_default_after
 }
 
 ##
@@ -281,7 +350,7 @@ function restore_run_directory_has_backup {
 
   # Restore only the sites/default/files.
   if [ $only_files -eq 1 ]; then
-    if [ $(restore_run_directory_has_files_backup "$directory") -eq 0 ]; then
+    if [ $(restore_run_directory_has_files_directory_backup "$directory") -eq 0 ]; then
       echo 0
       return
     fi
@@ -289,7 +358,7 @@ function restore_run_directory_has_backup {
 
   # Restore only the whole web directory.
   if [ $only_web -eq 1 ] || [ $restore_default -eq 1 ]; then
-    if [ $(restore_run_directory_has_web_backup "$directory") -eq 0 ]; then
+    if [ $(restore_run_directory_has_web_directory_backup "$directory") -eq 0 ]; then
       echo 0
       return
     fi
@@ -319,10 +388,11 @@ function restore_run_directory_has_db_backup {
 #
 # @param the directory name within the backup directory.
 ##
-function restore_run_directory_has_files_backup {
+function restore_run_directory_has_files_directory_backup {
   local directory="$1"
 
-  if [ -f "$DIR_BACKUP/$directory/files.tar.gz" ] || [ $(restore_run_directory_has_web_backup "$directory") -eq 1 ]; then
+  if [ -f "$DIR_BACKUP/$directory/files.tar.gz" ] \
+    || [ $(restore_run_directory_has_web_directory_backup "$directory") -eq 1 ]; then
     echo 1
     return
   fi
@@ -335,7 +405,7 @@ function restore_run_directory_has_files_backup {
 #
 # @param the directory name within the backup directory.
 ##
-function restore_run_directory_has_web_backup {
+function restore_run_directory_has_web_directory_backup {
   local directory="$1"
 
   if [ -f "$DIR_BACKUP/$directory/web.tar.gz" ]; then
@@ -345,21 +415,3 @@ function restore_run_directory_has_web_backup {
 
   echo 0
 }
-
-
-
-# Run a restore for the requested directory name.
-if [ ! -z "$SCRIPT_ARGUMENT" ]; then
-  restore_run_directory "$SCRIPT_ARGUMENT"
-# Or show a list to choose from.
-else
-  restore_run
-fi
-
-if [ "$?" -eq 1 ]; then
-  exit
-fi
-
-
-# Run any script after we login into Drupal.
-hook_invoke "restore_after"
