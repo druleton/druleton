@@ -1,0 +1,5 @@
+Create a package of the project by packaging all code.
+
+The build script will collect all the files (core, contrib modules and themes +
+custom modules and theme in 1 directory and will compress them as a package in
+a tarbal. No Drupal installation will be run.
