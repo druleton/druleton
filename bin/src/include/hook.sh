@@ -30,7 +30,7 @@ function hook_invoke {
 ##
 function hook_invoke_script {
   local hook_invoke_script="$1"
-  if [ -f "$hook_invoke_script" ]; then
+  if [ -f "$DIR_CONFIG/$hook_invoke_script" ]; then
     markup_debug "Run hook : $hook_invoke_script" 1
     source "$DIR_CONFIG/$hook_invoke_script"
     echo
