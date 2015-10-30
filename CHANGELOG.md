@@ -1,6 +1,6 @@
 ## [Unreleased]
 ### Fixed
-#3 backup.sh : Wrong comparison in backup script
+- #3 backup.sh : Wrong comparison in backup script
 
 
 ## [0.1.0] Initial release
