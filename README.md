@@ -16,7 +16,7 @@ by running the command with the `-h` switch.
 
 Example:
 
-``` bash
+```Shell
 $ bin/install -h
 ```
 
@@ -31,7 +31,7 @@ logged in as platform administrator (user 1).
 
 If there is already a working installation, a backup of it will be taken. 
 
-``` bash
+```Shell
 $ bin/install
 ```
 
@@ -45,7 +45,7 @@ A backup will be taken before the reset is run.
 The `sites/default/settings.php` file, the `sites/default/files` directory and 
 the database will be removed before the site is reinstalled.
 
-``` bash
+```bash
 $ bin/reset
 ```
 
@@ -58,7 +58,7 @@ A backup will be taken before the reset is run.
 
 The existing settings.php, files directory and database will be kept.
 
-``` bash
+```bash
 $ bin/upgrade
 ```
 
@@ -66,7 +66,7 @@ $ bin/upgrade
 The `bin/build` command will create a deployment package (code) in the `/build`
 directory.
 
-``` bash
+```bash
 $ bin/build
 ```
 
@@ -77,7 +77,7 @@ database. The backup will be stored in the `/backup` directory.
 You can limit the backup to just the web or files directory or just the database
 by passing them as arguments.
 
-``` bash
+```bash
 $ bin/backup
 ```
 
@@ -88,7 +88,7 @@ which one to restore. It will restore the `/web` directory and the database.
 If there is a working environment: a backup of it will be created before the 
 restore is run.
 
-``` bash
+```bash
 $ bin/restore
 ```
 
@@ -141,7 +141,7 @@ files should be located.
 
 Example for the install command:
 
-``` bash
+```bash
 $ bin/install --hook-info
 ```
 
