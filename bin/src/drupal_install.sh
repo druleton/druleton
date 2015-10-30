@@ -24,7 +24,7 @@ function drupal_install_run {
   markup_debug "  - Site name : $SITE_NAME"
   markup_debug "  - Profile   : $SITE_PROFILE"
   markup_debug "  - Username  : $ACCOUNT_NAME"
-  markup_debug "  - Password  : $ACCOUNT_PASS."
+  markup_debug "  - Password  : $ACCOUNT_PASS"
   markup_debug "  - Email     : $ACCOUNT_MAIL"
   markup_debug "  - DB host   : $DB_HOST"
   markup_debug "  - DB name   : $DB_NAME"
