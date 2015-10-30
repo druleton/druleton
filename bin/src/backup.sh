@@ -26,7 +26,7 @@ function backup_run {
   fi
 
   # Check if there is a working Drupal installation.
-  if [ `drupal_is_installed` -neq 1 ]; then
+  if [ `drupal_is_installed` -ne 1 ]; then
     markup_debug "No working Drupal installation to backup."
     return
   fi
