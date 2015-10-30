@@ -19,6 +19,18 @@ function drupal_install_run {
 
   # Install Drupal with the configuration parameters.
   markup_h1 "Install Drupal"
+
+  markup_debug "Install Drupal with:"
+  markup_debug "  - Site name : $SITE_NAME"
+  markup_debug "  - Profile   : $SITE_PROFILE"
+  markup_debug "  - Username  : $ACCOUNT_NAME"
+  markup_debug "  - Password  : $ACCOUNT_PASS."
+  markup_debug "  - Email     : $ACCOUNT_MAIL"
+  markup_debug "  - DB host   : $DB_HOST"
+  markup_debug "  - DB name   : $DB_NAME"
+  markup_debug "  - DB user   : $DB_USER"
+  markup_debug "  - DB pass   : $DB_PASS"
+
   drupal_drush -y si \
     --account-name="$ACCOUNT_NAME" \
     --account-pass="$ACCOUNT_PASS" \

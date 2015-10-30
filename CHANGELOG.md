@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- #6 drupal_install.sh : Add more verbose info about the install arguments.
+
 ### Fixed
 - #3 backup.sh : Wrong comparison in backup script
 
