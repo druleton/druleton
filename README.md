@@ -1,7 +1,7 @@
 # drupal-skeleton
 
-[![Author](https://img.shields.io/badge/author-%40sgrame-blue.svg?style=flat-square)](https://twitter.com/sgrame)
-[![License : MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![Author][icon-author]][link-author]
+[![License : MIT][icon-license]][link-license]
 
 Set of bash scripts and configuration files to install, reset, upgrade, backup,
 restore and build a Drupal project without the need to have Core and Contributed
@@ -216,8 +216,4 @@ config/install/script_after(_dev).sh
 [icon-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 
 [link-author]: https://twitter.com/sgrame
-[link-license]: 
-
-
-[![Author](https://img.shields.io/badge/author-%40sgrame-blue.svg?style=flat-square)](https://twitter.com/sgrame)
-[![License : MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[link-license]: LICENSE.md
