@@ -19,6 +19,18 @@ function backup_run {
     return
   fi
 
+  # Check if there is something to backup.
+  if [ ! -d "$DIR_WEB" ]; then
+    markup_debug "No web directory to backup."
+    return
+  fi
+
+  # Check if there is a working Drupal installation.
+  if [ `drupal_is_installed` -neq 1 ]; then
+    markup_debug "No working Drupal installation to backup."
+    return
+  fi
+
   hook_invoke "backup_before"
   backup_run_all
   hook_invoke "backup_after"
