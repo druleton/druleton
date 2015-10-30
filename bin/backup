@@ -1,0 +1,81 @@
+#!/bin/bash
+
+################################################################################
+# Script to backup a working Drupal installation.
+#
+# This will backup:
+# - The database.
+# - The /web directory.
+#
+# The code in /project will not be included in the backup.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+
+# Get the backup options.
+OPTION_BACKUP_ONLY_DB=$( option_is_set "--only-db" )
+OPTION_BACKUP_ONLY_FILES=$( option_is_set "--only-files" )
+OPTION_BACKUP_ONLY_WEB=$( option_is_set "--only-web" )
+
+
+# Show script information.
+echo
+markup_h1_devider
+markup_h1 " ${LWHITE}Backup${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
+markup_h1_devider
+markup_h1 " This will backup:"
+if [ $OPTION_BACKUP_ONLY_DB -eq 1 ]; then
+  markup_h1_li "The database."
+fi
+if [ $OPTION_BACKUP_ONLY_FILES -eq 1 ]; then
+  markup_h1_li "The sites/default/files directory."
+fi
+if [ $OPTION_BACKUP_ONLY_WEB -eq 1 ]; then
+  markup_h1_li "The /web directory."
+fi
+if [ $OPTION_BACKUP_ONLY_DB -ne 1 ] && [ $OPTION_BACKUP_ONLY_FILES -ne 1 ] && [ $OPTION_BACKUP_ONLY_WEB -ne 1 ]; then
+  markup_h1_li "The database."
+  markup_h1_li "The /web directory."
+fi
+markup_h1
+markup_h1 "The code in /project will not be included in the backup."
+markup_h1_devider
+echo
+
+
+# Confirm deletion of files & DB.
+if [ $CONFIRMED -ne 1 ]; then
+  read -p "Are you sure? (y/N) " -n 1 -r
+  echo
+
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    markup_warning "! Backup aborted"
+    echo
+    exit 1
+  fi
+  echo
+fi
+
+
+# Includes.
+source "$DIR_SRC/script.sh"
+source "$DIR_SRC/backup.sh"
+source "$DIR_SRC/script_after.sh"
+
+
+# START Script -----------------------------------------------------------------
+
+script_before_run
+backup_run
+script_after_run
+
+# END Script -------------------------------------------------------------------
+
+
+exit 0
