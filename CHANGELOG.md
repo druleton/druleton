@@ -1,3 +1,8 @@
+## [0.1.2] - 2015-10-30
+### Fixed
+- #9 Added missing `bin/backup` and `bin/build` scripts.
+
+
 ## [0.1.1] - 2015-10-30
 ### Added
 - #6 drupal_install.sh : Add more verbose info about the install arguments.
