@@ -8,7 +8,7 @@ restore and build a Drupal project without the need to have Core and Contributed
 code in the repository.
 
 
-# 6 commands
+## 6 commands
 The skeleton provides 6 commands to run the site locally.
 
 Each command has a help section that explains the options for it. View the help
@@ -21,8 +21,8 @@ $ bin/install -h
 ```
 
 
-## bin/install
-The `bin/install` command will download Core & Contrib (modules, themes & 
+### bin/install
+The `bin/install` command will download Core & Contributed (modules, themes & 
 libraries) as defined in the make file(s), and will install the website with
 the settings in the config/config.sh file.
 
@@ -35,10 +35,10 @@ If there is already a working installation, a backup of it will be taken.
 $ bin/install
 ```
 
-## bin/reset
+### bin/reset
 The `bin/reset` command will do the same as install without downloading the Core
-and Contrib files. Use this to reset an already installed website to its 
-just-installed state.
+and Contributed projects. Use this to reset an already installed website to its 
+fresh-install state.
 
 A backup will be taken before the reset is run. 
 
@@ -49,10 +49,10 @@ the database will be removed before the site is reinstalled.
 $ bin/reset
 ```
 
-## bin/upgrade
-The `bin/upgrade` command will download Core & Contrib code based on the make
-files and run the update-db command. Use this to update core and contrib to the 
-latest version or to apply a patch.
+### bin/upgrade
+The `bin/upgrade` command will download Core & Contributed code based on the
+make files and run the update-db command. Use this to update core and 
+contributed to their latest version or to apply a patch.
 
 A backup will be taken before the reset is run.
 
@@ -62,7 +62,7 @@ The existing settings.php, files directory and database will be kept.
 $ bin/upgrade
 ```
 
-# bin/build
+### bin/build
 The `bin/build` command will create a deployment package (code) in the `/build`
 directory.
 
@@ -70,7 +70,7 @@ directory.
 $ bin/build
 ```
 
-# bin/backup
+### bin/backup
 The `bin/backup` command will take a backup of the web directory and the 
 database. The backup will be stored in the `/backup` directory.
 
@@ -81,7 +81,7 @@ by passing them as arguments.
 $ bin/backup
 ```
 
-# bin/restore
+### bin/restore
 The `bin/restore` command will list the available backups and let you choose 
 which one to restore. It will restore the `/web` directory and the database.
 
@@ -93,36 +93,31 @@ $ bin/restore
 ```
 
 
-# Requirements
+## Requirements
 This skeleton requires a working bash environment. This comes standard with 
 Linux distributions and Mac OSX.
 
 On top of that it requires you to have a working Apache, Mysql & PHP 
-environment (see minimal requirments to run Drupal).
+environment, see [minimal requirements to run Drupal][link-drupal-requirements].
 
-You also need to have drush installed. There is no support for 
-drupalconsole for Drupal 8 (yet).  
-
-
-# Installation
-Download or clone this repository.
-
-Copy the `config/config_example.sh` file to `config/config.sh` and fill in the 
-details.
-
-Create an empty database with the credentials as set in the `config.sh` file. 
-
-Add one or more `.make` files in the `config/make` directory.
-Change the Drupal version (if required) in the `config/make/_core.make` file and
-add optional patches to apply to core.
-
-Run the `bin/install`  command.
-
-The neccesary files will be downloaded, Drupal will be installed, a browser will
-be opened and you will be logged in.
+You also need to have [drush][link-drush] installed. There is no support for 
+[drupalconsole][link-drupalconsole] for Drupal 8 (yet).  
 
 
-# Alter commands by implementing hooks
+## Installation
+* Download or clone this repository.
+* Copy the `config/config_example.sh` file to `config/config.sh` and fill in the 
+  details.
+* Create an empty database with the credentials as set in the `config.sh` file. 
+* Add one or more `.make` files in the `config/make` directory.
+* Change the Drupal version (if required) in the `config/make/_core.make` file and
+  add optional patches to apply to core.
+* Run the `bin/install`  command.
+* The necessary files will be downloaded, Drupal will be installed, a browser will
+  be opened and you will be logged in.
+
+
+## Alter commands by implementing hooks
 Each command has a set of steps it runs trough. All the code related to those 
 steps are located in the `bin` and `bin/src` directories. This code should not 
 be altered/hacked.
@@ -217,3 +212,7 @@ config/install/script_after(_dev).sh
 
 [link-author]: https://twitter.com/sgrame
 [link-license]: LICENSE.md
+
+[link-drupal-requirements]: https://www.drupal.org/requirements
+[link-drush]: https://github.com/drush-ops/drush
+[link-drupalconsole]: http://drupalconsole.com/
