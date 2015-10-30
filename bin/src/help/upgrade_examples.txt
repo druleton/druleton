@@ -1,0 +1,3 @@
+  * bin/upgrade         Without arguments, the environment is dev.
+  * bin/upgrade --env=prd
+                        Install the website for the "prd" environment.

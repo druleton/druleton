@@ -1,0 +1,2 @@
+  * bin/backup          Take a backup.
+  * bin/backup v1.0     Take a backup and store the files in backup/v1.0

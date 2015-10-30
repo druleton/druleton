@@ -1,0 +1,2 @@
+  * bin/reset           Reset the platform.
+  * bin/reset --env=prd Reset the platform for the "prd" environment.
