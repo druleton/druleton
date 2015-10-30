@@ -1,0 +1,3 @@
+  There is only one argument for the backup script: the name of the directory
+  within the backup directory where the backup files should be stored.
+  The current timestamp will be used if no argument is passed.

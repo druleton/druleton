@@ -1,0 +1,7 @@
+The restore script will list all the existing backups and ask which should be
+restored.
+
+  If there is a working installation:
+  * A backup of the web directory and the database will be created.
+  * The web directory will be deleted and replaced by the files in the backup.
+  * The database will be overwritten with the data in the backup.

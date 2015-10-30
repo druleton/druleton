@@ -1,0 +1,3 @@
+  * bin/build           Without arguments, the environment is dev.
+  * bin/build --env=prd Build the website for the "prd" environment.
+  * bin/build v1.0      Build the project and package as v1.0.tar.gz.

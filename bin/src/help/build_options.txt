@@ -1,0 +1,1 @@
+  --no-package          Do not compress the package once build.

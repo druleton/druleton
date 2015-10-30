@@ -1,0 +1,3 @@
+The backup script will create a backup of a working Drupal installation.
+The web directory and database data will be saved in compressed format in the
+backup directory.

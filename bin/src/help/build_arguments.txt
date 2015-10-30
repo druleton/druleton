@@ -1,0 +1,2 @@
+  This script has only one argument: the name for the package without the
+  extension. Example: "my_site_v1.O" will become "my_site_v1.O.tar.gz".
