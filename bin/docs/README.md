@@ -16,6 +16,7 @@ Overview off all Skeleton Documentation:
 
   
 ## Configuration
+- [config](config.md) : The structure of the `config` directory. 
 - [config.sh](config-config.md) : The global configuration file.
 - [make files](config-make.md) : How to add contrib modules, themes and 
   libraries using the make file configuration.
