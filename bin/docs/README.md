@@ -39,3 +39,8 @@ Overview off all Skeleton Documentation:
   script.
 - [bin/restore hooks](hooks-restore.md) : Available hooks for the `bin/restore`
   script.
+
+
+## Project
+- [project][project.md] : Add custom install profiles, modules, themes and 
+  libraries to the project.
