@@ -79,7 +79,7 @@ This script has no arguments.
 - --no-backup : Do not take a backup before the installation is run.
 - --no-login : Do not open a webbrowser and login to the website when the 
   installation is finished.
-- --env=<name> : The environment to run the script for (default : dev).
+- --env=\<name\> : The environment to run the script for (default : dev).
 - --help (-h) : Show the command help.
 - --hook-info : Show information about the available hooks.
 - --no-color : Disable all colored output.
