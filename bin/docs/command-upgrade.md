@@ -5,8 +5,8 @@ contributed to their latest version or to apply a patch.
 
 A backup will be taken before the reset is run.
 
-The existing `web/sites/default/settings.php`, `web/sites/default/files`
-directory and the database will be kept.
+The existing `web/sites/default` directory and its contents together with the
+database will be kept.
 
 ```bash
 $ bin/upgrade
