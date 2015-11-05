@@ -93,68 +93,68 @@ The hooks for the `bin/reset` command should be located in the
 The following hooks are supported (in the order as they will be included):
 
 
-#### config/install/script_before(_\<env\>).sh
+#### config/reset/script_before(_\<env\>).sh
 This hook is included and run before the script will run its first step.
 
-#### config/install/backup_before(_\<env\>).sh
+#### config/reset/backup_before(_\<env\>).sh
 This hook is included and run before a backup is created.
 
 Warning: this script will be not included if no backup has to be taken (e.g.
 when there is no working environment to backup from or when the `--no-backup`
 option is used).
 
-#### config/install/backup_after(_\<env\>).sh
+#### config/reset/backup_after(_\<env\>).sh
 This hook is included and run after a backup is created.
 
 Warning: this script will be not included if no backup has to be taken (e.g.
 when there is no working environment to backup from or when the `--no-backup`
 option is used).
 
-#### config/install/cleanup_before(_\<env\>).sh
+#### config/reset/cleanup_before(_\<env\>).sh
 This hook is included and run before the cleanup of the directories is run.
 
-#### config/install/cleanup_after(_\<env\>).sh
+#### config/reset/cleanup_after(_\<env\>).sh
 This hook is included and run after the cleanup of the directories is run.
 
-#### config/install/drupal_install_before(_\<env\>).sh
+#### config/reset/drupal_install_before(_\<env\>).sh
 This hook is included and run before the drupal installation is started.
 
-#### config/install/drupal_install_after(_\<dev\>).sh
+#### config/reset/drupal_install_after(_\<dev\>).sh
 This hook is included and run after the drupal installation has finished.
 
-#### config/install/drupal_modules_disable_before(_\<env\>).sh
+#### config/reset/drupal_modules_disable_before(_\<env\>).sh
 This hook is included and run before the modules are disabled.
 
 Warning: this hook is also run even if there are no modules to disable.
 
-#### config/install/drupal_modules_disable_after(_\<env\>).sh
+#### config/reset/drupal_modules_disable_after(_\<env\>).sh
 This hook is included and run before the modules are enabled.
 
 Warning: this hook is also run even if there are no modules to disable.
 
-#### config/install/drupal_modules_enable_before(_\<env\>).sh
+#### config/reset/drupal_modules_enable_before(_\<env\>).sh
 This hook is included and run before the modules are enabled.
 
 Warning: this hook is also run even if there are no modules to enable.
 
-#### config/install/drupal_modules_enable_after(_\<env\>).sh
+#### config/reset/drupal_modules_enable_after(_\<env\>).sh
 This hook is included and run after the modules are enabled.
 
 Warning: this hook is also run even if there are no modules to enable.
 
-#### config/install/drupal_login_before(_\<env\>).sh
+#### config/reset/drupal_login_before(_\<env\>).sh
 This hook is included and run before a browser is opened and the admin user is
 logged in.
 
 Warning: This hook will not be included if the `--no-login` is used.
 
-#### config/install/drupal_login_after(_\<env\>).sh
+#### config/reset/drupal_login_after(_\<env\>).sh
 This hook is included and run after a browser is opened and the admin user is
 logged in.
 
 Warning: This hook will not be included if the `--no-login` is used.
 
-#### config/install/script_after(_\<env\>).sh
+#### config/reset/script_after(_\<env\>).sh
 This hook is included and run when the script is finished.
 
 
