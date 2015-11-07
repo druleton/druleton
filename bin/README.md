@@ -97,8 +97,9 @@ $ bin/backup
 
 
 ### bin/restore
-The `bin/restore` command will list the available backups and let you choose
-which one to restore. It will restore the `/web` directory and the database.
+The `bin/restore` command will list the available backups from the `backup`
+directory and let you choose which one to restore. It will restore the `/web`
+directory and the database.
 
 If there is a working environment: a backup of it will be created before the
 restore is run.
