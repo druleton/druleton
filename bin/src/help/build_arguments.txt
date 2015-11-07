@@ -1,2 +1,5 @@
-  This script has only one argument: the name for the package without the
-  extension. Example: "my_site_v1.O" will become "my_site_v1.O.tar.gz".
+  This script has only one (optional) argument: the name for the package without
+  the extension. Example: "my_site_v1.0" will become "my_site_v1.0.tar.gz".
+  If no package name is given, an unique name will be created using the
+  site_name as defined in the config file and the date-time stamp when the
+  package was created.
