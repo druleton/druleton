@@ -5,18 +5,8 @@
 
 ##
 # Function to run the restore process.
-#
-# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
-# - restore_before : Scripts that should run before the restore is run.
-# - restore_after  : Scripts that should run after the restore has run.
-#
-# The hooks will be called without and with environment suffix.
 ##
 function restore_run {
-  # Run the before hook(s).
-  hook_invoke "restore_before"
-
-
   # Run a restore for the requested directory name.
   if [ ! -z "$SCRIPT_ARGUMENT" ]; then
     restore_run_directory "$SCRIPT_ARGUMENT"
@@ -30,8 +20,7 @@ function restore_run {
     exit
   fi
 
-  # Run the after hook(s).
-  hook_invoke "restore_after"
+
 }
 
 ##
@@ -95,6 +84,14 @@ function restore_run_from_selection {
 #
 # @param The directory name with the /backups directory where the backup files
 #        are located.
+#
+# This script will first take a backup of the currently installed platform.
+#
+# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
+# - restore_before : Scripts that should run before the restore is run.
+# - restore_after  : Scripts that should run after the restore has run.
+#
+# The hooks will be called without and with environment suffix.
 ##
 function restore_run_directory {
   markup_h1 "Backup directory : ${LWHITE}$1${LBLUE}"
@@ -109,7 +106,12 @@ function restore_run_directory {
   # ! Create a backup of the current active environment.
   echo
   source "$DIR_SRC/backup.sh"
+  backup_run
 
+  # Run the before hook(s).
+  hook_invoke "restore_before"
+
+  # Restore.
   markup_h1 "Restore from backup (can take a while...)"
 
   # Get the options.
@@ -154,6 +156,9 @@ function restore_run_directory {
   fi
 
   echo
+
+  # Run the after hook(s).
+  hook_invoke "restore_after"
 }
 
 ##
