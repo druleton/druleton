@@ -102,15 +102,15 @@ function markup_debug {
 }
 
 ##
-# Show a horizontal devider.
+# Show a horizontal divider.
 ##
-function markup_devider {
+function markup_divider {
   markup "================================================================================"
 }
 
 ##
-# Show a horizontal devider within a h1.
+# Show a horizontal divider within a h1.
 ##
-function markup_h1_devider {
+function markup_h1_divider {
   markup_h1 "================================================================================"
 }

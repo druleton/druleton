@@ -14,16 +14,16 @@ source $(dirname $0)/src/bootstrap.sh
 
 # Show script information.
 echo
-markup_h1_devider
+markup_h1_divider
 markup_h1 " ${LWHITE}Build${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
-markup_h1_devider
+markup_h1_divider
 markup_h1_li "Drupal core, contrib modules and themes will be downloaded."
 markup_h1_li "Custom profiles, modules & themes will be copied into the site structure."
 markup_h1_li "The site will not be installed."
 if [ -d "$DIR_BUILD/web" ]; then
   markup_h1_li "The previous build will be deleted and overwritten."
 fi
-markup_h1_devider
+markup_h1_divider
 echo
 
 
@@ -70,16 +70,16 @@ script_after_run
 
 
 # Finish message.
-markup_h1_devider
+markup_h1_divider
 markup_success " Finished"
-markup_h1_devider
+markup_h1_divider
 if [ -z "$BUILD_PACKAGE_NAME" ]; then
   markup_h1_li "Build directory : ${LWHITE}${DIR_BUILD}/web${RESTORE}"
 else
   markup_h1_li "Build file : ${LWHITE}${BUILD_PACKAGE_NAME}${RESTORE}"
   markup_h1_li "Directory  : ${LWHITE}${DIR_BUILD}${RESTORE}"
 fi
-markup_h1_devider
+markup_h1_divider
 echo
 
 
