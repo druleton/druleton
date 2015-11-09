@@ -27,6 +27,8 @@ Overview off all Skeleton Documentation:
 ## Hooks
 - [hook system](hooks.md) : More information about the hook system: add
   your own script steps before and/or after the existing command steps.
+- [hook helpers](hooks-helpers.md) : Overview of all helper functions that can
+  be used when writing hooks.
 
 
 ## Project
