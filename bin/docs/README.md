@@ -29,6 +29,8 @@ Overview off all Skeleton Documentation:
   your own script steps before and/or after the existing command steps.
 - [hook helpers](hooks-helpers.md) : Overview of all helper functions that can
   be used when writing hooks.
+- [predefined variables](hooks-variables.md) : Overview of all variables that
+  can be accessed and used when writing hooks.
 
 
 ## Project
