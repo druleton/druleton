@@ -1,6 +1,6 @@
 # Hook system
 The hook system allows you to insert extra scripts in the commands without
-having to alter (hack) the command code. This to make it possible to update the
+having to alter (hack) the command code. This makes it possible to update the
 `bin` directory without overriding the added code.
 
 - Running a command will trigger a hook when the command starts to run and when
@@ -10,7 +10,7 @@ having to alter (hack) the command code. This to make it possible to update the
   hooks.
 
 All hooks are stored in the `config/<command-name>` directory. See the
-[commands documentation][link-commands] for an overview of the files and their
+[commands documentation][link-commands] for an overview of the hooks and their
 location.
 
 You can access this information also by running the command with the
@@ -31,7 +31,7 @@ included for all environments. The environment specific hook will only be
 included when it matches the environment as set in the `--env=<env_name>`
 option.
 
-If both ara available: the general hook will always included and run first
+If both are available: the general hook will always included and run first
 followed by the environment specific one.
 
 
@@ -54,7 +54,7 @@ See the [helper functions documentation][link-hooks-helpers]
 
 
 [link-commands]: README.md
-[link-bash]:
+[link-bash]: http://www.tldp.org/LDP/abs/html/
 [link-hooks-helpers]: hooks-helpers.md
 
 [link-overview]: README.md
