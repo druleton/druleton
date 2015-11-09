@@ -45,7 +45,8 @@ All hooks should be written in [bash][link-bash].
 The skeleton provides helper functions to format output, call drush commands,
 ...
 
-See the [helper functions documentation][link-hooks-helpers]
+See the [helper functions][link-hooks-helpers] and
+[variables][link-hooks-variables] documentation.
 
 
 
@@ -53,8 +54,9 @@ See the [helper functions documentation][link-hooks-helpers]
 
 
 
-[link-commands]: README.md
+[link-commands]: README.md#commands
 [link-bash]: http://www.tldp.org/LDP/abs/html/
 [link-hooks-helpers]: hooks-helpers.md
+[link-hooks-variables]: hooks-variables.md
 
 [link-overview]: README.md
