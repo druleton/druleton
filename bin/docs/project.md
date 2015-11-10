@@ -4,30 +4,38 @@ libraries, ...) are stored in the `project` directory.
 
 This is the directory where the actual development is done.
 
+> **Note** The code within the `project` directory is optional. You can setup a
+> demo website with configuration and hooks only.
+
+The skeleton has the `config/build/drupal_make_after.sh`,
+`config/install/drupal_make_after.sh` and `config/upgrade/drupal_make_after.sh`
+hook implemented. The code in those hooks will automatically copy (for build
+command) or symlink (install & upgrade) the custom profiles, modules, themes and
+libraries from within the project directory.
+
+This will only work if you stick to the default project directory structure.
+
 > **Note** : The proposed structure of the project directory is not mandatory.
-> It's up to the implementation, configuration and implemented hooks what is
-> stored where and how it is added to the `web` and `build` directories.
+> Defining your own directory structure will require to alter the implemented
+> hooks so they fit the altered structure.
 
-> **Tip** : Configure your IDE so that it has the skeleton root directory as
-> the root of the project. Exclude the `backup`, `build` and the symlinks to the
-> `project` directories. This to avoid duplicated code being indexed in the IDE.
-
-The code within the `project` directory is optional. You can setup a demo
-website with configuration and hooks only.
 
 
 ## Add the custom functionality to the platform
-The custom code is added to the platform by added symlinks to the `web`
-directory for non-production environments (dev, tst, acc, ...) and copy the
-directories and files when building the platform.
+There are 2 common ways to develop custom functionality:
+- Create an [install profile][link-install-profile] that contains also the
+  custom modules, themes and libraries.
+- Put functionality in `custom` directories within the `web/sites/all/modules`
+  and `web/sites/all/themes` directories.
 
-#### Symlink a profile
+
+#### Build project with an install profile
 When creating an [install profile][link-install-profile], the custom modules and
 theme(s) are added as subdirectories to the profile:
 
 ```
 # The directory where the profile is stored:
-project/profiles/profile-name
+project/profiles/profile_name
 
 # The directory where the profiles custom modules are stored:
 project/profiles/profile_name/modules/custom
@@ -35,14 +43,13 @@ project/profiles/profile_name/modules/custom/module_name1
 project/profiles/profile_name/modules/custom/module_name2
 project/profiles/profile_name/modules/custom/...
 
-
 # The directory where the profile custom theme(s) are stored:
 project/profiles/profile_name/themes/custom
 project/profiles/profile_name/themes/custom/theme_name1
 project/profiles/profile_name/themes/custom/theme_name2
 project/profiles/profile_name/themes/custom/...
 
-# The directory where the profile custom libraies are stored:
+# The directory where the profile custom libraries are stored:
 project/profiles/profile_name/libraries/library_name1
 project/profiles/profile_name/libraries/library_name2
 project/profiles/profile_name/libraries/...
@@ -53,41 +60,39 @@ using the `config/install/drupal_make_after.sh` and
 `config/upgrade/drupal_make_after.sh` hook:
 
 ```bash
-# Add symlinks from the project folder.
-markup_h1 "Symlink custom modules and themes."
-
-# Symlink modules.
-if [ ! -L "$DIR_WEB/profiles/profile_name" ]; then
-  ln -s "$DIR_PROJECT/profiles/profile_name" "$DIR_WEB/profiles/profile_name"
-  message_success "Symlinked profile_name."
+# Symlink profiles.
+project_profiles=$(ls -l "$DIR_PROJECT/profiles" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_profiles" ]; then
+  for project_profile in $project_profiles
+  do
+    ln -s "$DIR_PROJECT/profiles/$project_profile" "$DIR_WEB/profiles/$project_profile"
+    message_success "Symlinked profile $project_profile."
+  done
 else
-  message_warning "Symlink already exists for profile_name."
+  message_warning "No project profiles available."
 fi
-
-echo
 ```
 
-#### Build profile
-Building a platform with install profile is done by implementing the
-`config/build/drupal_make_after.sh` hook:
+The profile is copied during the build process:
 
 ```bash
-# Add the code from the project folder.
-markup_h1 "Copy custom install profile to build."
-
-# Copy modules.
-cp -R "$DIR_PROJECT/profile/profile_name" "$DIR_BUILD/web/profiles/profile_name"
-if [ $? -ne 1 ]; then
-  message_success "Copied profile_name."
+# Copy profiles.
+project_profiles=$(ls -l "$DIR_PROJECT/profiles" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_profiles" ]; then
+  for project_profile in $project_profiles
+  do
+    cp -R "$DIR_PROJECT/profiles/$project_profile" "$DIR_BUILD/web/profiles/$project_profile"
+    message_success "Copied profile $project_profile."
+  done
 else
-  message_error "Could not copy profile_name."
+  message_warning "No project profiles available."
 fi
 ```
 
 
-#### Symlink modules and themes
-If you develop a website without install profile you should put the custom code
-and themes in following directories:
+#### Build project without install profile
+If you develop a website without install profile you should put the custom
+modules, themes and libraries in following directories:
 
 ```
 # The directory where the custom modules are stored:
@@ -99,62 +104,88 @@ project/modules/custom/module_name2
 project/themes/custom
 project/themes/custom/theme_name1
 project/themes/custom/theme_name2
+
+# The directory where the custom libraries are stored:
+project/libraries
+project/libraries/library_name1
+project/libraries/library_name2
 ```
 
-Adding the custom themes and libraries is done by implementing the
+Adding the custom modules, themes and libraries is done using the
 `config/install/drupal_make_after.sh` and `config/upgrade/drupal_make_after.sh`
 hook:
 
-
 ```bash
-# Add symlinks from the project folder.
-markup_h1 "Symlink custom modules and themes."
-
 # Symlink modules.
-if [ ! -L "$DIR_WEB/sites/all/modules/custom" ]; then
+project_modules=$(ls -l "$DIR_PROJECT/modules/custom" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_modules" ]; then
+  mkdir -p "$DIR_WEB/sites/all/modules"
   ln -s "$DIR_PROJECT/modules/custom" "$DIR_WEB/sites/all/modules/custom"
   message_success "Symlinked custom modules."
 else
-  message_warning "Symlink already exists for modules."
+  message_warning "No project modules available."
 fi
 
 # Symlink themes.
-if [ ! -L "$DIR_WEB/sites/all/themes/custom" ]; then
+project_themes=$(ls -l "$DIR_PROJECT/themes/custom" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_themes" ]; then
+  mkdir -p "$DIR_WEB/sites/all/themes"
   ln -s "$DIR_PROJECT/themes/custom" "$DIR_WEB/sites/all/themes/custom"
   message_success "Symlinked custom themes."
 else
-  message_warning "Symlink already exists for themes."
+  message_warning "No project themes available."
 fi
 
-echo
+# Symlink libraries.
+project_libraries=$(ls -l "$DIR_PROJECT/libraries" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_libraries" ]; then
+  mkdir -p "$DIR_WEB/sites/all/libraries"
+  for project_library in $project_libraries
+  do
+    ln -s "$DIR_PROJECT/libraries/$project_library" "$DIR_WEB/sites/all/libraries/$project_library"
+    message_success "Symlinked library $project_library."
+  done
+else
+  message_warning "No project libraries available."
+fi
 ```
 
-#### Build with modules and themes
-Building a platform without install profile is done by implementing the
-`config/build/drupal_make_after.sh` hook:
+The modules, themes and libraries are copied during the build process:
 
-```build
-# Copy from the project folder.
-markup_h1 "Copy custom modules and themes."
-
+```bash
 # Copy modules.
-cp -R "$DIR_PROJECT/modules/custom" "$DIR_BUILD/web/sites/all/modules/custom"
-if [ $? -ne 1 ]; then
+project_modules=$(ls -l "$DIR_PROJECT/modules/custom" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_modules" ]; then
+  mkdir -p "$DIR_BUILD/web/sites/all/modules"
+  cp -R "$DIR_PROJECT/modules/custom" "$DIR_BUILD/web/sites/all/modules/custom"
   message_success "Copied custom modules."
 else
-  message_error "Could not copy custom modules."
+  message_warning "No project modules available."
 fi
 
 # Copy themes.
-cp -R "$DIR_PROJECT/themes/custom" "$DIR_BUILD/web/sites/all/themes/custom"
-if [ $? -ne 1 ]; then
+project_themes=$(ls -l "$DIR_PROJECT/themes/custom" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_themes" ]; then
+  mkdir -p "$DIR_BUILD/web/sites/all/themes"
+  cp -R "$DIR_PROJECT/themes/custom" "$DIR_BUILD/web/sites/all/themes/custom"
   message_success "Copied custom themes."
 else
-  message_error "Could not copy custom themes."
+  message_warning "No project themes available."
 fi
 
+# Copy libraries.
+project_libraries=$(ls -l "$DIR_PROJECT/libraries" | grep "^d" | awk -F" " '{print $9}')
+if [ "$project_libraries" ]; then
+  mkdir -p "$DIR_BUILD/web/sites/all/libraries"
 
-echo
+  for project_library in $project_libraries
+  do
+    cp -R "$DIR_PROJECT/libraries/$project_library" "$DIR_WEB/sites/all/libraries/$project_library"
+    message_success "Copied library $project_library."
+  done
+else
+  message_warning "No project libraries available."
+fi
 ```
 
 
