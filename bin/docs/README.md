@@ -36,3 +36,7 @@ Overview off all Skeleton Documentation:
 ## Project
 - [project](project.md) : Add custom install profiles, modules, themes and
   libraries to the project.
+
+
+## Editor (IDE)
+- [Editor setup](editor.md) : Info how to setup your editor (IDE).
