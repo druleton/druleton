@@ -22,6 +22,8 @@ Overview off all Skeleton Documentation:
   libraries using the make file configuration.
 - [modules](config-modules.md) : Enable and Disable modules during install and
   reset.
+- [cleanup](config-cleanup.md) : Delete directories and files when the `web`
+  directory is (re)build.
 
 
 ## Hooks
