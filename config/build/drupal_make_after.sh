@@ -8,58 +8,20 @@
 # Add the custom code from the project folder.
 markup_h1 "Copy project profiles, modules, themes and libraries."
 
-# Copy profiles.
-project_profiles=$(ls -l "$DIR_PROJECT/profiles" | grep "^d" | awk -F" " '{print $9}')
-if [ "$project_profiles" ]; then
-  for project_profile in $project_profiles
-  do
-    cp -R "$DIR_PROJECT/profiles/$project_profile" "$DIR_BUILD/web/profiles/$project_profile"
-    message_success "Copied profile $project_profile."
-  done
-else
-  message_warning "No project profiles available."
-fi
+markup_h2 "Profiles"
+file_copy_subdirectories "$DIR_PROJECT/profiles" "$DIR_WEB/profiles"
 
-# Copy modules.
-project_modules=$(ls -l "$DIR_PROJECT/modules" | grep "^d" | awk -F" " '{print $9}')
-if [ "$project_modules" ]; then
-  mkdir -p "$DIR_BUILD/web/sites/all/modules"
+markup_h2 "Modules"
+mkdir -p "$DIR_WEB/sites/all/modules"
+file_copy_subdirectories "$DIR_PROJECT/modules" "$DIR_WEB/sites/all/modules"
 
-  for project_module in $project_modules
-  do
-    cp -R "$DIR_PROJECT/modules/$project_module" "$DIR_BUILD/web/sites/all/modules/$project_module"
-    message_success "Copied modules directory $project_module."
-  done
-else
-  message_warning "No project modules available."
-fi
+markup_h2 "Themes"
+mkdir -p "$DIR_WEB/sites/all/themes"
+file_copy_subdirectories "$DIR_PROJECT/themes" "$DIR_WEB/sites/all/themes"
 
-# Copy themes.
-project_themes=$(ls -l "$DIR_PROJECT/themes" | grep "^d" | awk -F" " '{print $9}')
-if [ "$project_themes" ]; then
-  mkdir -p "$DIR_BUILD/web/sites/all/themes"
+markup_h2 "Libraries"
+mkdir -p "$DIR_WEB/sites/all/libraries"
+file_copy_subdirectories "$DIR_PROJECT/libraries" "$DIR_WEB/sites/all/libraries"
 
-  for project_theme in $project_themes
-  do
-    cp -R "$DIR_PROJECT/themes/$project_theme" "$DIR_BUILD/web/sites/all/themes/$project_theme"
-    message_success "Copied themes directory $project_theme."
-  done
-else
-  message_warning "No project themes available."
-fi
-
-# Copy libraries.
-project_libraries=$(ls -l "$DIR_PROJECT/libraries" | grep "^d" | awk -F" " '{print $9}')
-if [ "$project_libraries" ]; then
-  mkdir -p "$DIR_BUILD/web/sites/all/libraries"
-
-  for project_library in $project_libraries
-  do
-    cp -R "$DIR_PROJECT/libraries/$project_library" "$DIR_WEB/sites/all/libraries/$project_library"
-    message_success "Copied library $project_library."
-  done
-else
-  message_warning "No project libraries available."
-fi
 
 echo
