@@ -2,6 +2,10 @@
 
 Overview off all Skeleton Documentation:
 
+## Requirments
+- [Requirements](requirements.md) : Minimal requirments to use the
+  drupal-skeleton.
+
 ## Commands
 - [bin/install](command-install.md) : Install the project.
 - [bin/reset](command-reset.md) : Reset an existing project back to the
