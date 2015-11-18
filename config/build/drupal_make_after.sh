@@ -21,21 +21,29 @@ else
 fi
 
 # Copy modules.
-project_modules=$(ls -l "$DIR_PROJECT/modules/custom" | grep "^d" | awk -F" " '{print $9}')
+project_modules=$(ls -l "$DIR_PROJECT/modules" | grep "^d" | awk -F" " '{print $9}')
 if [ "$project_modules" ]; then
   mkdir -p "$DIR_BUILD/web/sites/all/modules"
-  cp -R "$DIR_PROJECT/modules/custom" "$DIR_BUILD/web/sites/all/modules/custom"
-  message_success "Copied custom modules."
+
+  for project_module in $project_modules
+  do
+    cp -R "$DIR_PROJECT/modules/$project_module" "$DIR_BUILD/web/sites/all/modules/$project_module"
+    message_success "Copied modules directory $project_module."
+  done
 else
   message_warning "No project modules available."
 fi
 
 # Copy themes.
-project_themes=$(ls -l "$DIR_PROJECT/themes/custom" | grep "^d" | awk -F" " '{print $9}')
+project_themes=$(ls -l "$DIR_PROJECT/themes" | grep "^d" | awk -F" " '{print $9}')
 if [ "$project_themes" ]; then
   mkdir -p "$DIR_BUILD/web/sites/all/themes"
-  cp -R "$DIR_PROJECT/themes/custom" "$DIR_BUILD/web/sites/all/themes/custom"
-  message_success "Copied custom themes."
+
+  for project_theme in $project_themes
+  do
+    cp -R "$DIR_PROJECT/themes/$project_theme" "$DIR_BUILD/web/sites/all/themes/$project_theme"
+    message_success "Copied themes directory $project_theme."
+  done
 else
   message_warning "No project themes available."
 fi
