@@ -26,5 +26,5 @@ function message_warning {
 # @param string message
 ##
 function message_error {
-  markup " ${RED}✗${RED} $1"
+  markup " ${RED}✗ $1"
 }
