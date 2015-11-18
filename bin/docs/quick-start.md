@@ -51,7 +51,7 @@ $ bin/install
 
 The new site is ready to be start developing.
 
-From now on the [other 5 commands][link-documentation] can be used.
+From now on the [other 5 commands][link-commands] can be used.
 
 
 
@@ -72,6 +72,7 @@ Now that you have a running installation you can start extending the project:
 [link-requirements]: requirements.md
 [link-config-config]: config-config.md
 [link-documentation]: README.md
+[link-commands]: README.md#commands
 [link-config-make]: config-make.sh
 [link-config-modules]: config-modules.md
 [link-project]: project.md
