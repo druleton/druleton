@@ -17,7 +17,7 @@ All these functions accept one parameter: the text to use in the output.
 
 Overview:
 
-#### `markup`
+#### markup`
 Use always the `markup` function (instead of `echo`) when you want to print
 output to the screen. This command supports using color variables to output
 parts of the text colorized.
@@ -95,7 +95,7 @@ Highlighted colored backgrounds:
 
 
 
-#### `markup_h1`
+#### markup_h1
 The `markup_h1` function is used to print headings in the output. Use this on
 the begin and end of commands or large hooks. The line will be printed in blue
 text.
@@ -106,7 +106,7 @@ markup_h1 "Heading 1 demo."
 
 ![markup_h1][img-markup_h1]
 
-#### `markup_h2`
+#### markup_h2
 The `markup_h2` function is used to print secondary headings. The line will be
 printed in bright-white text.
 
@@ -116,7 +116,7 @@ markup_h2 "Heading 2 demo."
 
 ![markup_h2][img-markup_h2]
 
-#### `markup_success`
+#### markup_success
 Use this to print a line in green text.
 
 ```bash
@@ -125,7 +125,7 @@ markup_success "Success demo."
 
 ![markup_success][img-markup_success]
 
-#### `markup_warning`
+#### markup_warning
 Use this to print a line in yellow text.
 
 ```bash
@@ -134,7 +134,7 @@ markup_warning "Warning demo."
 
 ![markup_warning][img-markup_warning]
 
-#### `markup_error`
+#### markup_error
 Use this to print a line in red text.
 
 ```bash
@@ -143,7 +143,7 @@ markup_error "Error demo."
 
 ![markup_error][img-markup_error]
 
-#### `markup_li`
+#### markup_li
 Print a line as a list item. The line will be prefixed with a bullet.
 
 ```bash
@@ -153,7 +153,7 @@ markup_li "Second item."
 
 ![markup_li][img-markup_li]
 
-#### `markup_h1_li`
+#### markup_h1_li
 Use this to print a bullet in a heading 1 context. The line will be printed in
 blue with a bullet prefix.
 
@@ -164,7 +164,7 @@ markup_h1_li "Second item."
 
 ![markup_h1_li][img-markup_h1_li]
 
-#### `markup_divider`
+#### markup_divider
 This function will print out a line of `===` to the screen.
 
 This function does not accept any parameters.
@@ -175,7 +175,7 @@ markup_divider
 
 ![markup_divider][img-markup_divider]
 
-#### `markup_h1_divider`
+#### markup_h1_divider
 This function will print out a line of `===` within the heading 1 context. The
 divider will be printed in blue.
 
@@ -207,7 +207,7 @@ The message functions are used to print messages to the screen.
 
 There are multiple message functions:
 
-#### `message_success`
+#### message_success
 This function will print out the text prefixed with a green checkmark (✓).
 
 ```bash
@@ -216,7 +216,7 @@ message_success "Success demo."
 
 ![message_success][img-message_success]
 
-#### `message_warning`
+#### message_warning
 This function will print out the text prefixed with an yellow exclamation (!).
 
 ```bash
@@ -225,7 +225,7 @@ message_warning "Warning demo."
 
 ![message_warning][img-message_warning]
 
-#### `message_error`
+#### message_error
 This function will print out the text prefixed with a red cross (✗).
 
 ```bash
@@ -239,7 +239,7 @@ message_error "Error demo."
 The skeleton provides several Drupal specific helpers:
 
 
-#### `drupal_drush`
+#### drupal_drush
 Running Drush commands require by default or opening a command line interface
 within the web root of the platform or using a drush alias. The drupal_drush
 function will always run the drush commands within the `web` directory.
@@ -251,7 +251,7 @@ Example to clear the cache:
 drupal_drush cc
 ```
 
-#### `drupal_is_installed`
+#### drupal_is_installed
 Check if Drupal is installed (= there is a working Drupal platform). The
 function will echo 1 when ok, 0 if not ok.
 
@@ -268,14 +268,14 @@ if [ `drupal_is_installed` -ne 1 ]; then
 fi
 ```
 
-#### `drupal_sites_default_unprotect`
+#### drupal_sites_default_unprotect
 The `web/sites/default` directory and `web/sites/default/settings.php` file are
 by default write protected by Drupal. This function will unprotect both.
 
 Use this when you want to alter the settings.php file or when you want to
 add/edit/delete files within the `web/sites/default` directory.
 
-#### `drupal_sites_default_protect`
+#### drupal_sites_default_protect
 Use this to restore the write protection on the `web/sites/default` directory
 and `web/sites/default/settings.php` file.
 
@@ -285,7 +285,7 @@ and `web/sites/default/settings.php` file.
 All commands have options that can be used to manipulate the functionality.
 There are helper functions to access those command line options:
 
-#### `option_is_set`
+#### option_is_set
 Check if a specific option is set by passing the name inclusif the `-` or `--`
 prefix. The function will echo 1 or 0.
 
@@ -294,7 +294,7 @@ Example how to catch the value in a variable:
 only_db=$( option_is_set "--only-db" )
 ```
 
-#### `option_get_value`
+#### option_get_value
 Get the value of an option. This is only for options that pass a value like the
 `--env=\<env_name\>` option.
 
@@ -303,7 +303,7 @@ Example to get the environment value:
 environment=$(option_get_value "--env")
 ```
 
-#### `option_get_environment`
+#### option_get_environment
 This is a wrapper around the `option_get_value` function. It will return the
 actual name or fall back to `dev` when no environment option was passed to the
 command.
@@ -321,14 +321,14 @@ ENVIRONMENT=$(option_get_environment)
 ## File helpers
 File system related helper functions.
 
-#### `file_list_subdirectories`
+#### file_list_subdirectories
 List all subdirectories within the given parent directories.
 
 ```bash
 directories=$(file_list_subdirectories "path/to/parent_directory")
 ```
 
-#### `file_symlink_subdirectories`
+#### file_symlink_subdirectories
 Create symlinks within the target directory to the subdirectories of the source
 directory.
 
@@ -341,7 +341,7 @@ This function will output:
 file_symlink_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 ```
 
-#### `file_copy_subdirectories`
+#### file_copy_subdirectories
 Copy all directories within the source directory to the target directory.
 
 This function will output:
