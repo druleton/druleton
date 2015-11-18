@@ -26,9 +26,9 @@ OPTION_BACKUP_ONLY_WEB=$( option_is_set "--only-web" )
 
 # Show script information.
 echo
-markup_h1_devider
+markup_h1_divider
 markup_h1 " ${LWHITE}Backup${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
-markup_h1_devider
+markup_h1_divider
 markup_h1 " This will backup:"
 if [ $OPTION_BACKUP_ONLY_DB -eq 1 ]; then
   markup_h1_li "The database."
@@ -45,7 +45,7 @@ if [ $OPTION_BACKUP_ONLY_DB -ne 1 ] && [ $OPTION_BACKUP_ONLY_FILES -ne 1 ] && [ 
 fi
 markup_h1
 markup_h1 "The code in /project will not be included in the backup."
-markup_h1_devider
+markup_h1_divider
 echo
 
 

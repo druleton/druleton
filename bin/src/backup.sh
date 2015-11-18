@@ -92,10 +92,10 @@ function backup_run_all {
 
   # Inform about backup.
   echo
-  markup_h1_devider
+  markup_h1_divider
   markup_success " Backup created in"
   markup_h1 " ${LWHITE}$backup_destination${RESTORE}"
-  markup_h1_devider
+  markup_h1_divider
   echo
 }
 

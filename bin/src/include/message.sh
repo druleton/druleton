@@ -8,7 +8,7 @@
 # @param string message
 ##
 function message_success {
-  markup "${GREEN}✓${RESTORE} $1"
+  markup " ${GREEN}✓${RESTORE} $1"
 }
 
 ##

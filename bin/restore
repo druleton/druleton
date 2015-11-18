@@ -26,9 +26,9 @@ OPTION_RESTORE_ONLY_WEB=$( option_is_set "--only-web" )
 
 # Show script information.
 echo
-markup_h1_devider
+markup_h1_divider
 markup_h1 " ${LWHITE}Restore${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
-markup_h1_devider
+markup_h1_divider
 markup_h1 " This will restore:"
 if [ $OPTION_RESTORE_ONLY_DB -eq 1 ]; then
   markup_h1_li "The database."
@@ -47,7 +47,7 @@ if [ ! -z "$SCRIPT_ARGUMENT" ]; then
   echo
   markup_h1 " The backup will be restored from backup/${LWHITE}$SCRIPT_ARGUMENT${LBLUE}"
 fi
-markup_h1_devider
+markup_h1_divider
 echo
 
 
@@ -82,12 +82,12 @@ script_after_run
 
 
 # Finish message.
-markup_h1_devider
+markup_h1_divider
 markup_success " Finished"
-markup_h1_devider
+markup_h1_divider
 markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
 markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
-markup_h1_devider
+markup_h1_divider
 echo
 
 
