@@ -17,7 +17,7 @@ The [drupal-skeleton documentation][link-documentation] is located within the
 
 
 ## Requirements
-The skeleton requires at least a bash to run.
+The skeleton requires at least bash to run.
 
 [See skeleton requirements][link-requirements].
 
@@ -25,12 +25,12 @@ The skeleton requires at least a bash to run.
 ## Commands
 The drupal-skeleton contains a set of bash scripts (commands):
 
-- [`bin/install`][link-command-install] : Install the project.
+- [`bin/install`][link-command-install] : Download core and required contributed
+  modules, themes and libraries and install the project.
 - [`bin/reset`][link-command-reset] : Reset an installed project back to its
   freshly installed state.
 - [`bin/upgrade`][link-command-upgrade]: Upgrade an installed project.
-- [`bin/build`][link-command-build]: Build a package ready to deploy to a
-  production environment.
+- [`bin/build`][link-command-build]: Create a package of the project.
 - [`bin/backup`][link-command-backup]: Create a backup of the installed project.
 - [`bin/restore`][link-command-restore]: Restore the project from one of the
   created backups.
@@ -43,7 +43,6 @@ The drupal-skeleton contains a set of bash scripts (commands):
 The drupal-skeleton requires a minimal configuration to get started.
 
 [See skeleton configuration documentation][link-config].
-
 
 
 
