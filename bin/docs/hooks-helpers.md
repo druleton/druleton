@@ -17,7 +17,7 @@ All these functions accept one parameter: the text to use in the output.
 
 Overview:
 
-#### markup`
+#### markup
 Use always the `markup` function (instead of `echo`) when you want to print
 output to the screen. This command supports using color variables to output
 parts of the text colorized.
