@@ -7,6 +7,9 @@ Set of bash scripts and configuration files to install, reset, upgrade, backup,
 restore and build a Drupal project without the need to have Core and Contributed
 code in the repository.
 
+* [See the documentation about the Drupal Skeleton][link-docs].
+
+
 
 ## 6 commands
 The skeleton provides 6 commands to run the site locally.
@@ -136,6 +139,7 @@ See [hooks documentation][link-hooks].
 [link-drush]: https://github.com/drush-ops/drush
 [link-drupalconsole]: http://drupalconsole.com/
 
+[link-docs]: docs/README.md
 [link-command-install]: docs/command-install.md
 [link-command-reset]: docs/command-reset.md
 [link-command-upgrade]: docs/command-upgrade.md
