@@ -37,6 +37,7 @@ DIR_BUILD="$DIR_ROOT/build"
 
 
 # Include helpers.
+source "$DIR_SRC/include/file.sh"
 source "$DIR_SRC/include/options.sh"
 source "$DIR_SRC/include/colors.sh"
 source "$DIR_SRC/include/markup.sh"

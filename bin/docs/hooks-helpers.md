@@ -274,6 +274,33 @@ ENVIRONMENT=$(option_get_environment)
 
 
 
+## File helpers
+File system related helper functions.
+
+#### file_list_subdirectories
+List all subdirectories within the given parent directories.
+
+```bash
+directories=$(file_list_subdirectories "path/to/parent_directory")
+```
+
+#### file_symlink_subdirectories
+Create symlinks within the target directory to the subdirectories of the source
+directory.
+
+```bash
+file_symlink_subdirectories "/path/to/source_directory" "/path/to/target_directory"
+```
+
+#### file_copy_subdirectories
+Copy all directories within the source directory to the target directory.
+
+```bash
+file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
+```
+
+
+
 [Back to overview][link-overview]
 
 
