@@ -1,6 +1,6 @@
 # Drupal Skeleton documentation
 
-Overview off all Skeleton Documentation:
+Overview of all Skeleton Documentation:
 
 ## Quick Start
 - [Quick start](quick-start.md) : Short guide to get you started within minutes.
