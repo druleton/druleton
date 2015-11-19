@@ -30,7 +30,7 @@ Overview of all Skeleton Documentation:
 - [modules](config-modules.md) : Enable and Disable modules during install and
   reset.
 - [cleanup](config-cleanup.md) : Delete directories and files when the `web`
-  directory is (re)build.
+  directory is (re)built.
 
 
 ## Hooks
