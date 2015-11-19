@@ -6,7 +6,7 @@ Overview of all Skeleton Documentation:
 - [Quick start](quick-start.md) : Short guide to get you started within minutes.
 
 ## Requirements
-- [Requirements](requirements.md) : Minimal requirments to use the
+- [Requirements](requirements.md) : Minimal requirements to use the
   drupal-skeleton.
 
 ## Commands
