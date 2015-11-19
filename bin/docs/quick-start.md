@@ -46,10 +46,10 @@ $ bin/install
   file.
 - Modules will be enabled as defined in the `config/drupal_modules_disable.md`
   file.
-- The default brower will open the URL as specified in the config file and you
+- The default browser will open the URL as specified in the config file and you
   will be logged in as the admin user.
 
-The new site is ready to be start developing.
+The new site is ready to start developing.
 
 From now on the [other 5 commands][link-commands] can be used.
 
