@@ -30,10 +30,14 @@ DIR_SRC=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DIR_BIN=$( cd "$DIR_SRC/.." && pwd)
 DIR_ROOT=$( cd "$DIR_BIN/.." && pwd )
 DIR_PROJECT="$DIR_ROOT/project"
-DIR_CONFIG="$DIR_ROOT/config"
 DIR_WEB="$DIR_ROOT/web"
 DIR_BACKUP="$DIR_ROOT/backup"
 DIR_BUILD="$DIR_ROOT/build"
+
+# Define paths to the config directories.
+DIR_CONFIG="$DIR_ROOT/config"
+DIR_CONFIG_BIN="$DIR_CONFIG/bin"
+DIR_CONFIG_SRC="$DIR_CONFIG_BIN/src"
 
 
 # Include helpers.

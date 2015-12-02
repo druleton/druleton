@@ -15,3 +15,18 @@ config/config.sh
 # The reason of this project is to avoid core and contrib code to be stored in
 # the project repository. Do not store what can be build using make files.
 /web
+
+# Make sure that we are not versioning symlinked commands.
+/bin
+!/bin/docs
+!/bin/src
+!/bin/CHANGELOG.md
+!/bin/LICENSE.md
+!/bin/README.md
+!/bin/backup
+!/bin/build
+!/bin/init
+!/bin/install
+!/bin/reset
+!/bin/restore
+!/bin/upgrade
