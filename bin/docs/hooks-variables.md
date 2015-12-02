@@ -37,30 +37,37 @@ and helpers are located. Use this if you want to include a include script that
 is not loaded yet.
 
 #### `$DIR_ROOT`
-This is the full directory to the root of the skeleton. This is where the `bin`,
-`config` and `project` directories are located.
+This is the full directory path to the root of the skeleton. This is where the
+`bin`, `config` and `project` directories are located.
 
 #### `$DIR_PROJECT`
-The full directory where the custom projects profiles, modules and themes are
-located. Use this to symlink or copy these resources to the web directory:
+The full directory path where the custom projects profiles, modules and themes
+are located. Use this to symlink or copy these resources to the web directory:
 
 ```bash
 ln -s "$DIR_PROJECT/modules/custom" "$DIR_WEB/sites/all/modules/custom"
 ```
 
 #### `$DIR_CONFIG`
-The full directory where all the config files are located.
+The full directory path where all the config files are located.
+
+#### `$DIR_CONFIG_BIN`
+The full directory path where all the custom commands are located.
+
+#### `$DIR_CONFIG_SRC`
+The full directory path where all shared custom scripts are stored. These are
+included within hooks and custom commands.
 
 #### `$DIR_WEB`
-The full directory where Drupal will be installed (web root).
+The full directory path where Drupal will be installed (web root).
 
 #### `$DIR_BACKUP`
-The full directory where backups will be stored. This is the root of the backups
-`backup`. Each backup will be stored in each own subdirectory.
+The full directory path where backups will be stored. This is the root of the
+backups `backup`. Each backup will be stored in its own subdirectory.
 
 #### `$DIR_BUILD`
 The full directory path where the build will be stored. Each build will by
-default be packaged in a tar.gz package within this folder. The build itself
+default be compressed in a tar.gz file within this folder. The build itself
 will happen in the `build/web` directory.
 
 #### `$DRUPAL_INSTALLED`

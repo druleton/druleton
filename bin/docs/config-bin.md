@@ -25,7 +25,7 @@ Start the script by letting the CLI know that it is a bash script:
 ```
 
 
-### Check if script is symlinked
+### Check if script is located in the `bin` directory
 The script should not be called within its original location. Check this by
 adding the following code to the beginning of the command:
 ```
@@ -38,7 +38,7 @@ fi
 ```
 
 
-### Include the bootstrap
+### Include the skeleton bootstrap
 Include the bootstrap script, this will include the skeleton helpers and create
 all global variables.
 ```
@@ -82,7 +82,6 @@ source "$DIR_CONFIG_SRC/shared_functionailty.sh"
 Add the actual script steps.
 
 Add the global `script_before_run` & `script_after_run` hook triggers.
-[`hook_invoke` function][link-hook-invoke].
 
 
 > **Note** : Try to put the actual step code into included scripts.
@@ -97,7 +96,12 @@ if [ -z "$hello_name" ]; then
   hello_name="World"
 fi
 
-markup "Hello ${LWHITE}$hello_name${RESTORE}"
+hello_end_of_line="!"
+if [ $( option_is_set "--silent" ) -eq 1 ]; then
+  hello_end_of_line="."
+fi
+
+markup "Hello ${LWHITE}$hello_name${RESTORE}$hello_end_of_line"
 echo
 
 script_after_run
@@ -127,7 +131,7 @@ exit 0
 
 
 ### Full example
-Full example of a custo command (`config/bin/hello`):
+Full example of a custom command (`config/bin/hello`):
 ```
 #!/bin/bash
 
@@ -173,7 +177,12 @@ if [ -z "$hello_name" ]; then
   hello_name="World"
 fi
 
-markup "Hello ${LWHITE}$hello_name${RESTORE}"
+hello_end_of_line="!"
+if [ $( option_is_set "--silent" ) -eq 1 ]; then
+  hello_end_of_line="."
+fi
+
+markup "Hello ${LWHITE}$hello_name${RESTORE}$hello_end_of_line"
 echo
 
 script_after_run
@@ -182,6 +191,57 @@ script_after_run
 
 
 exit 0
+```
+
+
+## Add documentation about custom command
+Each command has a help by running the command with the -h option
+(eg. `bin/install -h`).
+
+Implement the help files when a custom command is added:
+
+### Command description
+Add the description text file: `config/bin/help/COMMANDNAME_description.txt`.
+The content of the file should explain what the command will do.
+
+Example:
+```
+The hello script is an example of an custom script. It implements the
+Hello World! functionality.
+```
+
+### Command examples
+Add some usage examples to the `config/bin/help/COMMANDNAME_examples.txt` file.
+
+Example:
+```
+  * bin/hello           Default, will output "Hello World!"
+  * bin/hello "Foo Bar" Will use the given argument to say hello to.
+                        This shall output "Hello Foo Bar!"
+```
+
+### Command arguments
+Explain what the argument is. If no argument is in use, explain it in this file
+`config/bin/help/COMMANDNAME_arguments.txt`.
+
+Example:
+```
+  There is only one argument for the hello script: the name of the person to
+  say hello to. This is optional. "World" will be used if no name is provided.
+```
+
+### Command options
+List the command options and where they stand for in the
+`config/bin/help/COMMANDNAME_options.txt` file.
+
+The default options, as provided by the skeleton, are automatically added to the
+command help.
+
+Do not create this help file if no custom options are added.
+
+Example:
+```
+  --silent              Don't should out the greeting.
 ```
 
 
