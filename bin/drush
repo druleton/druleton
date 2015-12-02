@@ -1,0 +1,27 @@
+#!/bin/bash
+
+################################################################################
+# Script that acts as a wrapper around the drush cli tool.
+#
+# The wrapper will always execute drush within the web directory.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+drush_params="$@"
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# START Script -----------------------------------------------------------------
+markup_debug "Drush params : $drush_params"
+drupal_drush $drush_params
+markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
+echo
+
+# END Script -------------------------------------------------------------------
+
+
+exit 0

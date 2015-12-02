@@ -1,0 +1,2 @@
+The drush script is a wrapper around drush. It will execute all commands within
+the web directory.

@@ -11,8 +11,8 @@ code in the repository.
 
 
 
-## 6 commands
-The skeleton provides 6 commands to run the site locally.
+## 7 commands
+The skeleton provides commands to run the site locally.
 
 Each command has a help section that explains the options for it. View the help
 by running the command with the `-h` switch.
@@ -114,6 +114,17 @@ $ bin/restore
 [More information about this command][link-command-restore].
 
 
+### bin/drush
+The `bin/drush` command is a wrapper around drush. It will always run the drush
+command within the `web` directory.
+
+```bash
+$ bin/drush
+```
+
+[More information about this command][link-command-drush].
+
+
 ## Alter commands by implementing hooks
 Each command has a set of steps it runs trough. All the code related to those
 steps are located in the `bin` and `bin/src` directories. This code should not
@@ -146,4 +157,5 @@ See [hooks documentation][link-hooks].
 [link-command-build]: docs/command-build.md
 [link-command-backup]: docs/command-backup.md
 [link-command-restore]: docs/command-restore.md
+[link-command-drush]: docs/command-drush.md
 [link-hooks]: docs/hooks.md
