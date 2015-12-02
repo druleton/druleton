@@ -1,0 +1,2 @@
+  * bin/init            Without arguments, the environment is dev.
+  * bin/init --env=prd  Init the environment for the "prd" environment.

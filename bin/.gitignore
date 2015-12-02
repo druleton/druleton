@@ -1,0 +1,16 @@
+# Make sure that we are not versioning symlinked commands.
+/*
+!/.gitignore
+!/docs
+!/src
+!/CHANGELOG.md
+!/LICENSE.md
+!/README.md
+!/backup
+!/build
+!/drush
+!/init
+!/install
+!/reset
+!/restore
+!/upgrade

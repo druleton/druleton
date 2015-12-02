@@ -22,5 +22,3 @@ file_symlink_subdirectories "$DIR_PROJECT/themes" "$DIR_WEB/sites/all/themes"
 markup_h2 "Libraries"
 mkdir -p "$DIR_WEB/sites/all/libraries"
 file_symlink_subdirectories "$DIR_PROJECT/libraries" "$DIR_WEB/sites/all/libraries"
-
-echo

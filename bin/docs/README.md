@@ -33,6 +33,8 @@ Overview of all Skeleton Documentation:
   reset.
 - [cleanup](config-cleanup.md) : Delete directories and files when the `web`
   directory is (re)built.
+- [custom commands](config-bin.md) : Add custom commands to the `config/bin` so
+  `bin/init` command can detect them and add them to the `bin` directory.
 
 
 ## Hooks
