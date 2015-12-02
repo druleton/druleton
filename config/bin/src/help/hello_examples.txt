@@ -1,0 +1,3 @@
+  * bin/hello           Default, will output "Hello World!"
+  * bin/hello "Foo Bar" Will use the given argument to say hello to.
+                        This shall output "Hello Foo Bar!"

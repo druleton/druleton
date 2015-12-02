@@ -42,7 +42,12 @@ if [ -z "$hello_name" ]; then
   hello_name="World"
 fi
 
-markup "Hello ${LWHITE}$hello_name${RESTORE}"
+hello_end_of_line="!"
+if [ $( option_is_set "--silent" ) -eq 1 ]; then
+  hello_end_of_line="."
+fi
+
+markup "Hello ${LWHITE}$hello_name${RESTORE}$hello_end_of_line"
 echo
 
 script_after_run

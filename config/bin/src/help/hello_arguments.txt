@@ -1,2 +1,2 @@
-  There is only one argument for the backup script: the name of the person to
-  say hello to. This is optional. "world" will be used if no name is provided.
+  There is only one argument for the hello script: the name of the person to
+  say hello to. This is optional. "World" will be used if no name is provided.
