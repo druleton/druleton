@@ -11,23 +11,24 @@
 function help_run {
   echo
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_description.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_description.txt"
   echo
 
   markup_h2 "Examples:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_examples.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_examples.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_examples.txt"
   help_run_load "$DIR_SRC/help/common_examples.txt"
   echo
 
   markup_h2 "Arguments:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_arguments.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_arguments.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_arguments.txt"
   help_run_load "$DIR_SRC/help/common_arguments.txt"
   echo
 
   markup_h2 "Options:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_options.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_options.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_options.txt"
   help_run_load "$DIR_SRC/help/common_options.txt"
   echo
 
