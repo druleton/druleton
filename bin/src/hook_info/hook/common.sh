@@ -1,6 +1,6 @@
-markup_h1_devider
+markup_h1_divider
 markup_h1 " Hook information for ${LWHITE}bin/${SCRIPT_NAME}${RESTORE}"
-markup_h1_devider
+markup_h1_divider
 
 markup "
 The hook system allows you to plugin bash scripts before or after each step in

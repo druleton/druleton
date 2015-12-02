@@ -8,7 +8,7 @@
 # @param string test to show in the markup.
 ##
 function markup {
-  echo -e "$1"
+  echo -e "$1${RESTORE}"
 }
 
 ##
@@ -19,7 +19,7 @@ function markup {
 # @param string test to show in the markup
 ##
 function markup_h1 {
-  markup "${LBLUE}$1${RESTORE}"
+  markup "${LBLUE}$1"
 }
 
 ##
@@ -30,7 +30,7 @@ function markup_h1 {
 # @param string text to show in the markup
 ##
 function markup_h2 {
-  markup "${YELLOW}$1${RESTORE}"
+  markup "${YELLOW}$1"
 }
 
 ##
@@ -41,7 +41,7 @@ function markup_h2 {
 # @param string text to show in the markup.
 ##
 function markup_success {
-  markup "${GREEN}$1${RESTORE}"
+  markup "${GREEN}$1"
 }
 
 ##
@@ -52,7 +52,7 @@ function markup_success {
 # @param string text to show in the markup.
 ##
 function markup_warning {
-  markup "${YELLOW}$1${YELLOW}"
+  markup "${YELLOW}$1"
 }
 
 ##
@@ -63,7 +63,7 @@ function markup_warning {
 # @param string text to show in the markup.
 ##
 function markup_error {
-  markup "${RED}$1${RED}"
+  markup "${RED}$1"
 }
 
 ##
@@ -72,7 +72,7 @@ function markup_error {
 # @param The text to show in the bullet.
 ##
 function markup_li {
-  markup " • $1"
+  markup " ${GREY}•${RESTORE} $1"
 }
 
 ##
@@ -95,22 +95,22 @@ function markup_debug {
     return
   fi
 
-  markup  "${GREY}$1${RESTORE}"
+  markup  "${GREY}$1"
   if [ ! -z "$2" ]; then
     echo
   fi
 }
 
 ##
-# Show a horizontal devider.
+# Show a horizontal divider.
 ##
-function markup_devider {
+function markup_divider {
   markup "================================================================================"
 }
 
 ##
-# Show a horizontal devider within a h1.
+# Show a horizontal divider within a h1.
 ##
-function markup_h1_devider {
+function markup_h1_divider {
   markup_h1 "================================================================================"
 }

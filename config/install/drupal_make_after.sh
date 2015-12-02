@@ -5,23 +5,22 @@
 ################################################################################
 
 
-# Add symlinks from the project folder.
-markup_h1 "Symlink custom modules and themes."
+# Add symlinks from the project directory.
+markup_h1 "Symlink project profiles, modules, themes and libraries."
 
-# Symlink modules.
-if [ ! -L "$DIR_WEB/sites/all/modules/custom" ]; then
-  ln -s "$DIR_PROJECT/modules/custom" "$DIR_WEB/sites/all/modules/custom"
-  message_success "Symlinked custom modules."
-else
-  message_warning "Symlink already exists for modules."
-fi
+markup_h2 "Profiles"
+file_symlink_subdirectories "$DIR_PROJECT/profiles" "$DIR_WEB/profiles"
 
-# Symlink themes.
-if [ ! -L "$DIR_WEB/sites/all/themes/custom" ]; then
-  ln -s "$DIR_PROJECT/themes/custom" "$DIR_WEB/sites/all/themes/custom"
-  message_success "Symlinked custom themes."
-else
-  message_warning "Symlink already exists for themes."
-fi
+markup_h2 "Modules"
+mkdir -p "$DIR_WEB/sites/all/modules"
+file_symlink_subdirectories "$DIR_PROJECT/modules" "$DIR_WEB/sites/all/modules"
+
+markup_h2 "Themes"
+mkdir -p "$DIR_WEB/sites/all/themes"
+file_symlink_subdirectories "$DIR_PROJECT/themes" "$DIR_WEB/sites/all/themes"
+
+markup_h2 "Libraries"
+mkdir -p "$DIR_WEB/sites/all/libraries"
+file_symlink_subdirectories "$DIR_PROJECT/libraries" "$DIR_WEB/sites/all/libraries"
 
 echo
