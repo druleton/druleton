@@ -37,15 +37,13 @@ function init_run {
 function init_custom_commands {
   markup_h1 "Symlink custom commands"
   if [ ! -d "$DIR_CONFIG_BIN" ]; then
-    message_warning "There is no $DIR_CONFIG_BIN directory"
-    markup "   to symlink from."
+    message_warning "There is no config/bin directory to symlink from."
     return
   fi
 
   local commands=$(find "$DIR_CONFIG_BIN" -maxdepth 1 -type f | awk -F"/" '{print $NF}' | grep -v '\.')
   if [ -z "$commands" ]; then
-    message_warning "There are no commands within the"
-    markup "   $DIR_CONFIG_BIN directory to symlink to."
+    message_warning "There are no commands within the config/bin directory to symlink to."
     return
   fi
 
