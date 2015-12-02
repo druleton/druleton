@@ -47,6 +47,12 @@ function hook_invoke_script {
 ##
 function hook_info_run {
   echo
+  if [ ! -f "$DIR_SRC/hook_info/${SCRIPT_NAME}.sh" ]; then
+    message_error "No hook info available for this command."
+    echo
+    exit
+  fi
+
   source "$DIR_SRC/hook_info/${SCRIPT_NAME}.sh"
   echo
   exit
