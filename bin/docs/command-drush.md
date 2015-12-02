@@ -1,7 +1,6 @@
 # bin/drush command
-The `bin/drush` command is a wrapper around the drush command. It will always
-run the command within the `web` directory.
-
+The `bin/drush` command is a wrapper around the drush command. It allows to run
+drush commands from within the root of the project.
 
 ```bash
 $ bin/drush
