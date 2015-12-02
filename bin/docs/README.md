@@ -20,6 +20,8 @@ Overview of all Skeleton Documentation:
   deployed on production.
 - [bin/backup](command-backup.md) : Create a backup of the installed project.
 - [bin/restore](command-restore.md) : Restore one of the backups.
+- [bin/drush](command-drush.md) : Run a drush command within the `web`
+  directory.
 
 
 ## Configuration

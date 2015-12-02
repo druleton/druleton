@@ -34,6 +34,8 @@ The drupal-skeleton contains a set of bash scripts (commands):
 - [`bin/backup`][link-command-backup]: Create a backup of the installed project.
 - [`bin/restore`][link-command-restore]: Restore the project from one of the
   created backups.
+- [`bin/drush`][link-command-drush] : Run a drush command within the `web`
+  directory.
 
 [See skeleton documentation][link-documentation].
 
@@ -61,3 +63,4 @@ The drupal-skeleton requires a minimal configuration to get started.
 [link-command-build]: bin/docs/command-build.md
 [link-command-backup]: bin/docs/command-backup.md
 [link-command-restore]: bin/docs/command-restore.md
+[link-command-drush]: bin/docs/command-drush.md
