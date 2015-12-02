@@ -17,6 +17,7 @@ function init_run {
   hook_invoke "init_before"
 
   init_custom_commands
+  echo
 
   # Run hooks after we login into Drupal.
   hook_invoke "init_after"
@@ -35,14 +36,16 @@ function init_run {
 ##
 function init_custom_commands {
   markup_h1 "Symlink custom commands"
-  if [ -z "$DIR_CONFIG_BIN" ]; then
-    message_error "There is no $DIR_CONFIG_BIN directory to symlink from."
+  if [ ! -d "$DIR_CONFIG_BIN" ]; then
+    message_warning "There is no $DIR_CONFIG_BIN directory"
+    markup "   to symlink from."
     return
   fi
 
   local commands=$(find "$DIR_CONFIG_BIN" -maxdepth 1 -type f | awk -F"/" '{print $NF}' | grep -v '\.')
   if [ -z "$commands" ]; then
-    message_error "There are no commands within the $DIR_CONFIG_BIN directory to symlink to."
+    message_warning "There are no commands within the"
+    markup "   $DIR_CONFIG_BIN directory to symlink to."
     return
   fi
 
@@ -59,7 +62,6 @@ function init_custom_commands {
       message_success "bin/$command"
     fi
   done
-  echo
 
   hook_invoke "init_custom_commands_after"
 }
