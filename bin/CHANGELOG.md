@@ -3,6 +3,10 @@
 ## [Unreleased][1.x.x]
 ### Added
 - #19 : Added bin/drush command and its documentation.
+- #20 : Added bin/init command and its documentation.
+
+### Fixed
+- Error when there is no hook info available for a specific command.
 
 
 
