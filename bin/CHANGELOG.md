@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased][1.x.x]
+## [0.2.0] - 2015-12-02 Documentation
 ### Added
 - #11 Add documentation : documented the drupal-skeleton, how everything works
   and how to extend it.
@@ -15,6 +15,7 @@
   changelog file to be used for the project.
 
 ### Fixed
+- #14 colored markup : each markup function should restore the default color.
 - bin/restore : Added the missing backup creation during executing the restore
   command.
 - bin/upgrade : Added the missing cleanup step to the upgrade command.
@@ -44,7 +45,7 @@
 
 
 
-[1.x.x]: https://github.com/zero2one/drupal-skeleton/compare/master...develop
+[0.2.0]: https://github.com/zero2one/drupal-skeleton/compare/0.1.1...0.2.0
 [0.1.2]: https://github.com/zero2one/drupal-skeleton/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/zero2one/drupal-skeleton/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/zero2one/drupal-skeleton/releases/tag/0.1.0
