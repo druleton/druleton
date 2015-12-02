@@ -7,6 +7,7 @@
 
 ### Fixed
 - Error when there is no hook info available for a specific command.
+- Added missing documentation about extending the skeleton command help.
 
 
 

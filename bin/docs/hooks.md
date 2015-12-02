@@ -50,6 +50,52 @@ See the [helper functions][link-hooks-helpers] and
 
 
 
+## Documenting hooks
+A hook extends the functionality of a skeleton command. Some hooks can support
+extra options or need extra description and examples.
+
+The skeleton supports extending the documentation of the skeleton commands by
+creating the proper help files within the `config/bin/src/help` directory:
+
+### Command description
+Add the extra description to the file:
+`config/bin/help/COMMANDNAME_description.txt`. The content should explain what
+the hook(s) add to the command.
+
+Example:
+```
+All custom code from within the project directory will be symlinked to their
+proper locations within the web directory.
+```
+
+### Command examples
+Add some usage examples to the `config/bin/help/COMMANDNAME_examples.txt` file.
+
+Example:
+```
+  * bin/install --no-link
+                        The project code will not be symlinked to its proper
+                        location within the web directory.
+```
+
+### Command arguments
+Explain what the argument is. If no argument is in use, explain it in this file
+`config/bin/help/COMMANDNAME_arguments.txt`.
+
+### Command options
+List the extra command options and where they stand for in the
+`config/bin/help/COMMANDNAME_options.txt` file.
+
+Do not create this help file if no extra options are added.
+
+Example:
+```
+  --no-link             Don't create symlinks from within the web directory to
+                        the project files.
+```
+
+
+
 [Back to overview][link-overview]
 
 
