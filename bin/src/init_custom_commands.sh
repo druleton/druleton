@@ -1,30 +1,10 @@
 ################################################################################
-# Functionality to initiate the environment.
+# Functionality to symlink custom commands.
 ################################################################################
 
 
 ##
-# Function to initiate the project environment.
-#
-# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
-# - drupal_login_before : Scripts that should run before the user is logged in.
-# - drupal_login_after  : Scripts that should run after the user id logged in.
-#
-# The hooks will be called without and with environment suffix.
-##
-function init_run {
-  # Run hooks before we login into Drupal.
-  hook_invoke "init_before"
-
-  init_custom_commands
-  echo
-
-  # Run hooks after we login into Drupal.
-  hook_invoke "init_after"
-}
-
-##
-# Symlink the custom commands.
+# Function to symlink custom commands from the config/bin to the bin directory.
 #
 # This script will trigger 2 "hooks" in the config/<script-name>/ directory:
 # - init_custom_commands_before : Scripts that should run before custom commands
@@ -33,8 +13,9 @@ function init_run {
 #   commands are symlinked.
 #
 # The hooks will only be triggered if there are commands to symlink to.
+# The hooks will be called without and with environment suffix.
 ##
-function init_custom_commands {
+function init_custom_commands_run {
   markup_h1 "Symlink custom commands"
   if [ ! -d "$DIR_CONFIG_BIN" ]; then
     message_warning "There is no config/bin directory to symlink from."
@@ -60,6 +41,7 @@ function init_custom_commands {
       message_success "bin/$command"
     fi
   done
+  echo
 
   hook_invoke "init_custom_commands_after"
 }
