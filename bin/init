@@ -42,12 +42,14 @@ fi
 
 # Includes.
 source "$DIR_SRC/script.sh"
+source "$DIR_SRC/init_composer.sh"
 source "$DIR_SRC/init_custom_commands.sh"
 
 
 # START Script -----------------------------------------------------------------
 
 script_before_run
+init_composer_run
 init_custom_commands_run
 script_after_run
 
