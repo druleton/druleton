@@ -15,7 +15,18 @@ hooks.
 
 The command will perform following script steps:
 
-#### 1. Add custom commands to the `bin` directory
+#### 1. Download or update composer
+[Composer][link-composer] is a package manager for PHP. It is used to download
+and install tools like drush.
+
+Composer will be downloaded or updated into the `bin` directory. It can be
+called using the following command:
+
+```
+$ bin/composer
+```
+
+#### 2. Add custom commands to the `bin` directory
 The skeleton allows to define custom commands in the `config/bin` directory.
 This step will create a symlink for each custom command to the `bin` directory.
 This so all commands are run from the same directory.
@@ -57,22 +68,28 @@ The hooks for the `bin/init` command should be located in the
 The following hooks are supported (in the order as they will be included):
 
 
-#### config/backup/script_before(_\<env\>).sh
+#### config/init/script_before(_\<env\>).sh
 This hook is included and run before the script will run its first step.
 
-#### config/backup/init_custom_commands_before(_\<env\>).sh
+#### config/init/init_composer_before(_\<env\>).sh
+This hook is included and run before composer is installed or updated locally.
+
+#### config/init/init_composer_after(_\<env\>).sh
+This hook is included and run after composer is installed or updated locally.
+
+#### config/init/init_custom_commands_before(_\<env\>).sh
 This hook is included and run before the custom commands are added to the `bin`
 directory.
 
-Warning: this script will be not included if no custom commands are defined.
+> Warning: this script will be not included if no custom commands are defined.
 
-#### config/backup/init_custom_commands_before(_\<env\>).sh
+#### config/init/init_custom_commands_before(_\<env\>).sh
 This hook is included and run after the custom commands are added to the `bin`
 directory.
 
-Warning: this script will be not included if no custom commands are defined.
+> Warning: this script will be not included if no custom commands are defined.
 
-#### config/backup/script_after(_\<env\>).sh
+#### config/init/script_after(_\<env\>).sh
 This hook is included and run when the script is finished.
 
 
@@ -83,5 +100,6 @@ This hook is included and run when the script is finished.
 
 [link-hooks]: hooks.md
 [link-config-bin]: config-bin.sh
+[link-composer]: https://getcomposer.org
 
 [link-overview]: README.md
