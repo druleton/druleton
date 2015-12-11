@@ -11,7 +11,7 @@ code in the repository.
 
 
 
-## 7 commands
+## 8 commands
 The skeleton provides commands to run the site locally.
 
 Each command has a help section that explains the options for it. View the help
@@ -22,6 +22,22 @@ Example:
 ```Shell
 $ bin/install -h
 ```
+
+
+### bin/init
+The `bin/init` command is used to setup the project environment. It will
+download tools like composer and add them to the `bin` directory. It will also
+scan the `config/bin` directory if there are custom, project specific, commands
+and add them to the `bin` directory.
+
+You can run this command anytime, it will update the tools and rescan the
+`config/bin` directory.
+
+```Shell
+$ bin/init
+```
+
+[More information about this command][link-command-init].
 
 
 ### bin/install
@@ -125,6 +141,24 @@ $ bin/drush
 [More information about this command][link-command-drush].
 
 
+
+## More commands
+
+### Composer
+The `bin/init` command will download and install composer locally. It can be
+called using following command:
+
+```
+$ bin/composer
+```
+
+### Custom commands
+It is possible to add your own, project specific, commands.
+
+[See the custom commands documentation][link-config-bin].
+
+
+
 ## Alter commands by implementing hooks
 Each command has a set of steps it runs trough. All the code related to those
 steps are located in the `bin` and `bin/src` directories. This code should not
@@ -151,6 +185,7 @@ See [hooks documentation][link-hooks].
 [link-drupalconsole]: http://drupalconsole.com/
 
 [link-docs]: docs/README.md
+[link-command-init]: docs/command-init.md
 [link-command-install]: docs/command-install.md
 [link-command-reset]: docs/command-reset.md
 [link-command-upgrade]: docs/command-upgrade.md
@@ -159,3 +194,4 @@ See [hooks documentation][link-hooks].
 [link-command-restore]: docs/command-restore.md
 [link-command-drush]: docs/command-drush.md
 [link-hooks]: docs/hooks.md
+[link-config-bin]: config-bin.sh

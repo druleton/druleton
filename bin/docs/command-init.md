@@ -1,6 +1,11 @@
 # bin/init command
-The `bin/init` command is used to setup or update the skeleton environment.
-It is used to support custom commands and download dependencies.
+The `bin/init` command is used to setup the skeleton and project environment.
+It will download tools like composer and add them to the `bin` directory. It
+will also scan the `config/bin` directory if there are custom, project specific,
+commands and add them to the `bin` directory.
+
+You can run this command anytime, it will update the tools and rescan the
+`config/bin` directory.
 
 ```bash
 $ bin/init
