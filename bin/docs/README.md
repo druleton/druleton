@@ -10,6 +10,7 @@ Overview of all Skeleton Documentation:
   drupal-skeleton.
 
 ## Commands
+- [bin/init](command-init.md) : Setup the skeleton environment.
 - [bin/install](command-install.md) : Install the project.
 - [bin/reset](command-reset.md) : Reset an existing project back to the
   fresh-installed state.
