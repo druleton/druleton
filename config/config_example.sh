@@ -26,3 +26,12 @@ DB_HOST="localhost"
 ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
+
+# The Drush version to use.
+#
+# Use "global" if you want to use the globally installed drush command (outside
+# the skeleton project.
+# Or set the branch or tag name from https://github.com/drush-ops/drush.
+#
+# If the variable is not set, dev-master will be used.
+DRUSH_VERSION="dev-master"
