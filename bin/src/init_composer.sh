@@ -18,16 +18,22 @@ function init_composer_run {
   # Hook before install/update composer.
   hook_invoke "init_composer_before"
 
+  # Disable composer x-debug warnings
+  COMPOSER_DISABLE_XDEBUG_WARN=1
+
   if [ -f "$DIR_BIN/composer" ]; then
     init_composer_update
+    echo
+    init_composer_init
+    echo
+    init_composer_update_packages
     echo
   else
     init_composer_install
     echo
+    init_composer_init
+    echo
   fi
-
-  init_composer_init
-  echo
 
   # Hook after install/update composer.
   hook_invoke "init_composer_after"
@@ -47,7 +53,7 @@ function init_composer_install {
 ##
 function init_composer_update {
   markup_h1 "Update composer."
-  $DIR_BIN/composer self-update
+  composer_skeleton_run self-update
 }
 
 ##
@@ -59,8 +65,7 @@ function init_composer_init {
   if [ -f "$DIR_BIN/composer.json" ]; then
     message_success "Composer was already initiated."
   else
-    $DIR_BIN/composer -n init \
-      --working-dir="$DIR_BIN" \
+    composer_skeleton_run -n init \
       --name="drupal-skeleton/bin" \
       --description="PHP packages needed by the skeleton." \
       --author="zero2one <zero2one@serial-graphics.be>" \
@@ -69,4 +74,12 @@ function init_composer_init {
       --type="library"
     message_success "Composer is initiated"
   fi
+}
+
+##
+# Update the composer packages.
+##
+function init_composer_update_packages {
+  markup_h1 "Update installed composer packages"
+  composer_skeleton_run update
 }
