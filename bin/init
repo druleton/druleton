@@ -43,6 +43,7 @@ fi
 # Includes.
 source "$DIR_SRC/script.sh"
 source "$DIR_SRC/init_composer.sh"
+source "$DIR_SRC/init_drush.sh"
 source "$DIR_SRC/init_custom_commands.sh"
 
 
