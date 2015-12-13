@@ -65,7 +65,7 @@ install a local version. This is defined by the `$DRUSH_VERSION` variable.
 The options are:
 
 - **DRUSH_VERSION="global"** : Use the globally installed drush command.
-- **DRUSH_VERSION="<branch or tag name>"** : Download a local drush command, use
+- **DRUSH_VERSION="branch or tag name"** : Download a local drush command, use
   the branch or tag to determen what version to download.
 
 > Note : The default is to download a local drush using the
