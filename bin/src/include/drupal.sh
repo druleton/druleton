@@ -7,12 +7,31 @@
 # Run drush from within the Drupal root ($DIR_WEB folder).
 #
 # Use this if you need to run the drush command from within the actual web root.
-# Do not use it when instaling the make files.
+# Do not use it when installing the make files.
+#
+#
 ##
 function drupal_drush {
-  drush --root="$DIR_WEB" "$@"
+  drupal_drush_run "$@" --root="$DIR_WEB"
 }
 
+##
+# Run drush.
+#
+# This command will run by default the globally installed drush.
+# If the $DRUSH_VERSION is set to a specific version, then it will expect drush
+# to be installed using composer and will run drush from within the
+# bin/vendor/bin directory.
+##
+function drupal_drush_run {
+  local cmd_drush="$DIR_BIN/vendor/bin/drush"
+
+  if [ "$DRUSH_VERSION" == "global" ]; then
+    cmd_drush="drush"
+  fi
+
+  $cmd_drush "$@"
+}
 
 ##
 # Check if there is a working Drupak installation.

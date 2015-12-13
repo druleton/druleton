@@ -31,6 +31,23 @@ directory structure. Use the same vhost URL as defined in the config file.
 
 
 
+## Run the init command
+The skeleton has some 3th party dependencies that are not included in the `bin`
+directory. They need to be installed by running the `bin/init` command:
+
+```bash
+$ bin/init
+```
+
+This command will:
+- Download Composer and install it in the `bin` directory.
+- Use composer to download and install Drush (and its dependencies)locally in
+  the `bin/vendor` directory.
+- Create symlinks from within the `bin` directory to the optional custom
+  commands as defined in the `config/bin` directory.
+
+
+
 ## Run the install command
 Install the project by running the `bin/install` command:
 
@@ -51,7 +68,7 @@ $ bin/install
 
 The new site is ready to start developing.
 
-From now on the [other 5 commands][link-commands] can be used.
+From now on [all commands][link-commands] can be used.
 
 
 
@@ -62,6 +79,7 @@ Now that you have a running installation you can start extending the project:
 - [Enable extra modules after the installation process][link-config-modules].
 - [Add custom install profiles, modules, themes and libraries][link-project].
 - [Extend the commands by implementing their hooks][link-hooks].
+- [Add extra commands specific for the project][link-config-bin].
 
 
 
@@ -73,6 +91,7 @@ Now that you have a running installation you can start extending the project:
 [link-config-config]: config-config.md
 [link-documentation]: README.md
 [link-commands]: README.md#commands
+[link-config-bin]: config-bin.md
 [link-config-make]: config-make.sh
 [link-config-modules]: config-modules.md
 [link-project]: project.md

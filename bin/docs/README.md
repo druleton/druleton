@@ -2,12 +2,15 @@
 
 Overview of all Skeleton Documentation:
 
+
 ## Quick Start
 - [Quick start](quick-start.md) : Short guide to get you started within minutes.
+
 
 ## Requirements
 - [Requirements](requirements.md) : Minimal requirements to use the
   drupal-skeleton.
+
 
 ## Commands
 - [bin/init](command-init.md) : Setup the skeleton environment.
@@ -22,6 +25,11 @@ Overview of all Skeleton Documentation:
 - [bin/backup](command-backup.md) : Create a backup of the installed project.
 - [bin/restore](command-restore.md) : Restore one of the backups.
 - [bin/drush](command-drush.md) : Run a drush command within the `web`
+  directory.
+
+Commands installed during the init command:
+- [bin/composer](https://getcomposer.org/) : A local copy of composer.
+- [bin/...](config-bin.md) : Any custom command as defined in the `config/bin`
   directory.
 
 

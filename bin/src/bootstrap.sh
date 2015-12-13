@@ -46,6 +46,7 @@ source "$DIR_SRC/include/options.sh"
 source "$DIR_SRC/include/colors.sh"
 source "$DIR_SRC/include/markup.sh"
 source "$DIR_SRC/include/message.sh"
+source "$DIR_SRC/include/composer.sh"
 source "$DIR_SRC/include/drupal.sh"
 
 # Load the config file.

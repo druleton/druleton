@@ -21,6 +21,8 @@ echo
 markup_h1_divider
 markup_h1 " ${LWHITE}Initiate/update${LBLUE} environment for website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
 markup_h1_divider
+markup_h1_li "Composer will be installed or updated in the bin/ directory."
+markup_h1_li "Drush will be installed (or global installed drush will be used)."
 markup_h1_li "Any custom command will be included in the bin/ directory."
 markup_h1_divider
 echo
@@ -43,6 +45,7 @@ fi
 # Includes.
 source "$DIR_SRC/script.sh"
 source "$DIR_SRC/init_composer.sh"
+source "$DIR_SRC/init_drush.sh"
 source "$DIR_SRC/init_custom_commands.sh"
 
 
@@ -50,6 +53,7 @@ source "$DIR_SRC/init_custom_commands.sh"
 
 script_before_run
 init_composer_run
+init_drush_run
 init_custom_commands_run
 script_after_run
 
