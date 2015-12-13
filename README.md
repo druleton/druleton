@@ -25,14 +25,15 @@ The skeleton requires at least bash to run.
 ## Commands
 The drupal-skeleton contains a set of bash scripts (commands):
 
+- [`bin/init`][link-command-init] : Setup or update the skeleton environment.
 - [`bin/install`][link-command-install] : Download core and required contributed
   modules, themes and libraries and install the project.
 - [`bin/reset`][link-command-reset] : Reset an installed project back to its
   freshly installed state.
 - [`bin/upgrade`][link-command-upgrade]: Upgrade an installed project.
-- [`bin/build`][link-command-build]: Create a package of the project.
-- [`bin/backup`][link-command-backup]: Create a backup of the installed project.
-- [`bin/restore`][link-command-restore]: Restore the project from one of the
+- [`bin/build`][link-command-build] : Create a package of the project.
+- [`bin/backup`][link-command-backup] : Create a backup of the installed project.
+- [`bin/restore`][link-command-restore] : Restore the project from one of the
   created backups.
 - [`bin/drush`][link-command-drush] : Run a drush command within the `web`
   directory.
@@ -57,6 +58,7 @@ The drupal-skeleton requires a minimal configuration to get started.
 [link-documentation]: bin/docs/README.md
 [link-config]: bin/docs/config.md
 [link-requirements]: bin/docs/requirements.md
+[link-command-init]: bin/docs/command-init.md
 [link-command-install]: bin/docs/command-install.md
 [link-command-reset]: bin/docs/command-reset.md
 [link-command-upgrade]: bin/docs/command-upgrade.md

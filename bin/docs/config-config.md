@@ -58,6 +58,20 @@ credentials from the config file:
   site url (`$ACCOUNT_NAME@$SITE_URL`).
 
 
+#### Drush version
+The skeleton provides the option to use a globally installed drush command or to
+install a local version. This is defined by the `$DRUSH_VERSION` variable.
+
+The options are:
+
+- **DRUSH_VERSION="global"** : Use the globally installed drush command.
+- **DRUSH_VERSION="<branch or tag name>"** : Download a local drush command, use
+  the branch or tag to determen what version to download.
+
+> Note : The default is to download a local drush using the
+> [dev-master][link-drush-dev-master] branch.
+
+
 
 ## Example config file
 
@@ -81,6 +95,9 @@ DB_HOST="localhost"
 ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
+
+# Drush version.
+DRUSH_VERSION="dev-master"
 ```
 
 
@@ -90,5 +107,6 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 
 
 [link-hooks]: hooks.md
+[link-drush-dev-master]: https://github.com/drush-ops/drush/tree/master
 
 [link-overview]: README.md

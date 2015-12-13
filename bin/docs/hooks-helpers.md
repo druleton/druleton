@@ -251,6 +251,24 @@ Example to clear the cache:
 drupal_drush cc
 ```
 
+> Note: this function is a wrapper around
+> [`drupal_drush_run`](#drupal_drush_run). It will always use the same global or
+> local drush as defined in the configuration.
+
+#### drupal_drush_run
+The skeleton provides the option to use a locally (default) or globally
+installed drush command. This function will check what to use based on the
+configuration variable [`$DRUSH_VERSION`][link-config-config-drush-version].
+If that variable is set to "global" then the globally installed drush will be
+used by the skeleton.
+
+The difference between this function and `drupal_drush` is that this command
+will not use by default `web` as the working directory.
+
+```bash
+drupal_drush_run cc drush
+```
+
 #### drupal_is_installed
 Check if Drupal is installed (= there is a working Drupal platform). The
 function will echo 1 when ok, 0 if not ok.
@@ -360,6 +378,7 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 
 
 [link-hooks-variables]: hooks-variables.md
+[link-config-config-drush-version]: config-config.md#drush-version
 
 [link-overview]: README.md
 

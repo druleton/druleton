@@ -31,7 +31,19 @@ called using the following command:
 $ bin/composer
 ```
 
-#### 2. Add custom commands to the `bin` directory
+#### 2. Install drush
+[Drush][link-drush] is a command line interface to perform actions on drupal. It
+is used by the skeleton to install and interact with the drupal installation in
+the `web` directory.
+
+By default the [dev-master][link-drush-master] branch of drush will be used as
+the version to install locally. You can set a custom version by defining this in
+the [`$DRUSH_VERSION`][link-config-config-drush-version] variable in the config
+file. You can also use a globally installed drush version by setting the
+`$DRUSH_VERSION` variable to "global".
+
+
+#### 3. Add custom commands to the `bin` directory
 The skeleton allows to define custom commands in the `config/bin` directory.
 This step will create a symlink for each custom command to the `bin` directory.
 This so all commands are run from the same directory.
@@ -82,6 +94,12 @@ This hook is included and run before composer is installed or updated locally.
 #### config/init/init_composer_after(_\<env\>).sh
 This hook is included and run after composer is installed or updated locally.
 
+#### config/init/init_drush_before(_\<env\>).sh
+This hook is included and run before drush is installed or updated locally.
+
+#### config/init/init_drush_after(_\<env\>).sh
+This hook is included and run after drush is installed or updated locally.
+
 #### config/init/init_custom_commands_before(_\<env\>).sh
 This hook is included and run before the custom commands are added to the `bin`
 directory.
@@ -106,5 +124,8 @@ This hook is included and run when the script is finished.
 [link-hooks]: hooks.md
 [link-config-bin]: config-bin.sh
 [link-composer]: https://getcomposer.org
+[link-drush]: https://github.com/drush-ops/drush
+[link-drush-master]: https://github.com/drush-ops/drush/tree/master
+[link-config-config-drush-version]: config-config.md#drush-version
 
 [link-overview]: README.md
