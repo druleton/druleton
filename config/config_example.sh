@@ -34,4 +34,8 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 # Or set the branch or tag name from https://github.com/drush-ops/drush.
 #
 # If the variable is not set, dev-master will be used.
-DRUSH_VERSION="dev-master"
+#DRUSH_VERSION="global"
+
+# Composer is by default downloaded during the bin/init script.
+# You can optionally use a global installed composer.
+#COMPOSER_USE_GLOBAL=1

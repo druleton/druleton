@@ -1,0 +1,2 @@
+  * bin/composer help      Show help about composer.
+  * bin/composer --version Show the composer version.

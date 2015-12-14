@@ -24,7 +24,7 @@ function drupal_drush {
 # bin/vendor/bin directory.
 ##
 function drupal_drush_run {
-  local cmd_drush="$DIR_BIN/vendor/bin/drush"
+  local cmd_drush="$DIR_BIN/packagist/vendor/bin/drush"
 
   if [ "$DRUSH_VERSION" == "global" ]; then
     cmd_drush="drush"

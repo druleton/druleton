@@ -21,7 +21,7 @@ function init_composer_run {
   # Disable composer x-debug warnings
   COMPOSER_DISABLE_XDEBUG_WARN=1
 
-  if [ -f "$DIR_BIN/composer" ]; then
+  if [ -d "$DIR_BIN/composer_src" ]; then
     init_composer_update
     echo
     init_composer_init
@@ -44,8 +44,14 @@ function init_composer_run {
 ##
 function init_composer_install {
   markup_h1 "Install composer."
-  curl -sS https://getcomposer.org/installer \
-    | php -- --install-dir="$DIR_BIN" --filename=composer
+  mkdir -p "$DIR_BIN/packagist"
+
+  if [ -z "$COMPOSER_USE_GLOBAL" ]; then
+    curl -sS https://getcomposer.org/installer \
+      | php -- --install-dir="$DIR_BIN/packagist"
+  else
+    markup_warning "Skip composer installation : globally installed composer will be used."
+  fi
 }
 
 ##
@@ -53,7 +59,12 @@ function init_composer_install {
 ##
 function init_composer_update {
   markup_h1 "Update composer."
-  composer_skeleton_run self-update
+
+  if [ -z "$COMPOSER_USE_GLOBAL" ]; then
+    composer_skeleton_run self-update
+  else
+    markup_warning "Skip composer update : globally installed composer is in use."
+  fi
 }
 
 ##
@@ -62,7 +73,7 @@ function init_composer_update {
 function init_composer_init {
   markup_h1 "Initiate composer."
 
-  if [ -f "$DIR_BIN/composer.json" ]; then
+  if [ -f "$DIR_BIN/packagist/composer.json" ]; then
     message_success "Composer was already initiated."
   else
     composer_skeleton_run -n init \
