@@ -6,6 +6,7 @@
 - #20 : Added bin/init command and its documentation.
 - #23 : Install composer locally by running the bin/init command.
 - #23 : Install drush locally by running the bin/init command.
+- #30 : Add the configuration option to use local or global composer binary.
 
 ### Fixed
 - Error when there is no hook info available for a specific command.

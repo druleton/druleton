@@ -8,7 +8,13 @@
 # This will run the bin/composer command with surpression of the XDEBUG warning.
 ##
 function composer_run {
-  COMPOSER_DISABLE_XDEBUG_WARN=1 "$DIR_BIN/composer" "$@"
+  local cmd_composer="$DIR_BIN/packagist/composer.phar"
+
+  if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
+    cmd_composer="composer"
+  fi
+
+  COMPOSER_DISABLE_XDEBUG_WARN=1 "$cmd_composer" "$@"
 }
 
 ##
@@ -18,5 +24,5 @@ function composer_run {
 # installed by the skeleton.
 ##
 function composer_skeleton_run {
-  composer_run "$@" --working-dir="$DIR_BIN"
+  composer_run "$@" --working-dir="$DIR_BIN/packagist"
 }

@@ -35,6 +35,8 @@ The drupal-skeleton contains a set of bash scripts (commands):
 - [`bin/backup`][link-command-backup] : Create a backup of the installed project.
 - [`bin/restore`][link-command-restore] : Restore the project from one of the
   created backups.
+- [bin/composer](command-composer.md) : A wrapper around a globally installed or
+  local copy of the composer binary.
 - [`bin/drush`][link-command-drush] : Run a drush command within the `web`
   directory.
 

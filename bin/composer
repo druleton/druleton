@@ -1,0 +1,25 @@
+#!/bin/bash
+
+################################################################################
+# Script that acts as a wrapper around the composer cli tool.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+composer_params="$@"
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# START Script -----------------------------------------------------------------
+markup_debug "Composer params : $composer_params"
+composer_run $composer_params
+markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
+echo
+
+# END Script -------------------------------------------------------------------
+
+
+exit 0
