@@ -58,6 +58,17 @@ credentials from the config file:
   site url (`$ACCOUNT_NAME@$SITE_URL`).
 
 
+#### Composer
+The skeleton will, by default, download and install composer locally. The
+`COMPOSER_USE_GLOBAL` variable allows to force the skeleton to use the globally
+install composer instead.
+
+- **COMPOSER_USE_GLOBAL=0** : Use the locally installed composer binary.
+- **COMPOSER_USE_GLOBAL=1** : Use the globally installed composer binary.
+
+> Note : The default is to download and install composer locally.
+
+
 #### Drush version
 The skeleton provides the option to use a globally installed drush command or to
 install a local version. This is defined by the `$DRUSH_VERSION` variable.
@@ -95,6 +106,9 @@ DB_HOST="localhost"
 ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
+
+# Use global composer
+COMPOSER_USE_GLOBAL=1
 
 # Drush version.
 DRUSH_VERSION="dev-master"

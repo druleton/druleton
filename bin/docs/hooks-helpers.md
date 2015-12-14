@@ -235,6 +235,24 @@ message_error "Error demo."
 ![message_error][img-message_error]
 
 
+
+## Composer helpers
+The skeleton provides several Composer helpers:
+
+#### composer_run
+Run the composer binary. This will automatically use the locally or globally
+installed composer. What composer binary will be used depeneds on the
+configuration [`$COMPOSER_USE_GLOBAL`][link-config-config-composer] variable.
+
+#### composer_skeleton_run
+Run a composer command using the `bin/packagist` directory as working directory.
+This directory is used to download and store php packages as needed by the
+skeleton.
+
+> Note this function is a wrapper around the [`composer_run`](#composer_run)
+> function.
+
+
 ## Drupal helpers
 The skeleton provides several Drupal specific helpers:
 
@@ -378,6 +396,7 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 
 
 [link-hooks-variables]: hooks-variables.md
+[link-config-config-composer]: config-config.md#composer
 [link-config-config-drush-version]: config-config.md#drush-version
 
 [link-overview]: README.md
