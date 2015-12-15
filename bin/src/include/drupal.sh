@@ -26,7 +26,7 @@ function drupal_drush {
 function drupal_drush_run {
   local cmd_drush=""
 
-  if [ "$DRUSH_VERSION" == "phar" ]; then
+  if [ -z "$DRUSH_VERSION" ] || [ "$DRUSH_VERSION" == "phar" ]; then
     cmd_drush="$DIR_BIN/packagist/drush.phar"
   elif [ "$DRUSH_VERSION" == "global" ]; then
     cmd_drush="drush"
