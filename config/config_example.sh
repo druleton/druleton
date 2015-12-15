@@ -27,15 +27,19 @@ ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 
-# The Drush version to use.
-#
-# Use "global" if you want to use the globally installed drush command (outside
-# the skeleton project.
-# Or set the branch or tag name from https://github.com/drush-ops/drush.
-#
-# If the variable is not set, dev-master will be used.
-#DRUSH_VERSION="global"
-
 # Composer is by default downloaded during the bin/init script.
 # You can optionally use a global installed composer.
 #COMPOSER_USE_GLOBAL=1
+
+# The Drush version to use.
+#
+# Options:
+# - phar : use the drush.phar file as the local drush binary. This is the
+#   default option.
+# - branch or tag name : use a specific version by setting the variable to the
+#   proper branch or tag name (eg. dev-master).
+#   See https://github.com/drush-ops/drush.
+# - global : use the globally installed drush command (outside the skeleton).
+#
+# If the variable is not set, phar will be used.
+#DRUSH_VERSION="global"
