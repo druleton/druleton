@@ -26,3 +26,12 @@ function composer_run {
 function composer_skeleton_run {
   composer_run "$@" --working-dir="$DIR_BIN/packagist"
 }
+
+##
+# Make sure that a COMPOSER_USE_GLOBAL variable is set.
+##
+function composer_variable_use_global {
+  if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
+    COMPOSER_USE_GLOBAL=0
+  fi
+}

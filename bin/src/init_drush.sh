@@ -15,11 +15,6 @@
 # The hooks will be called without and with environment suffix.
 ##
 function init_drush_run {
-  # Fallback to dev-master if no configuration found.
-  if [ -z "$DRUSH_VERSION" ]; then
-    DRUSH_VERSION="phar"
-  fi
-
   # Hook before install/update composer.
   hook_invoke "init_drush_before"
 

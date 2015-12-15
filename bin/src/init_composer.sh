@@ -18,9 +18,6 @@ function init_composer_run {
   # Hook before install/update composer.
   hook_invoke "init_composer_before"
 
-  # Disable composer x-debug warnings
-  COMPOSER_DISABLE_XDEBUG_WARN=1
-
   if [ -d "$DIR_BIN/composer_src" ]; then
     init_composer_update
     echo

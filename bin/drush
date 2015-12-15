@@ -16,8 +16,17 @@ drush_params="$@"
 source $(dirname $0)/src/bootstrap.sh
 
 # START Script -----------------------------------------------------------------
-markup_debug "Drush params : $drush_params"
+
+markup_debug
+markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
+markup_debug
+
 drupal_drush $drush_params
+
+markup_debug
+markup_debug "Drush binary used : $DRUSH_VERSION"
+markup_debug "Drush params : $drush_params"
+
 markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
 echo
 
