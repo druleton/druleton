@@ -24,13 +24,26 @@ function drupal_drush {
 # bin/vendor/bin directory.
 ##
 function drupal_drush_run {
-  local cmd_drush="$DIR_BIN/packagist/vendor/bin/drush"
+  local cmd_drush=""
 
-  if [ "$DRUSH_VERSION" == "global" ]; then
+  if [ "$DRUSH_VERSION" == "phar" ]; then
+    cmd_drush="$DIR_BIN/packagist/drush.phar"
+  elif [ "$DRUSH_VERSION" == "global" ]; then
     cmd_drush="drush"
+  else
+    cmd_drush="$DIR_BIN/packagist/vendor/bin/drush"
   fi
 
   $cmd_drush "$@"
+}
+
+##
+# Make sure that the DRUSH_VERSION variable is set.
+##
+function drupal_drush_variable_version {
+  if [ -z "$DRUSH_VERSION" ]; then
+    DRUSH_VERSION="phar"
+  fi
 }
 
 ##

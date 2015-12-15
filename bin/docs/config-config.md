@@ -63,7 +63,8 @@ The skeleton will, by default, download and install composer locally. The
 `COMPOSER_USE_GLOBAL` variable allows to force the skeleton to use the globally
 install composer instead.
 
-- **COMPOSER_USE_GLOBAL=0** : Use the locally installed composer binary.
+- **COMPOSER_USE_GLOBAL=0** : Download the composer binary locally and use that
+  to run composer commands.
 - **COMPOSER_USE_GLOBAL=1** : Use the globally installed composer binary.
 
 > Note : The default is to download and install composer locally.
@@ -75,12 +76,12 @@ install a local version. This is defined by the `$DRUSH_VERSION` variable.
 
 The options are:
 
+- **DRUSH_VERSION="phar"** : Download and use drush.phar as drush binary.
 - **DRUSH_VERSION="global"** : Use the globally installed drush command.
 - **DRUSH_VERSION="branch or tag name"** : Download a local drush command, use
-  the branch or tag to determen what version to download.
+  the [branch or tag][link-drush] to determine what version to download.
 
-> Note : The default is to download a local drush using the
-> [dev-master][link-drush-dev-master] branch.
+> Note : The default is to download and use the drush.phar binary.
 
 
 
@@ -121,6 +122,6 @@ DRUSH_VERSION="dev-master"
 
 
 [link-hooks]: hooks.md
-[link-drush-dev-master]: https://github.com/drush-ops/drush/tree/master
+[link-drush]: https://github.com/drush-ops/drush
 
 [link-overview]: README.md

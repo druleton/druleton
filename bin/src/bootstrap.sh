@@ -63,8 +63,14 @@ DRUPAL_INSTALLED=$( drupal_is_installed )
 if [ $(option_is_set "--confirm") -eq 1 ] || [ $(option_is_set "-y") -eq 1 ]; then
   CONFIRMED=1
 else
- CONFIRMED=0
+  CONFIRMED=0
 fi
+
+# Set the default variable value(s) for composer.
+composer_variable_use_global
+
+# Set the default variable value(s) for drush.
+drupal_drush_variable_version
 
 # Load Help.
 source "$DIR_SRC/include/help.sh"

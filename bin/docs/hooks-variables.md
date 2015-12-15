@@ -76,6 +76,17 @@ Is there a working Drupal installation 1/0.
 #### `$CONFIRMED`
 Is the --confirm or -y option passed to the script.
 
+#### `$COMPOSER_USE_GLOBAL`
+Should the globally (1) or locally (0) installed composer binary be used for the
+`bin/composer` command.
+
+[see configuration documentation][link-config-config-composer].
+
+#### `$DRUSH_VERSION`
+What drush version to install and use.
+
+[see configuration documentation][link-config-config-drush-version].
+
 
 
 ## Command argument
@@ -95,6 +106,8 @@ The variables from the command line are accessible using the
 
 
 [link-config-config]: config-config.md
+[link-config-config-composer]: config-config.md#composer
+[link-config-config-drush-version]: config-config.md#drush-version
 [link-hooks-helpers]: hooks-helpers.md
 
 [link-overview]: README.md

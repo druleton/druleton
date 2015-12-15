@@ -16,5 +16,5 @@ echo
 
 # Enable the theme debugging.
 markup_h1 "Enable theme debugging"
-drush vset theme_debug 1
+drupal_drush vset theme_debug 1
 echo
