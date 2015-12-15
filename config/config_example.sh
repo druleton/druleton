@@ -43,3 +43,8 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 #
 # If the variable is not set, phar will be used.
 #DRUSH_VERSION="global"
+
+# drupal/coder is installed by default as a dependency for the bin/coder
+# command. The installation is not required on all environments.
+# Disable installing it by setting the CODER_DISABLED variable to 1 (default 0).
+#CODER_DISABLED=1

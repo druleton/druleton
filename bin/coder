@@ -1,0 +1,35 @@
+#!/bin/bash
+
+################################################################################
+# Script that is as a wrapper around the phpcs tool with drupal code standards.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+coder_params="$@"
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+source "$DIR_SRC/drupal_coder.sh"
+
+# START Script -----------------------------------------------------------------
+
+markup_debug
+markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
+markup_debug
+
+drupal_coder_run $coder_params
+
+markup_debug
+markup_debug "Coder params : $coder_params"
+
+markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
+echo
+
+# END Script -------------------------------------------------------------------
+
+
+exit 0

@@ -46,6 +46,7 @@ fi
 source "$DIR_SRC/script.sh"
 source "$DIR_SRC/init_composer.sh"
 source "$DIR_SRC/init_drush.sh"
+source "$DIR_SRC/init_coder.sh"
 source "$DIR_SRC/init_custom_commands.sh"
 
 
@@ -54,6 +55,7 @@ source "$DIR_SRC/init_custom_commands.sh"
 script_before_run
 init_composer_run
 init_drush_run
+init_coder_run
 init_custom_commands_run
 script_after_run
 
