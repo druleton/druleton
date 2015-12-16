@@ -15,8 +15,6 @@ fi
 # The $CODER_DIRECTORIES is defined in config/drupal_coder.sh
 ##
 function drupal_coder_run_all {
-  local cmd_options="$@"
-
   if [ -z "$CODER_DIRECTORIES" ]; then
     message_error "There are no directories defined in \$CODER_DIRECTORIES."
     markup " > Add these in an array to the config/drupal_coder.sh file."
@@ -26,7 +24,7 @@ function drupal_coder_run_all {
 
   for directory in ${CODER_DIRECTORIES[@]}; do
     markup_h2 "Scan $directory"
-    drupal_coder_run $directory $cmd_options
+    drupal_coder_run $directory "$@"
     echo
   done
 }
@@ -46,8 +44,8 @@ function drupal_coder_run {
   fi
 
   # Filter out command options specific by the skeleton.
-  local cmd="$DIR_BIN/packagist/vendor/bin/phpcs $options $cmd_options"
-  $cmd
+  local cmd="$DIR_BIN/packagist/vendor/bin/phpcs $options"
+  $cmd "$@"
 }
 
 ##

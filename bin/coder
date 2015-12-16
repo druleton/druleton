@@ -8,12 +8,12 @@
 ################################################################################
 
 
-coder_params="$@"
-
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
 
+# Include resources.
 source "$DIR_SRC/drupal_coder.sh"
+
 
 # START Script -----------------------------------------------------------------
 
@@ -21,11 +21,12 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
+
 # By default run the code inspections on the directories in config file.
-if [ -z "$SCRIPT_ARGUMENT" ] || [ "$SCRIPT_ARGUMENT" == "all" ]; then
-  drupal_coder_run_all $coder_params
+if [ -z "$SCRIPT_ARGUMENT" ]; then
+  drupal_coder_run_all "${SCRIPT_OPTIONS_ALL[@]}"
 else
-  drupal_coder_run $coder_params
+  drupal_coder_run "${SCRIPT_OPTIONS_ALL[@]}"
 fi
 
 markup_debug
