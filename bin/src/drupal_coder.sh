@@ -33,6 +33,14 @@ function drupal_coder_run_all {
 # Run the phpcs command with the drupal code standards.
 ##
 function drupal_coder_run {
+  if [ ! -f "$DIR_BIN/packagist/vendor/bin/phpcs" ]; then
+    markup_error "The drupal/coder and phpcs packages are not installed."
+    markup " > Run bin/init to install it."
+    markup " > Make sure that the installation is not disabled."
+    echo
+    exit
+  fi
+
   # Default options.
   local options="$( drupal_coder_options )"
 
