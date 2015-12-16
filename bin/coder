@@ -21,7 +21,11 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-drupal_coder_run $coder_params
+if [ "$SCRIPT_ARGUMENT" == "all" ]; then
+  drupal_coder_run_all $coder_params
+else
+  drupal_coder_run $coder_params
+fi
 
 markup_debug
 markup_debug "Coder params : $coder_params"

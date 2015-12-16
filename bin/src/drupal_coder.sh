@@ -4,10 +4,31 @@
 
 
 # Include the configuration (if any).
-if [ -f "$DIR_CONFIG/coder.sh" ]; then
-  source "$DIR_CONFIG/coder.sh"
+if [ -f "$DIR_CONFIG/drupal_coder.sh" ]; then
+  source "$DIR_CONFIG/drupal_coder.sh"
 fi
 
+
+##
+# Run the coder on all directories as specified in $CODER_DIRECTORIES.
+#
+# The $CODER_DIRECTORIES is defined in config/drupal_coder.sh
+##
+function drupal_coder_run_all {
+  local cmd_options="$@"
+
+  if [ -z "$CODER_DIRECTORIES" ]; then
+    message_error "There are no directories defined in $CODER_DIRECTORIES"
+    message_error "Add these in an array to the config/drupal_coder.sh file."
+    exit
+  fi
+
+  for directory in ${CODER_DIRECTORIES[@]}; do
+    markup_h2 "Scan $directory"
+    drupal_coder_run $directory $cmd_options
+    echo
+  done
+}
 
 ##
 # Run the phpcs command with the drupal code standards.
@@ -134,6 +155,9 @@ function drupal_coder_filter_options {
 
   # phpcs does not support environments.
   options=${options/--env=*/}
+
+  # Remove all from the options.
+  options=${options/all/}
 
   echo "$options"
 }
