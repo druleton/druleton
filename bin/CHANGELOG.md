@@ -8,11 +8,14 @@
 - #23 : Install drush locally by running the bin/init command.
 - #30 : Add the configuration option to use local or global composer binary.
 - #32 : Add support to use drush.phar.
+- #34 : Add bin/coder command as a wrapper around the phpcs binary using drupal
+        coding standards.
 
 ### Fixed
 - Error when there is no hook info available for a specific command.
 - Added missing documentation about extending the skeleton command help.
-
+- Added missing help information of wrapped commands like bin/drush and
+  bin/composer.
 
 
 ## [0.2.0] - 2015-12-02 Documentation

@@ -14,6 +14,7 @@ fi
 ##
 function drupal_coder_run {
   local options="$( drupal_coder_options )"
+  local cmd_options="$( drupal_coder_filter_options "$@" )"
 
   # Only use colors if not disabled.
   if [ $( option_is_set "--no-color") -ne 1 ]; then
@@ -23,7 +24,6 @@ function drupal_coder_run {
   fi
 
   # Filter out command options specific by the skeleton.
-  local cmd_options="$( cmddrupal_coder_filter_options "$@" )"
   local cmd="$DIR_BIN/packagist/vendor/bin/phpcs $options $cmd_options"
   $cmd
 }
@@ -120,7 +120,7 @@ function drupal_coder_extensions {
 # @return string
 #   The filtered options.
 ##
-function cmddrupal_coder_filter_options {
+function drupal_coder_filter_options {
   local options="$@"
 
   # Skeleton uses --no-color, phpcs uses --no-colors

@@ -25,6 +25,7 @@ function drupal_drush {
 ##
 function drupal_drush_run {
   local cmd_drush=""
+  local cmd_options="$( drupal_drush_filter_options "$@" )"
 
   if [ -z "$DRUSH_VERSION" ] || [ "$DRUSH_VERSION" == "phar" ]; then
     cmd_drush="$DIR_BIN/packagist/drush.phar"
@@ -34,8 +35,30 @@ function drupal_drush_run {
     cmd_drush="$DIR_BIN/packagist/vendor/bin/drush"
   fi
 
-  $cmd_drush "$@"
+  $cmd_drush "$cmd_options"
 }
+
+##
+# Remove skeleton specific command options.
+#
+# @param string
+#   The command options.
+#
+# @return string
+#   The filtered options.
+##
+function drupal_drush_filter_options {
+  local options="$@"
+
+  # Skeleton uses --no-color, phpcs uses --no-colors
+  options=${options/--no-color/}
+
+  # phpcs does not support environments.
+  options=${options/--env=*/}
+
+  echo "$options"
+}
+
 
 ##
 # Make sure that the DRUSH_VERSION variable is set.
