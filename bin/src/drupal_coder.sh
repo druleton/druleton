@@ -18,8 +18,9 @@ function drupal_coder_run_all {
   local cmd_options="$@"
 
   if [ -z "$CODER_DIRECTORIES" ]; then
-    message_error "There are no directories defined in $CODER_DIRECTORIES"
-    message_error "Add these in an array to the config/drupal_coder.sh file."
+    message_error "There are no directories defined in \$CODER_DIRECTORIES."
+    markup " > Add these in an array to the config/drupal_coder.sh file."
+    echo
     exit
   fi
 
