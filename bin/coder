@@ -21,12 +21,14 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
+# Create the global $CODER_OPTIONS array.
+drupal_coder_filter_options
 
 # By default run the code inspections on the directories in config file.
 if [ -z "$SCRIPT_ARGUMENT" ]; then
-  drupal_coder_run_all "${SCRIPT_OPTIONS_ALL[@]}"
+  drupal_coder_run_all "${CODER_OPTIONS[@]}"
 else
-  drupal_coder_run "${SCRIPT_OPTIONS_ALL[@]}"
+  drupal_coder_run "${CODER_OPTIONS[@]}"
 fi
 
 markup_debug

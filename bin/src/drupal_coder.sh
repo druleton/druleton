@@ -33,14 +33,19 @@ function drupal_coder_run_all {
 # Run the phpcs command with the drupal code standards.
 ##
 function drupal_coder_run {
+  # Default options.
   local options="$( drupal_coder_options )"
-  local cmd_options="$( drupal_coder_filter_options "$@" )"
 
   # Only use colors if not disabled.
   if [ $( option_is_set "--no-color") -ne 1 ]; then
     options="$options --colors"
   else
     options="$options --no-colors"
+  fi
+
+  # Translate --verbose to -v
+  if [ $( option_is_set "--verbose") -eq 1 ]; then
+    options="$options -v"
   fi
 
   # Filter out command options specific by the skeleton.
@@ -132,6 +137,26 @@ function drupal_coder_extensions {
 }
 
 ##
+# Create the $CODER_OPTIONS array based on the $SCRIPT_OPTIONS_ALL array.
+##
+function drupal_coder_filter_options {
+  CODER_OPTIONS=()
+
+  markup_debug "Filter coder options:"
+
+  for coder_option in "${SCRIPT_OPTIONS_ALL[@]}"; do
+    # Check if the option should be passed to coder.
+    if [ $(drupal_coder_filter_option "$coder_option") -eq 1 ]; then
+      markup_debug " • $coder_option"
+    else
+      CODER_OPTIONS+=("$coder_option")
+    fi
+  done
+
+  markup_debug
+}
+
+##
 # Remove skeleton specific command options.
 #
 # @param string
@@ -140,23 +165,32 @@ function drupal_coder_extensions {
 # @return string
 #   The filtered options.
 ##
-function drupal_coder_filter_options {
-  local options="$@"
+function drupal_coder_filter_option {
+  local option="$1"
 
   # Skeleton uses --no-color, phpcs uses --no-colors
-  options=${options/--no-color/}
+  if [ "$option" == "--no-color" ]; then
+    echo 1
+    return
+  fi
 
   # phpcs has no confirm option.
-  options=${options/-y/}
+  if [ "$option" == "-y" ] || [ "option" == "--confirm" ]; then
+    echo 1
+    return
+  fi
 
   # phpcs has only -v not --verbose.
-  options=${options/--verbose/-v}
+  if [ "$option" == "--verbose" ]; then
+    echo 1
+    return
+  fi
 
   # phpcs does not support environments.
-  options=${options/--env=*/}
+  if [[ "$option" == "env="* ]]; then
+    echo 1
+    return
+  fi
 
-  # Remove all from the options.
-  options=${options/all/}
-
-  echo "$options"
+  echo 0
 }
