@@ -1,0 +1,4 @@
+  * bin/coder path/to/file Run code style check on the given file.
+  * bin/coder all          Run code style checks on all the file paths as
+                           defined in the config/drupal_coder.sh
+                           CODER_DIRECTORIES variable.

@@ -1,0 +1,3 @@
+The coder command is a wrapper around the phpcs (php code style) binary.
+It provides the option to configure default extensions and ignore patterns in
+the config/drupal_coder.sh configuration file.

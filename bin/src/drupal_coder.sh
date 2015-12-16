@@ -137,10 +137,3 @@ function cmddrupal_coder_filter_options {
 
   echo "$options"
 }
-
-##
-# Run the auto code fix.
-##
-function drupal_coder_autofix_run {
-  "$DIR_BIN/packagist/vendor/bin/phpcbf" "$@" --standard=Drupal
-}
