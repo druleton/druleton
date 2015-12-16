@@ -21,7 +21,8 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-if [ "$SCRIPT_ARGUMENT" == "all" ]; then
+# By default run the code inspections on the directories in config file.
+if [ -z "$SCRIPT_ARGUMENT" ] || [ "$SCRIPT_ARGUMENT" == "all" ]; then
   drupal_coder_run_all $coder_params
 else
   drupal_coder_run $coder_params
