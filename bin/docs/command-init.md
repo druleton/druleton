@@ -27,7 +27,7 @@ and install tools like drush.
 Composer will be downloaded or updated into the `bin` directory. It can be
 called using the following command:
 
-```
+```bash
 $ bin/composer
 ```
 
@@ -43,7 +43,19 @@ file. You can also use a globally installed drush version by setting the
 `$DRUSH_VERSION` variable to "global".
 
 
-#### 3. Add custom commands to the `bin` directory
+#### 3. Install drupal/coder
+The [`bin/coder`][link-command-coder] command is a wrapper around
+PHP_CodeSniffer (phpcs) using the drupal/coder code standards.
+
+The required libraries will be downloaded (or updated) when the `bin/init`
+command is run.
+
+> Note: Not all environments require this to be installed. Set the
+> [`$CODER_DISABLED`][link-config-config-coder-disabled] variable to 1 to skip
+> the installation of the required packages.
+
+
+#### 4. Add custom commands to the `bin` directory
 The skeleton allows to define custom commands in the `config/bin` directory.
 This step will create a symlink for each custom command to the `bin` directory.
 This so all commands are run from the same directory.
@@ -127,5 +139,7 @@ This hook is included and run when the script is finished.
 [link-drush]: https://github.com/drush-ops/drush
 [link-drush-master]: https://github.com/drush-ops/drush/tree/master
 [link-config-config-drush-version]: config-config.md#drush-version
+[link-command-coder]: command-drupal-coder.md
+[link-config-config-coder-disabled]: config-config.md#coder
 
 [link-overview]: README.md

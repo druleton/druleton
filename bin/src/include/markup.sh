@@ -101,6 +101,7 @@ function markup_debug {
   fi
 }
 
+
 ##
 # Show a horizontal divider.
 ##

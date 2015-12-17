@@ -11,7 +11,7 @@ code in the repository.
 
 
 
-## 8 commands
+## Commands
 The skeleton provides commands to run the site locally.
 
 Each command has a help section that explains the options for it. View the help
@@ -130,6 +130,16 @@ $ bin/restore
 [More information about this command][link-command-restore].
 
 
+### bin/composer
+The `bin/composer` command is a wrapper around the composer.phar binary.
+
+```bash
+$ bin/composer
+```
+
+[More information about this command][link-command-composer].
+
+
 ### bin/drush
 The `bin/drush` command is a wrapper around drush. It will always run the drush
 command within the `web` directory.
@@ -139,6 +149,17 @@ $ bin/drush
 ```
 
 [More information about this command][link-command-drush].
+
+
+### bin/coder
+The `bin/coder` command is a wrapper around the phpcs (PHP Code Sniffer)
+binary. It has the proper default settings for the Drupal standards.
+
+```bash
+$ bin/coder
+```
+
+[More information about this command][link-command-coder].
 
 
 
@@ -192,6 +213,8 @@ See [hooks documentation][link-hooks].
 [link-command-build]: docs/command-build.md
 [link-command-backup]: docs/command-backup.md
 [link-command-restore]: docs/command-restore.md
+[link-command-composer]: docs/command-composer.md
 [link-command-drush]: docs/command-drush.md
+[link-command-coder]: docs/command-coder.md
 [link-hooks]: docs/hooks.md
 [link-config-bin]: config-bin.sh

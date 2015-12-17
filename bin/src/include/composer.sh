@@ -9,12 +9,21 @@
 ##
 function composer_run {
   local cmd_composer="$DIR_BIN/packagist/composer.phar"
+  local cmd_options="$( composer_filter_options "$@" )"
+
+  # Only use colors if not disabled.
+  if [ $( option_is_set "--no-color") -ne 1 ]; then
+    cmd_options="$options --ansi"
+  else
+    cmd_options="$options --no-ansi"
+  fi
 
   if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
     cmd_composer="composer"
   fi
 
-  COMPOSER_DISABLE_XDEBUG_WARN=1 "$cmd_composer" "$@"
+  local cmd="$cmd_composer $cmd_options"
+  COMPOSER_DISABLE_XDEBUG_WARN=1  $cmd
 }
 
 ##
@@ -34,4 +43,28 @@ function composer_variable_use_global {
   if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
     COMPOSER_USE_GLOBAL=0
   fi
+}
+
+##
+# Remove skeleton specific command options.
+#
+# @param string
+#   The command options.
+#
+# @return string
+#   The filtered options.
+##
+function composer_filter_options {
+  local options="$@"
+
+  # Skeleton uses --no-color, phpcs uses --no-colors
+  options=${options/--no-color/}
+
+  # phpcs has no confirm option.
+  options=${options/-y/}
+
+  # phpcs does not support environments.
+  options=${options/--env=*/}
+
+  echo "$options"
 }

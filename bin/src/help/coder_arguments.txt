@@ -1,0 +1,2 @@
+  All arguments will be passed to the phpcs or phpcbf command.
+  Use this as calling the commands directly.

@@ -26,7 +26,7 @@ function drupal_drush {
 function drupal_drush_run {
   local cmd_drush=""
 
-  if [ "$DRUSH_VERSION" == "phar" ]; then
+  if [ -z "$DRUSH_VERSION" ] || [ "$DRUSH_VERSION" == "phar" ]; then
     cmd_drush="$DIR_BIN/packagist/drush.phar"
   elif [ "$DRUSH_VERSION" == "global" ]; then
     cmd_drush="drush"
@@ -36,6 +36,28 @@ function drupal_drush_run {
 
   $cmd_drush "$@"
 }
+
+##
+# Remove skeleton specific command options.
+#
+# @param string
+#   The command options.
+#
+# @return string
+#   The filtered options.
+##
+function drupal_drush_filter_options {
+  local options="$@"
+
+  # Drush does not support --no-color
+  options=${options/--no-color/}
+
+  # Drush does not support environments.
+  options=${options/--env=*/}
+
+  echo "$options"
+}
+
 
 ##
 # Make sure that the DRUSH_VERSION variable is set.
