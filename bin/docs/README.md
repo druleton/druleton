@@ -28,6 +28,8 @@ Overview of all Skeleton Documentation:
   local copy of the composer binary.
 - [bin/drush](command-drush.md) : Run a drush command within the `web`
   directory.
+- [bin/coder](command-coder.md) : Wrapper around the phpcs (PHP Code Sniffer)
+  binary. It has the proper default settings for the Drupal standards.
 
 Commands installed during the init command:
 - [bin/...](config-bin.md) : Any custom command as defined in the `config/bin`
@@ -45,6 +47,8 @@ Commands installed during the init command:
   directory is (re)built.
 - [custom commands](config-bin.md) : Add custom commands to the `config/bin` so
   `bin/init` command can detect them and add them to the `bin` directory.
+- [coder](config-drupal-coder.md) : Configuration for the `config/coder`
+  command.
 
 
 ## Hooks

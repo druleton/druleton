@@ -1,6 +1,6 @@
 ################################################################################
-# Hook information for the bin/drush script.
+# Hook information for the bin/composer script.
 ################################################################################
 
 # Common hook information.
-hook_info_run_load "drush.sh"
+hook_info_run_load "composer.sh"

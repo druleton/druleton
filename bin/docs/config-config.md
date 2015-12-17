@@ -84,6 +84,14 @@ The options are:
 > Note : The default is to download and use the drush.phar binary.
 
 
+#### Coder
+drupal/coder code standards and all its dependencies (eg. phpcs) are by default
+installed when the `bin/init` command is called. This is not required for every
+installation environment. The installation can be disabled:
+
+- **CODER_DISABLED=1** : Disable the installation of `drupal/coder`.
+
+
 
 ## Example config file
 
@@ -113,6 +121,9 @@ COMPOSER_USE_GLOBAL=1
 
 # Drush version.
 DRUSH_VERSION="dev-master"
+
+# Disable installing drupal/coder
+CODER_DISABLED=1
 ```
 
 
