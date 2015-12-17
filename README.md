@@ -39,6 +39,8 @@ The drupal-skeleton contains a set of bash scripts (commands):
   local copy of the composer binary.
 - [`bin/drush`][link-command-drush] : Run a drush command within the `web`
   directory.
+- [`bin/coder`][link-command-coder] : Run code inspections using the
+  drupal/coder standards.
 
 [See skeleton documentation][link-documentation].
 
@@ -69,3 +71,4 @@ The drupal-skeleton requires a minimal configuration to get started.
 [link-command-restore]: bin/docs/command-restore.md
 [link-command-composer]: bin/docs/command-composer.md
 [link-command-drush]: bin/docs/command-drush.md
+[link-command-coder]: bin/docs/command-coder.md
