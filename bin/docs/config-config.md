@@ -87,7 +87,7 @@ The options are:
 #### Coder
 drupal/coder code standards and all its dependencies (eg. phpcs) are by default
 installed when the `bin/init` command is called. This is not required for every
-installation environment. The installation can be disabled:
+environment. The installation can be disabled:
 
 - **CODER_DISABLED=1** : Disable the installation of `drupal/coder`.
 
