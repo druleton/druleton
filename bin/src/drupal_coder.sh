@@ -195,7 +195,7 @@ function drupal_coder_filter_option {
   fi
 
   # phpcs does not support environments.
-  if [[ "$option" == "env="* ]]; then
+  if [[ "$option" == "--env="* ]]; then
     echo 1
     return
   fi
