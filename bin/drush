@@ -10,8 +10,6 @@
 ################################################################################
 
 
-drush_params="$@"
-
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
 
@@ -21,7 +19,10 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-drupal_drush $drush_params
+# Create the global $CODER_OPTIONS array.
+drupal_drush_filter_options
+
+drupal_drush "${DRUSH_OPTIONS[@]}"
 
 markup_debug
 markup_debug "Drush binary used : $DRUSH_VERSION"

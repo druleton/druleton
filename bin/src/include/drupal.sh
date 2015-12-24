@@ -38,6 +38,26 @@ function drupal_drush_run {
 }
 
 ##
+# Create the $DRUSH_OPTIONS array based on the $SCRIPT_OPTIONS_ALL array.
+##
+function drupal_drush_filter_options {
+  DRUSH_OPTIONS=()
+
+  markup_debug "Filter drush options:"
+
+  for drush_option in "${SCRIPT_OPTIONS_ALL[@]}"; do
+    # Check if the option should be passed to drush.
+    if [ $(drupal_drush_filter_option "$drush_option") -eq 1 ]; then
+      markup_debug " • $drush_option"
+    else
+      DRUSH_OPTIONS+=("$drush_option")
+    fi
+  done
+
+  markup_debug
+}
+
+##
 # Remove skeleton specific command options.
 #
 # @param string
@@ -46,18 +66,23 @@ function drupal_drush_run {
 # @return string
 #   The filtered options.
 ##
-function drupal_drush_filter_options {
-  local options="$@"
+function drupal_drush_filter_option {
+  local option="$1"
 
-  # Drush does not support --no-color
-  options=${options/--no-color/}
+  # Skeleton uses --no-color, drush does not support that.
+  if [ "$option" == "--no-color" ]; then
+    echo 1
+    return
+  fi
 
-  # Drush does not support environments.
-  options=${options/--env=*/}
+  # drush does not support environments.
+  if [[ "$option" == "--env="* ]]; then
+    echo 1
+    return
+  fi
 
-  echo "$options"
+  echo 0
 }
-
 
 ##
 # Make sure that the DRUSH_VERSION variable is set.
