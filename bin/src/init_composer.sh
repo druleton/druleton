@@ -18,7 +18,9 @@ function init_composer_run {
   # Hook before install/update composer.
   hook_invoke "init_composer_before"
 
-  if [ -d "$DIR_BIN/composer_src" ]; then
+  init_composer_with_force
+
+  if [ -d "$DIR_BIN/packagist" ]; then
     init_composer_update
     echo
     init_composer_init
@@ -34,6 +36,30 @@ function init_composer_run {
 
   # Hook after install/update composer.
   hook_invoke "init_composer_after"
+}
+
+##
+# Check if the init command was called with force.
+#
+# This will delete downloaded files so the init command will be run as a new
+# install.
+##
+function init_composer_with_force {
+  if [ $(option_is_set "-f") -ne 1 ] && [ $(option_is_set "--force") -ne 1 ]; then
+    markup_debug "Init with force : No force used on the skeleton."
+    markup_debug
+    return
+  fi
+
+  if [ ! -d "$DIR_BIN/packagist" ]; then
+    markup_debug "Init with force : No bin/packagist directory to delete."
+    markup_debug
+    return
+  fi
+
+  rm -Rf "$DIR_BIN/packagist"
+  message_success "Init with force : bin/packagist directory is deleted."
+  echo
 }
 
 ##
