@@ -28,4 +28,4 @@
 
 
 
-[1.x.x]: https://github.com/ACCOUNT-NAME/REPOSITORY-NAME/compare/master...develop
+[1.x.x]: https://github.com/ACCOUNT/REPOSITORY-NAME/compare/master...develop
