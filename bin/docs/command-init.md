@@ -76,6 +76,9 @@ $ bin/init -h
 There are no arguments for this command.
 
 #### Options
+- --force (-f) : The init script will only download dependencies if they are not
+  yet downloaded. The force option will delete the files and download them
+  again.
 - --env=\<name\> : The environment to run the script for (default : dev).
 - --help (-h) : Show the command help.
 - --hook-info : Show information about the available hooks.
