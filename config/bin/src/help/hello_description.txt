@@ -1,0 +1,2 @@
+The hello script is an example of an custom script. It implements the
+Hello World! functionality.

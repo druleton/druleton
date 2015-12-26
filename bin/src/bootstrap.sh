@@ -30,10 +30,14 @@ DIR_SRC=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DIR_BIN=$( cd "$DIR_SRC/.." && pwd)
 DIR_ROOT=$( cd "$DIR_BIN/.." && pwd )
 DIR_PROJECT="$DIR_ROOT/project"
-DIR_CONFIG="$DIR_ROOT/config"
 DIR_WEB="$DIR_ROOT/web"
 DIR_BACKUP="$DIR_ROOT/backup"
 DIR_BUILD="$DIR_ROOT/build"
+
+# Define paths to the config directories.
+DIR_CONFIG="$DIR_ROOT/config"
+DIR_CONFIG_BIN="$DIR_CONFIG/bin"
+DIR_CONFIG_SRC="$DIR_CONFIG_BIN/src"
 
 
 # Include helpers.
@@ -42,6 +46,7 @@ source "$DIR_SRC/include/options.sh"
 source "$DIR_SRC/include/colors.sh"
 source "$DIR_SRC/include/markup.sh"
 source "$DIR_SRC/include/message.sh"
+source "$DIR_SRC/include/composer.sh"
 source "$DIR_SRC/include/drupal.sh"
 
 # Load the config file.
@@ -58,8 +63,14 @@ DRUPAL_INSTALLED=$( drupal_is_installed )
 if [ $(option_is_set "--confirm") -eq 1 ] || [ $(option_is_set "-y") -eq 1 ]; then
   CONFIRMED=1
 else
- CONFIRMED=0
+  CONFIRMED=0
 fi
+
+# Set the default variable value(s) for composer.
+composer_variable_use_global
+
+# Set the default variable value(s) for drush.
+drupal_drush_variable_version
 
 # Load Help.
 source "$DIR_SRC/include/help.sh"

@@ -1,0 +1,4 @@
+The composer command is a wrapper around the composer binary. It allows to use
+a globally installed composer or a locally copy.
+What composer binary to use is defined in the config/config.sh file using the
+$COMPOSER_USE_GLOBAL variable.

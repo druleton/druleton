@@ -26,3 +26,25 @@ DB_HOST="localhost"
 ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
+
+# Composer is by default downloaded during the bin/init script.
+# You can optionally use a global installed composer.
+#COMPOSER_USE_GLOBAL=1
+
+# The Drush version to use.
+#
+# Options:
+# - phar : use the drush.phar file as the local drush binary. This is the
+#   default option.
+# - branch or tag name : use a specific version by setting the variable to the
+#   proper branch or tag name (eg. dev-master).
+#   See https://github.com/drush-ops/drush.
+# - global : use the globally installed drush command (outside the skeleton).
+#
+# If the variable is not set, phar will be used.
+#DRUSH_VERSION="global"
+
+# drupal/coder is installed by default as a dependency for the bin/coder
+# command. The installation is not required on all environments.
+# Disable installing it by setting the CODER_DISABLED variable to 1 (default 0).
+#CODER_DISABLED=1

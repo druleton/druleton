@@ -11,8 +11,8 @@ code in the repository.
 
 
 
-## 6 commands
-The skeleton provides 6 commands to run the site locally.
+## Commands
+The skeleton provides commands to run the site locally.
 
 Each command has a help section that explains the options for it. View the help
 by running the command with the `-h` switch.
@@ -22,6 +22,22 @@ Example:
 ```Shell
 $ bin/install -h
 ```
+
+
+### bin/init
+The `bin/init` command is used to setup the skeleton environment. It will
+download tools like composer and add them to the `bin` directory. It will also
+scan the `config/bin` directory if there are custom, project specific, commands
+and add them to the `bin` directory.
+
+You can run this command anytime, it will update the tools and rescan the
+`config/bin` directory.
+
+```Shell
+$ bin/init
+```
+
+[More information about this command][link-command-init].
 
 
 ### bin/install
@@ -114,6 +130,56 @@ $ bin/restore
 [More information about this command][link-command-restore].
 
 
+### bin/composer
+The `bin/composer` command is a wrapper around the composer.phar binary.
+
+```bash
+$ bin/composer
+```
+
+[More information about this command][link-command-composer].
+
+
+### bin/drush
+The `bin/drush` command is a wrapper around drush. It will always run the drush
+command within the `web` directory.
+
+```bash
+$ bin/drush
+```
+
+[More information about this command][link-command-drush].
+
+
+### bin/coder
+The `bin/coder` command is a wrapper around the phpcs (PHP Code Sniffer)
+binary. It has the proper default settings for the Drupal standards.
+
+```bash
+$ bin/coder
+```
+
+[More information about this command][link-command-coder].
+
+
+
+## More commands
+
+### Composer
+The `bin/init` command will download and install composer locally. It can be
+called using following command:
+
+```
+$ bin/composer
+```
+
+### Custom commands
+It is possible to add your own, project specific, commands.
+
+[See the custom commands documentation][link-config-bin].
+
+
+
 ## Alter commands by implementing hooks
 Each command has a set of steps it runs trough. All the code related to those
 steps are located in the `bin` and `bin/src` directories. This code should not
@@ -140,10 +206,15 @@ See [hooks documentation][link-hooks].
 [link-drupalconsole]: http://drupalconsole.com/
 
 [link-docs]: docs/README.md
+[link-command-init]: docs/command-init.md
 [link-command-install]: docs/command-install.md
 [link-command-reset]: docs/command-reset.md
 [link-command-upgrade]: docs/command-upgrade.md
 [link-command-build]: docs/command-build.md
 [link-command-backup]: docs/command-backup.md
 [link-command-restore]: docs/command-restore.md
+[link-command-composer]: docs/command-composer.md
+[link-command-drush]: docs/command-drush.md
+[link-command-coder]: docs/command-coder.md
 [link-hooks]: docs/hooks.md
+[link-config-bin]: config-bin.sh

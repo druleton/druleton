@@ -11,25 +11,37 @@
 function help_run {
   echo
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_description.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_description.txt"
   echo
 
   markup_h2 "Examples:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_examples.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_examples.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_examples.txt"
   help_run_load "$DIR_SRC/help/common_examples.txt"
   echo
 
   markup_h2 "Arguments:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_arguments.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_arguments.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_arguments.txt"
   help_run_load "$DIR_SRC/help/common_arguments.txt"
   echo
 
   markup_h2 "Options:"
   help_run_load "$DIR_SRC/help/${SCRIPT_NAME}_options.txt"
-  help_run_load "$DIR_CONFIG/$SCRIPT_NAME/help_options.txt"
+  help_run_load "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_options.txt"
   help_run_load "$DIR_SRC/help/common_options.txt"
   echo
+
+  # Check if there are extra's to show.
+  # Use this for binary wrappers like bin/drush, bin/composer, ...
+  if [ -f "$DIR_SRC/help/${SCRIPT_NAME}_extra.sh" ]; then
+    source "$DIR_SRC/help/${SCRIPT_NAME}_extra.sh"
+    echo
+  fi
+  if [ -f "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_extra.sh" ]; then
+    source "$DIR_CONFIG_SRC/help/${SCRIPT_NAME}_extra.sh"
+    echo
+  fi
 
   exit
 }
@@ -40,8 +52,14 @@ function help_run {
 # @param Path to the help file.
 ##
 function help_run_load {
+  local content=""
+
   if [ -f "$1" ]; then
-    markup "$(cat $1)"
+    content="$(cat $1)"
+  fi
+
+  if [ ! -z "$content" ]; then
+    markup "$content"
   fi
 }
 

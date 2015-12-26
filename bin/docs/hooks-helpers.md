@@ -235,6 +235,24 @@ message_error "Error demo."
 ![message_error][img-message_error]
 
 
+
+## Composer helpers
+The skeleton provides several Composer helpers:
+
+#### composer_run
+Run the composer binary. This will automatically use the locally or globally
+installed composer. What composer binary will be used depeneds on the
+configuration [`$COMPOSER_USE_GLOBAL`][link-config-config-composer] variable.
+
+#### composer_skeleton_run
+Run a composer command using the `bin/packagist` directory as working directory.
+This directory is used to download and store php packages as needed by the
+skeleton.
+
+> Note this function is a wrapper around the [`composer_run`](#composer_run)
+> function.
+
+
 ## Drupal helpers
 The skeleton provides several Drupal specific helpers:
 
@@ -249,6 +267,24 @@ You can the same arguments and options as calling drush directly.
 Example to clear the cache:
 ```bash
 drupal_drush cc
+```
+
+> Note: this function is a wrapper around
+> [`drupal_drush_run`](#drupal_drush_run). It will always use the same global or
+> local drush as defined in the configuration.
+
+#### drupal_drush_run
+The skeleton provides the option to use a locally (default) or globally
+installed drush command. This function will check what to use based on the
+configuration variable [`$DRUSH_VERSION`][link-config-config-drush-version].
+If that variable is set to "global" then the globally installed drush will be
+used by the skeleton.
+
+The difference between this function and `drupal_drush` is that this command
+will not use by default `web` as the working directory.
+
+```bash
+drupal_drush_run cc drush
 ```
 
 #### drupal_is_installed
@@ -360,6 +396,8 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 
 
 [link-hooks-variables]: hooks-variables.md
+[link-config-config-composer]: config-config.md#composer
+[link-config-config-drush-version]: config-config.md#drush-version
 
 [link-overview]: README.md
 

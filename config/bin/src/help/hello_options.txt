@@ -1,0 +1,1 @@
+  --silent              Don't should out the greeting.

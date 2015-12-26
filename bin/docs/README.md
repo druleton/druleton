@@ -2,14 +2,18 @@
 
 Overview of all Skeleton Documentation:
 
+
 ## Quick Start
 - [Quick start](quick-start.md) : Short guide to get you started within minutes.
+
 
 ## Requirements
 - [Requirements](requirements.md) : Minimal requirements to use the
   drupal-skeleton.
 
+
 ## Commands
+- [bin/init](command-init.md) : Setup the skeleton environment.
 - [bin/install](command-install.md) : Install the project.
 - [bin/reset](command-reset.md) : Reset an existing project back to the
   fresh-installed state.
@@ -20,6 +24,16 @@ Overview of all Skeleton Documentation:
   deployed on production.
 - [bin/backup](command-backup.md) : Create a backup of the installed project.
 - [bin/restore](command-restore.md) : Restore one of the backups.
+- [bin/composer](command-composer.md) : A wrapper around a globally installed or
+  local copy of the composer binary.
+- [bin/drush](command-drush.md) : Run a drush command within the `web`
+  directory.
+- [bin/coder](command-coder.md) : Wrapper around the phpcs (PHP Code Sniffer)
+  binary. It has the proper default settings for the Drupal standards.
+
+Commands installed during the init command:
+- [bin/...](config-bin.md) : Any custom command as defined in the `config/bin`
+  directory.
 
 
 ## Configuration
@@ -31,6 +45,10 @@ Overview of all Skeleton Documentation:
   reset.
 - [cleanup](config-cleanup.md) : Delete directories and files when the `web`
   directory is (re)built.
+- [custom commands](config-bin.md) : Add custom commands to the `config/bin` so
+  `bin/init` command can detect them and add them to the `bin` directory.
+- [coder](config-drupal-coder.md) : Configuration for the `config/coder`
+  command.
 
 
 ## Hooks

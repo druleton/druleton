@@ -56,7 +56,7 @@ function drupal_modules_disable_run_file {
     return
   fi
 
-  markup_h1 "Disable unwated modules"
+  markup_h1 "Disable unwanted modules"
   source "$drupal_modules_disabe_file"
 
   # Check if there are modules to disable.

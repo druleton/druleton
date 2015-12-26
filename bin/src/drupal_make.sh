@@ -34,7 +34,7 @@ function drupal_make_run {
   # Make Drupal core.
   markup_h1 "Download Drupal core"
   markup_h2 "_core.make"
-  drush make "$DIR_CONFIG/make/_core.make" "$DIR_WEB"
+  drupal_drush_run make "$DIR_CONFIG/make/_core.make" "$DIR_WEB"
   echo
 
   # 1. Default make files.
@@ -82,7 +82,7 @@ function drupal_make_run_file {
   # Run all make files in the configuration.
   for make_file in ${MAKE_FILES[@]}; do
     markup_h2 "${make_file}"
-    drush make --no-core "$DIR_CONFIG/make/${make_file}" "$DIR_WEB"
+    drupal_drush_run make --no-core "$DIR_CONFIG/make/${make_file}" "$DIR_WEB"
   done
   echo
 }

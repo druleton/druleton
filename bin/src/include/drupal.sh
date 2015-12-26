@@ -7,12 +7,91 @@
 # Run drush from within the Drupal root ($DIR_WEB folder).
 #
 # Use this if you need to run the drush command from within the actual web root.
-# Do not use it when instaling the make files.
+# Do not use it when installing the make files.
+#
+#
 ##
 function drupal_drush {
-  drush --root="$DIR_WEB" "$@"
+  drupal_drush_run "$@" --root="$DIR_WEB"
 }
 
+##
+# Run drush.
+#
+# This command will run by default the globally installed drush.
+# If the $DRUSH_VERSION is set to a specific version, then it will expect drush
+# to be installed using composer and will run drush from within the
+# bin/vendor/bin directory.
+##
+function drupal_drush_run {
+  local cmd_drush=""
+
+  if [ -z "$DRUSH_VERSION" ] || [ "$DRUSH_VERSION" == "phar" ]; then
+    cmd_drush="$DIR_BIN/packagist/drush.phar"
+  elif [ "$DRUSH_VERSION" == "global" ]; then
+    cmd_drush="drush"
+  else
+    cmd_drush="$DIR_BIN/packagist/vendor/bin/drush"
+  fi
+
+  $cmd_drush "$@"
+}
+
+##
+# Create the $DRUSH_OPTIONS array based on the $SCRIPT_OPTIONS_ALL array.
+##
+function drupal_drush_filter_options {
+  DRUSH_OPTIONS=()
+
+  markup_debug "Filter drush options:"
+
+  for drush_option in "${SCRIPT_OPTIONS_ALL[@]}"; do
+    # Check if the option should be passed to drush.
+    if [ $(drupal_drush_filter_option "$drush_option") -eq 1 ]; then
+      markup_debug " • $drush_option"
+    else
+      DRUSH_OPTIONS+=("$drush_option")
+    fi
+  done
+
+  markup_debug
+}
+
+##
+# Remove skeleton specific command options.
+#
+# @param string
+#   The command options.
+#
+# @return string
+#   The filtered options.
+##
+function drupal_drush_filter_option {
+  local option="$1"
+
+  # Skeleton uses --no-color, drush does not support that.
+  if [ "$option" == "--no-color" ]; then
+    echo 1
+    return
+  fi
+
+  # drush does not support environments.
+  if [[ "$option" == "--env="* ]]; then
+    echo 1
+    return
+  fi
+
+  echo 0
+}
+
+##
+# Make sure that the DRUSH_VERSION variable is set.
+##
+function drupal_drush_variable_version {
+  if [ -z "$DRUSH_VERSION" ]; then
+    DRUSH_VERSION="phar"
+  fi
+}
 
 ##
 # Check if there is a working Drupak installation.

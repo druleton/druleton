@@ -58,6 +58,40 @@ credentials from the config file:
   site url (`$ACCOUNT_NAME@$SITE_URL`).
 
 
+#### Composer
+The skeleton will, by default, download and install composer locally. The
+`COMPOSER_USE_GLOBAL` variable allows to force the skeleton to use the globally
+install composer instead.
+
+- **COMPOSER_USE_GLOBAL=0** : Download the composer binary locally and use that
+  to run composer commands.
+- **COMPOSER_USE_GLOBAL=1** : Use the globally installed composer binary.
+
+> Note : The default is to download and install composer locally.
+
+
+#### Drush version
+The skeleton provides the option to use a globally installed drush command or to
+install a local version. This is defined by the `$DRUSH_VERSION` variable.
+
+The options are:
+
+- **DRUSH_VERSION="phar"** : Download and use drush.phar as drush binary.
+- **DRUSH_VERSION="global"** : Use the globally installed drush command.
+- **DRUSH_VERSION="branch or tag name"** : Download a local drush command, use
+  the [branch or tag][link-drush] to determine what version to download.
+
+> Note : The default is to download and use the drush.phar binary.
+
+
+#### Coder
+drupal/coder code standards and all its dependencies (eg. phpcs) are by default
+installed when the `bin/init` command is called. This is not required for every
+environment. The installation can be disabled:
+
+- **CODER_DISABLED=1** : Disable the installation of `drupal/coder`.
+
+
 
 ## Example config file
 
@@ -81,6 +115,15 @@ DB_HOST="localhost"
 ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
+
+# Use global composer
+COMPOSER_USE_GLOBAL=1
+
+# Drush version.
+DRUSH_VERSION="dev-master"
+
+# Disable installing drupal/coder
+CODER_DISABLED=1
 ```
 
 
@@ -90,5 +133,6 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 
 
 [link-hooks]: hooks.md
+[link-drush]: https://github.com/drush-ops/drush
 
 [link-overview]: README.md

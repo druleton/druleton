@@ -1,0 +1,2 @@
+  * bin/drush help      Show help about drush.
+  * bin/drush cc all    Clear all cache.
