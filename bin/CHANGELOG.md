@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased][1.x.x]
+## [0.3.0] - 2015-12-26
 ### Added
 - #19 : Added bin/drush command and its documentation.
 - #20 : Added bin/init command and its documentation.
@@ -10,6 +10,8 @@
 - #32 : Add support to use drush.phar.
 - #34 : Add bin/coder command as a wrapper around the phpcs binary using drupal
         coding standards.
+- #35 : Add option to force installing 3th party packages (composer, drush,
+        coder, ...).
 
 ### Fixed
 - Error when there is no hook info available for a specific command.
@@ -63,7 +65,7 @@
 
 
 
-[1.x.x]: https://github.com/zero2one/drupal-skeleton/compare/master...develop
+[0.3.0]: https://github.com/zero2one/drupal-skeleton/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/zero2one/drupal-skeleton/compare/0.1.1...0.2.0
 [0.1.2]: https://github.com/zero2one/drupal-skeleton/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/zero2one/drupal-skeleton/compare/0.1.0...0.1.1
