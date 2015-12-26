@@ -16,6 +16,7 @@
 - Added missing documentation about extending the skeleton command help.
 - Added missing help information of wrapped commands like bin/drush and
   bin/composer.
+- #36 : Fixed missing support for quoted parameters.
 
 
 ## [0.2.0] - 2015-12-02 Documentation

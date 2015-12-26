@@ -9,7 +9,7 @@
 ##
 function composer_run {
   local cmd_composer="$DIR_BIN/packagist/composer.phar"
-  local cmd_options="$( composer_filter_options "$@" )"
+  local cmd_options=""
 
   # Only use colors if not disabled.
   if [ $( option_is_set "--no-color") -ne 1 ]; then
@@ -23,7 +23,7 @@ function composer_run {
   fi
 
   local cmd="$cmd_composer $cmd_options"
-  COMPOSER_DISABLE_XDEBUG_WARN=1  $cmd
+  COMPOSER_DISABLE_XDEBUG_WARN=1 $cmd "$@"
 }
 
 ##
@@ -45,6 +45,27 @@ function composer_variable_use_global {
   fi
 }
 
+
+##
+# Create the $COMPOSER_OPTIONS array based on the $SCRIPT_OPTIONS_ALL array.
+##
+function composer_filter_options {
+  COMPOSER_OPTIONS=()
+
+  markup_debug "Filter composer options:"
+
+  for composer_option in "${SCRIPT_OPTIONS_ALL[@]}"; do
+    # Check if the option should be passed to composer.
+    if [ $(composer_filter_option "$composer_option") -eq 1 ]; then
+      markup_debug " • $composer_option"
+    else
+      COMPOSER_OPTIONS+=("$composer_option")
+    fi
+  done
+
+  markup_debug
+}
+
 ##
 # Remove skeleton specific command options.
 #
@@ -54,17 +75,26 @@ function composer_variable_use_global {
 # @return string
 #   The filtered options.
 ##
-function composer_filter_options {
-  local options="$@"
+function composer_filter_option {
+  local option="$1"
 
-  # Skeleton uses --no-color, phpcs uses --no-colors
-  options=${options/--no-color/}
+  # Skeleton uses --no-color, composer does not support it.
+  if [ "$option" == "--no-color" ]; then
+    echo 1
+    return
+  fi
 
-  # phpcs has no confirm option.
-  options=${options/-y/}
+  # composer has no confirm option.
+  if [ "$option" == "-y" ] || [ "option" == "--confirm" ]; then
+    echo 1
+    return
+  fi
 
-  # phpcs does not support environments.
-  options=${options/--env=*/}
+  # composer does not support environments.
+  if [[ "$option" == "--env="* ]]; then
+    echo 1
+    return
+  fi
 
-  echo "$options"
+  echo 0
 }

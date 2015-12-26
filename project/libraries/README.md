@@ -10,4 +10,3 @@ Each subdirectory in this directory will be symlinked to the
 
 
 [link-project]: ../../bin/docs/project.md
-

@@ -7,9 +7,6 @@
 # All configuration is in the config directory
 ################################################################################
 
-
-composer_params="$@"
-
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
 
@@ -20,7 +17,10 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-composer_run $composer_params
+# Create the global $COMPOSER_OPTIONS array.
+composer_filter_options
+
+composer_run "${COMPOSER_OPTIONS[@]}"
 
 markup_debug
 composer_binary_in_use="local"
