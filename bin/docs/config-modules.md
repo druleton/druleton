@@ -1,6 +1,6 @@
 # Module configuration
 When installing a platform disabeling by-default installed modules and enabeling
-extra modules can be required. The skeleton provides two optional configuration
+extra modules can be required. Druleton provides two optional configuration
 files to define what modules should be disabled and enabled.
 
 

@@ -8,7 +8,7 @@ The commands will become available as `bin/commandname` after running the
 
 
 - Read the [documentation about the custom commands][link-config-commands]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

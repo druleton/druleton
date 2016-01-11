@@ -51,7 +51,7 @@ function init_drush_run {
 ##
 function init_drush_phar_with_force {
   if [ $(option_is_set "-f") -ne 1 ] && [ $(option_is_set "--force") -ne 1 ]; then
-    markup_debug "Init with force : No force used on the skeleton."
+    markup_debug "Init with force : No force used on druleton."
     markup_debug
     return
   fi

@@ -7,7 +7,7 @@ This is the directory where the actual development is done.
 > **Note** The code within the `project` directory is optional. You can setup a
 > demo website with configuration and hooks only.
 
-The skeleton has the `config/build/drupal_make_after.sh`,
+Druleton has the `config/build/drupal_make_after.sh`,
 `config/install/drupal_make_after.sh` and `config/upgrade/drupal_make_after.sh`
 hook implemented. The code in those hooks will automatically copy (for build
 command) or symlink (install & upgrade) the custom profiles, modules, themes and

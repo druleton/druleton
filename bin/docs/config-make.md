@@ -1,5 +1,5 @@
 # Make file(s)
-The drupal-skeleton uses drush make files to download and extract the Drupal
+Druleton uses drush make files to download and extract the Drupal
 Core, contributed modules and themes as well as 3th party libraries.
 
 [Read more about drush make files][link-drush-make].

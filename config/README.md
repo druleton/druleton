@@ -1,4 +1,4 @@
-# drupal-skeleton configuration
+# Druleton configuration
 
 This directory contains the configuration for the project and
 [hooks][link-hooks] for specific commands.
@@ -9,7 +9,7 @@ copy of the `config_example.sh` file and fill in the
 
 - Read the [documentation about the config directory][link-config]
 - See [info about the config.sh file][link-config-config]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

@@ -1,6 +1,6 @@
-# Drupal Skeleton documentation
+# Druleton documentation
 
-Overview of all Skeleton Documentation:
+Overview of all druleton documentation:
 
 
 ## Quick Start
@@ -8,12 +8,11 @@ Overview of all Skeleton Documentation:
 
 
 ## Requirements
-- [Requirements](requirements.md) : Minimal requirements to use the
-  drupal-skeleton.
+- [Requirements](requirements.md) : Minimal requirements to use druleton.
 
 
 ## Commands
-- [bin/init](command-init.md) : Setup the skeleton environment.
+- [bin/init](command-init.md) : Setup the druleton environment.
 - [bin/install](command-install.md) : Install the project.
 - [bin/reset](command-reset.md) : Reset an existing project back to the
   fresh-installed state.

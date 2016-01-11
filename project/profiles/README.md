@@ -5,7 +5,7 @@ Each subdirectory in this directory will be symlinked to the
 `web/profiles` directory during install & upgrade. Or copied into
 `build/web/profiles` during build.
 
-[See drupal-skeleton documentation about project][link-project].
+[See druleton documentation about project][link-project].
 
 
 

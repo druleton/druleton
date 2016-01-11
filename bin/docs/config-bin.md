@@ -1,6 +1,6 @@
 # Custom commands (config/bin)
-The skeleton allows to create extra, custom, commands. These can be platform
-specific, that is why they are not stored within the skeleton `bin` directory.
+Druleton allows to create extra, custom, commands. These can be platform
+specific, that is why they are not stored within the `bin` directory.
 
 The custom commands need to be stored in the `config/bin` directory.
 
@@ -14,7 +14,7 @@ available as `bin/hello` once the `bin/init` script is called.
 
 ## Create custom commands
 Each custom command should be build as the base base commands: they should use
-the path variables and skeleton variables as documented in the
+the path variables and druleton variables as documented in the
 [variables documentation][hooks-variables].
 
 
@@ -38,11 +38,11 @@ fi
 ```
 
 
-### Include the skeleton bootstrap
-Include the bootstrap script, this will include the skeleton helpers and create
+### Include the druleton bootstrap
+Include the bootstrap script, this will include the druleton helpers and create
 all global variables.
 ```
-# Bootstrap the skeleton.
+# Bootstrap druleton.
 source $(dirname $0)/src/bootstrap.sh
 ```
 
@@ -234,7 +234,7 @@ Example:
 List the command options and where they stand for in the
 `config/bin/help/COMMANDNAME_options.txt` file.
 
-The default options, as provided by the skeleton, are automatically added to the
+The default options, as provided by druleton, are automatically added to the
 command help.
 
 Do not create this help file if no custom options are added.

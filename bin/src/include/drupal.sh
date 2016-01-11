@@ -58,7 +58,7 @@ function drupal_drush_filter_options {
 }
 
 ##
-# Remove skeleton specific command options.
+# Remove druleton specific command options.
 #
 # @param string
 #   The command options.
@@ -69,7 +69,7 @@ function drupal_drush_filter_options {
 function drupal_drush_filter_option {
   local option="$1"
 
-  # Skeleton uses --no-color, drush does not support that.
+  # Druleton uses --no-color, drush does not support that.
   if [ "$option" == "--no-color" ]; then
     echo 1
     return

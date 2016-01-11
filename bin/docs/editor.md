@@ -1,6 +1,6 @@
 # Editor setup (IDE)
 
-Configure your IDE so that it has the skeleton root directory as the root of the
+Configure your IDE so that it has the druleton root directory as the root of the
 project.
 
 Exclude the following directories in your IDE:

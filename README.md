@@ -1,9 +1,9 @@
-# drupal-skeleton
+# druleton
 
 [![Author][icon-author]][link-author]
 [![License : MIT][icon-license]][link-license]
 
-The drupal-skeleton provides a skeleton directory structure, a configuration
+Druleton provides a skeleton directory structure, a configuration
 directory and a set of commands to easily set up an environment to develop,
 test, and deploy a Drupal based project. This without the need to include Drupal
 core, contrib modules, themes and libraries in the repository of this project.
@@ -11,21 +11,21 @@ core, contrib modules, themes and libraries in the repository of this project.
 > This README file is a placeholder.
 > Replace the content of this file with the project specific documentation.
 
-The [drupal-skeleton documentation][link-documentation] is located within the
+The [druleton documentation][link-documentation] is located within the
 [`bin/docs`][link-documentation] directory.
 
 
 
 ## Requirements
-The skeleton requires at least bash to run.
+Druleton requires at least bash to run.
 
-[See skeleton requirements][link-requirements].
+[See druleton requirements][link-requirements].
 
 
 ## Commands
-The drupal-skeleton contains a set of bash scripts (commands):
+Druleton contains a set of bash scripts (commands):
 
-- [`bin/init`][link-command-init] : Setup or update the skeleton environment.
+- [`bin/init`][link-command-init] : Setup or update the druleton environment.
 - [`bin/install`][link-command-install] : Download core and required contributed
   modules, themes and libraries and install the project.
 - [`bin/reset`][link-command-reset] : Reset an installed project back to its
@@ -42,14 +42,14 @@ The drupal-skeleton contains a set of bash scripts (commands):
 - [`bin/coder`][link-command-coder] : Run code inspections using the
   drupal/coder standards.
 
-[See skeleton documentation][link-documentation].
+[See druleton documentation][link-documentation].
 
 
 
 ## Configuration
-The drupal-skeleton requires a minimal configuration to get started.
+Druleton requires a minimal configuration to get started.
 
-[See skeleton configuration documentation][link-config].
+[See druleton configuration documentation][link-config].
 
 
 

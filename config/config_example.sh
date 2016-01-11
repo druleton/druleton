@@ -39,7 +39,7 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 # - branch or tag name : use a specific version by setting the variable to the
 #   proper branch or tag name (eg. dev-master).
 #   See https://github.com/drush-ops/drush.
-# - global : use the globally installed drush command (outside the skeleton).
+# - global : use the globally installed drush command (outside druleton).
 #
 # If the variable is not set, phar will be used.
 #DRUSH_VERSION="global"

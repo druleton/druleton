@@ -1,5 +1,5 @@
 # Hook helpers
-The skeleton provides helpers to make it easier to write hooks and to colorize
+Druleton provides helpers to make it easier to write hooks and to colorize
 informational output.
 
 
@@ -237,7 +237,7 @@ message_error "Error demo."
 
 
 ## Composer helpers
-The skeleton provides several Composer helpers:
+Druleton provides several Composer helpers:
 
 #### composer_run
 Run the composer binary. This will automatically use the locally or globally
@@ -246,15 +246,14 @@ configuration [`$COMPOSER_USE_GLOBAL`][link-config-config-composer] variable.
 
 #### composer_skeleton_run
 Run a composer command using the `bin/packagist` directory as working directory.
-This directory is used to download and store php packages as needed by the
-skeleton.
+This directory is used to download and store php packages as needed by druleton.
 
 > Note this function is a wrapper around the [`composer_run`](#composer_run)
 > function.
 
 
 ## Drupal helpers
-The skeleton provides several Drupal specific helpers:
+Druleton provides several Drupal specific helpers:
 
 
 #### drupal_drush
@@ -274,11 +273,11 @@ drupal_drush cc
 > local drush as defined in the configuration.
 
 #### drupal_drush_run
-The skeleton provides the option to use a locally (default) or globally
+Druleton provides the option to use a locally (default) or globally
 installed drush command. This function will check what to use based on the
 configuration variable [`$DRUSH_VERSION`][link-config-config-drush-version].
 If that variable is set to "global" then the globally installed drush will be
-used by the skeleton.
+used by druleton.
 
 The difference between this function and `drupal_drush` is that this command
 will not use by default `web` as the working directory.

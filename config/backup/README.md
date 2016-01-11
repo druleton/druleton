@@ -5,7 +5,7 @@ This directory contains the implemented hooks for the
 
 - See [hooks documentation][link-hooks]
 - See [`bin/backup` command documentation][link-command-backup]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

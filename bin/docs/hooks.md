@@ -42,8 +42,7 @@ defined by the hook name.
 
 All hooks should be written in [bash][link-bash].
 
-The skeleton provides helper functions to format output, call drush commands,
-...
+Druleton provides helper functions to format output, call drush commands, ...
 
 See the [helper functions][link-hooks-helpers] and
 [variables][link-hooks-variables] documentation.
@@ -51,10 +50,10 @@ See the [helper functions][link-hooks-helpers] and
 
 
 ## Documenting hooks
-A hook extends the functionality of a skeleton command. Some hooks can support
+A hook extends the functionality of a druleton command. Some hooks can support
 extra options or need extra description and examples.
 
-The skeleton supports extending the documentation of the skeleton commands by
+Druleton supports extending the documentation of the build-in commands by
 creating the proper help files within the `config/bin/src/help` directory:
 
 ### Command description
