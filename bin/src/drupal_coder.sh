@@ -56,7 +56,7 @@ function drupal_coder_run {
     options="$options -v"
   fi
 
-  # Filter out command options specific by the skeleton.
+  # Filter out command options specific by druleton.
   local cmd="$DIR_BIN/packagist/vendor/bin/phpcs $options"
   $cmd "$@"
 }
@@ -165,7 +165,7 @@ function drupal_coder_filter_options {
 }
 
 ##
-# Remove skeleton specific command options.
+# Remove druleton specific command options.
 #
 # @param string
 #   The command options.
@@ -176,7 +176,7 @@ function drupal_coder_filter_options {
 function drupal_coder_filter_option {
   local option="$1"
 
-  # Skeleton uses --no-color, phpcs uses --no-colors
+  # Druleton uses --no-color, phpcs uses --no-colors
   if [ "$option" == "--no-color" ]; then
     echo 1
     return

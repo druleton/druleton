@@ -27,10 +27,10 @@ function composer_run {
 }
 
 ##
-# Run a composer command within the skeleton context.
+# Run a composer command within the druleton context.
 #
 # Use this to perform composer commands on the set of packages required and
-# installed by the skeleton.
+# installed by druleton.
 ##
 function composer_skeleton_run {
   composer_run "$@" --working-dir="$DIR_BIN/packagist"
@@ -67,7 +67,7 @@ function composer_filter_options {
 }
 
 ##
-# Remove skeleton specific command options.
+# Remove druleton specific command options.
 #
 # @param string
 #   The command options.
@@ -78,7 +78,7 @@ function composer_filter_options {
 function composer_filter_option {
   local option="$1"
 
-  # Skeleton uses --no-color, composer does not support it.
+  # Druleton uses --no-color, composer does not support it.
   if [ "$option" == "--no-color" ]; then
     echo 1
     return

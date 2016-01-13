@@ -8,7 +8,7 @@ It also contains the [`cleanup.sh` configuration arrays][link-config-cleanup].
 - See [hooks documentation][link-hooks]
 - See [`bin/install` command documentation][link-command-install]
 - See [cleanup documentation][link-config-cleanup]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

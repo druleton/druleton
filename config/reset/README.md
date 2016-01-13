@@ -9,7 +9,7 @@ when the reset command is run.
 - See [hooks documentation][link-hooks]
 - See [`bin/reset` command documentation][link-command-reset]
 - See [cleanup documentation][link-config-cleanup]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

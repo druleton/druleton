@@ -18,7 +18,7 @@ Including the custom functionality code into the build is done by copying the
 project (sub)directories into the build (see
 `config/build/drupal_make_after.sh`) for an example.
 
-[See drupal-skeleton documentation about project][link-project].
+[See druleton documentation about project][link-project].
 
 
 

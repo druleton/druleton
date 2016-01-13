@@ -75,7 +75,7 @@ This script has no arguments.
 ## Command hooks
 Each step in the scipt triggers "hooks". These hooks allow you to add extra
 steps in between the reset script without having to alter (hack) the
-`bin/upgrade` script as defined in the drupal-skeleton.
+`bin/upgrade` script as defined in druleton.
 
 See [more info about the hook system][link-hooks].
 

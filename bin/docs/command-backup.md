@@ -53,7 +53,7 @@ timestamp will be used if no argument is passed.
 ## Command hooks
 Each step in the scipt triggers "hooks". These hooks allow you to add extra
 steps in between the install script without having to alter (hack) the
-`bin/backup` script as defined in the drupal-skeleton.
+`bin/backup` script as defined in druleton.
 
 See [more info about the hook system][link-hooks].
 

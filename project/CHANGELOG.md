@@ -6,7 +6,7 @@
 > Create for each release a new chapter and list the changes. Link for each
 > release to a diff on the repository frontend.
 >
-> Example: see the [CHANGELOG](../bin/CHANGELOG.md) of the drupal-skeleton.
+> Example: see the [CHANGELOG](../bin/CHANGELOG.md) of druleton.
 
 
 ## [Unreleased][1.x.x]

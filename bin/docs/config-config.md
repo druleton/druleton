@@ -59,8 +59,8 @@ credentials from the config file:
 
 
 #### Composer
-The skeleton will, by default, download and install composer locally. The
-`COMPOSER_USE_GLOBAL` variable allows to force the skeleton to use the globally
+Druleton will, by default, download and install composer locally. The
+`COMPOSER_USE_GLOBAL` variable allows forcing druleton to use the globally
 install composer instead.
 
 - **COMPOSER_USE_GLOBAL=0** : Download the composer binary locally and use that
@@ -71,7 +71,7 @@ install composer instead.
 
 
 #### Drush version
-The skeleton provides the option to use a globally installed drush command or to
+Druleton provides the option to use a globally installed drush command or to
 install a local version. This is defined by the `$DRUSH_VERSION` variable.
 
 The options are:
@@ -97,10 +97,10 @@ environment. The installation can be disabled:
 
 ```
 # The name of the site.
-SITE_NAME="Drupal Skeleton"
+SITE_NAME="Druleton"
 
 # URL where the site is hosted.
-SITE_URL="drupal-skeleton.sg"
+SITE_URL="druleton.sg"
 
 # The install profile that shouls be installed.
 SITE_PROFILE="standard"
@@ -108,7 +108,7 @@ SITE_PROFILE="standard"
 # Database connection parameters.
 DB_USER="localuser"
 DB_PASS="localpass"
-DB_NAME="drupal_skeleton"
+DB_NAME="druleton"
 DB_HOST="localhost"
 
 # Administrator account (user 1).

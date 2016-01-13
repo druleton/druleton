@@ -1,5 +1,5 @@
 # Hook variables
-The skeleton defines a set of variables when the command is run. These variables
+Druleton defines a set of variables when the command is run. These variables
 are global and can be used in the hooks.
 
 > **Tip** : Use variables always surrounded with "" to avoid breaking scripts
@@ -37,7 +37,7 @@ and helpers are located. Use this if you want to include a include script that
 is not loaded yet.
 
 #### `$DIR_ROOT`
-This is the full directory path to the root of the skeleton. This is where the
+This is the full directory path to the root of druleton. This is where the
 `bin`, `config` and `project` directories are located.
 
 #### `$DIR_PROJECT`

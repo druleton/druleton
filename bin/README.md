@@ -1,4 +1,4 @@
-# drupal-skeleton
+# druleton
 
 [![Author][icon-author]][link-author]
 [![License : MIT][icon-license]][link-license]
@@ -7,12 +7,15 @@ Set of bash scripts and configuration files to install, reset, upgrade, backup,
 restore and build a Drupal project without the need to have Core and Contributed
 code in the repository.
 
-* [See the documentation about the Drupal Skeleton][link-docs].
+The name "druleton" is a combination of **dru**pal and ske**leton**.
+
+* [See the documentation about druleton][link-docs].
 
 
 
 ## Commands
-The skeleton provides commands to run the site locally.
+Druleton provides commands to create a new site and support in development and
+deployment.
 
 Each command has a help section that explains the options for it. View the help
 by running the command with the `-h` switch.
@@ -25,7 +28,7 @@ $ bin/install -h
 
 
 ### bin/init
-The `bin/init` command is used to setup the skeleton environment. It will
+The `bin/init` command is used to setup the druleton environment. It will
 download tools like composer and add them to the `bin` directory. It will also
 scan the `config/bin` directory if there are custom, project specific, commands
 and add them to the `bin` directory.
@@ -185,7 +188,7 @@ Each command has a set of steps it runs trough. All the code related to those
 steps are located in the `bin` and `bin/src` directories. This code should not
 be altered/hacked.
 
-The drupal-skeleton provides hooks that are called before and after each step so
+Druleton provides hooks that are called before and after each step so
 extra scripts can be added and run.
 
 The hooks can be implemented only for specific environments by adding the

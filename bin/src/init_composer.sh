@@ -46,7 +46,7 @@ function init_composer_run {
 ##
 function init_composer_with_force {
   if [ $(option_is_set "-f") -ne 1 ] && [ $(option_is_set "--force") -ne 1 ]; then
-    markup_debug "Init with force : No force used on the skeleton."
+    markup_debug "Init with force : No force used on druleton."
     markup_debug
     return
   fi
@@ -100,10 +100,10 @@ function init_composer_init {
     message_success "Composer was already initiated."
   else
     composer_skeleton_run -n init \
-      --name="drupal-skeleton/bin" \
-      --description="PHP packages needed by the skeleton." \
+      --name="druleton/bin" \
+      --description="PHP packages needed by druleton." \
       --author="zero2one <zero2one@serial-graphics.be>" \
-      --homepage="https://github.com/zero2one/drupal-skeleton" \
+      --homepage="https://github.com/zero2one/druleton" \
       --license="MIT" \
       --type="library"
     message_success "Composer is initiated"

@@ -1,5 +1,5 @@
 # Quick Start
-The drupal-skeleton has a everything to startup fast. This quick-start guide
+Druleton has a everything to startup fast. This quick-start guide
 explains how.
 
 
@@ -32,7 +32,7 @@ directory structure. Use the same vhost URL as defined in the config file.
 
 
 ## Run the init command
-The skeleton has some 3th party dependencies that are not included in the `bin`
+Druleton has some 3th party dependencies that are not included in the `bin`
 directory. They need to be installed by running the `bin/init` command:
 
 ```bash

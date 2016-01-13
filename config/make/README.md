@@ -10,7 +10,7 @@ Drupal version for the project.
 
 
 - See [make documentation][link-config-make]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

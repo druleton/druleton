@@ -8,7 +8,7 @@ Each subdirectory in this directory will be symlinked to the
 > **Tip** : Create a subdirectory to put custom modules in (eg. `custom`,
 `features`, ...).
 
-[See drupal-skeleton documentation about project][link-project].
+[See druleton documentation about project][link-project].
 
 
 

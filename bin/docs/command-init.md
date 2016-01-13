@@ -1,5 +1,5 @@
 # bin/init command
-The `bin/init` command is used to setup the skeleton and project environment.
+The `bin/init` command is used to setup druleton and project environment.
 It will download tools like composer and add them to the `bin` directory. It
 will also scan the `config/bin` directory if there are custom, project specific,
 commands and add them to the `bin` directory.
@@ -14,9 +14,8 @@ $ bin/init
 
 
 ## What does this command do?
-This command prepares the environment by installing dependencies for the
-skeleton and allows initiation of project specific dependencies by the provided
-hooks.
+This command prepares the environment by installing dependencies for druleton
+and allows initiation of project specific dependencies by the provided hooks.
 
 The command will perform following script steps:
 
@@ -33,8 +32,8 @@ $ bin/composer
 
 #### 2. Install drush
 [Drush][link-drush] is a command line interface to perform actions on drupal. It
-is used by the skeleton to install and interact with the drupal installation in
-the `web` directory.
+is used by druleton to install and interact with the drupal installation in the
+`web` directory.
 
 By default the [dev-master][link-drush-master] branch of drush will be used as
 the version to install locally. You can set a custom version by defining this in
@@ -56,7 +55,7 @@ command is run.
 
 
 #### 4. Add custom commands to the `bin` directory
-The skeleton allows to define custom commands in the `config/bin` directory.
+Druleton allows to define custom commands in the `config/bin` directory.
 This step will create a symlink for each custom command to the `bin` directory.
 This so all commands are run from the same directory.
 
@@ -90,7 +89,7 @@ There are no arguments for this command.
 ## Command hooks
 Each step in the scipt triggers "hooks". These hooks allow you to add extra
 steps in between the install script without having to alter (hack) the
-`bin/backup` script as defined in the drupal-skeleton.
+`bin/backup` script as defined in druleton.
 
 See [more info about the hook system][link-hooks].
 

@@ -9,7 +9,7 @@ when the upgrade command is run.
 - See [hooks documentation][link-hooks]
 - See [`bin/upgrade` command documentation][link-command-upgrade]
 - See [cleanup documentation][link-config-cleanup]
-- Read [documentation about the drupal-skeleton][link-documentation]
+- Read [documentation about druleton][link-documentation]
 
 
 

@@ -80,7 +80,7 @@ A list of all backups to choose from will be listed if no argument is passed.
 ## Command hooks
 Each step in the scipt triggers "hooks". These hooks allow you to add extra
 steps in between the restore script without having to alter (hack) the
-`bin/restore` script as defined in the drupal-skeleton.
+`bin/restore` script as defined in druleton.
 
 See [more info about the hook system][link-hooks].
 

@@ -29,7 +29,7 @@ If no package name is given, an unique name will be created using:
 Example:
 
 ```
-Drupal_Skeleton-20151107_110452.tar.gz
+druleton-20151107_110452.tar.gz
 ```
 
 
@@ -63,7 +63,7 @@ created.
 ## Command hooks
 Each step in the scipt triggers "hooks". These hooks allow you to add extra
 steps in between the build script without having to alter (hack) the
-`bin/build` script as defined in the drupal-skeleton.
+`bin/build` script as defined in druleton.
 
 See [more info about the hook system][link-hooks].
 
