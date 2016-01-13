@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [Unreleased][1.x.x]
+### Changed
+- #27 : Moved repository to the druleton organisation and renamed the project.
+
+
+
 ## [0.3.0] - 2015-12-26
 ### Added
 - #19 : Added bin/drush command and its documentation.
@@ -65,6 +72,7 @@
 
 
 
+[1.x.x]: https://github.com/zero2one/drupal-skeleton/compare/master...develop
 [0.3.0]: https://github.com/druleton/druleton/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/druleton/druleton/compare/0.1.1...0.2.0
 [0.1.2]: https://github.com/druleton/druleton/compare/0.1.1...0.1.2

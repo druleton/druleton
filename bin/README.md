@@ -7,12 +7,15 @@ Set of bash scripts and configuration files to install, reset, upgrade, backup,
 restore and build a Drupal project without the need to have Core and Contributed
 code in the repository.
 
+The name "druleton" is a combination of **dru**pal and ske**leton**.
+
 * [See the documentation about druleton][link-docs].
 
 
 
 ## Commands
-Druleton provides commands to run the site locally.
+Druleton provides commands to create a new site and support in development and
+deployment.
 
 Each command has a help section that explains the options for it. View the help
 by running the command with the `-h` switch.
