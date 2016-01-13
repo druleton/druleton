@@ -3,6 +3,7 @@
 !/.gitignore
 !/docs
 !/src
+!/templates
 !/CHANGELOG.md
 !/LICENSE.md
 !/README.md
@@ -16,3 +17,6 @@
 !/reset
 !/restore
 !/upgrade
+
+# Global ignore patterns.
+.DS_Store
