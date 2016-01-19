@@ -34,6 +34,17 @@ function markup_h2 {
 }
 
 ##
+# Show a line as a tertiary header (h3).
+#
+# This will result in text in light white.
+#
+# @param string text to show in the markup
+##
+function markup_h3 {
+  markup "${MAGENTA}$1"
+}
+
+##
 # Show a line of text as a success.
 #
 # The whole line will be shown in green.
