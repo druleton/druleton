@@ -49,8 +49,10 @@ source "$DIR_SRC/include/message.sh"
 source "$DIR_SRC/include/composer.sh"
 source "$DIR_SRC/include/drupal.sh"
 
-# Load the config file.
-source "$DIR_CONFIG/config.sh"
+# Load the config file (if any).
+if [ -f "$DIR_CONFIG/config.sh" ]; then
+  source "$DIR_CONFIG/config.sh"
+fi
 
 # Get the environment.
 ENVIRONMENT=$(option_get_environment)

@@ -15,44 +15,35 @@
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
 
-
-# Show script information.
-echo
-markup_h1_divider
-markup_h1 " ${LWHITE}Initiate/update${LBLUE} environment for website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
-markup_h1_divider
-markup_h1_li "Composer will be installed or updated in the bin/ directory."
-markup_h1_li "Drush will be installed (or global installed drush will be used)."
-markup_h1_li "Any custom command will be included in the bin/ directory."
-markup_h1_divider
-echo
-
-
-# Confirm deletion of files & DB.
-if [ $CONFIRMED -ne 1 ]; then
-  read -p "Are you sure? (y/N) " -n 1 -r
-  echo
-
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    markup_warning "! Init aborted"
-    echo
-    exit 1
-  fi
-  echo
-fi
-
-
 # Includes.
 source "$DIR_SRC/script.sh"
-source "$DIR_SRC/init_composer.sh"
-source "$DIR_SRC/init_drush.sh"
+source "$DIR_SRC/init.sh"
 source "$DIR_SRC/init_coder.sh"
+source "$DIR_SRC/init_config.sh"
+source "$DIR_SRC/init_composer.sh"
 source "$DIR_SRC/init_custom_commands.sh"
+source "$DIR_SRC/init_druleton.sh"
+source "$DIR_SRC/init_drush.sh"
 
+
+# Init
+init_init
+
+# Information.
+init_info
+
+# Confirmation.
+init_confirm
 
 # START Script -----------------------------------------------------------------
 
 script_before_run
+init_druleton_run
+
+exit
+
+init_config_run
+
 init_composer_run
 init_drush_run
 init_coder_run
