@@ -80,10 +80,24 @@ function markup_error {
 ##
 # Show an item as a list item.
 #
-# @param The text to show in the bullet.
+# @param string The text to show in the bullet.
+# @param string (optional) The text to show as a value.
 ##
 function markup_li {
   markup " ${GREY}•${RESTORE} $1"
+}
+
+##
+# Show an item together with a value
+#
+# The result will be like:
+#  • Text input : Value
+#
+# @param string The text to show in the bullet.
+# @param string (optional) The text to show as a value.
+##
+function markup_li_value {
+  markup_li "$1 : ${GREEN}$2"
 }
 
 ##
@@ -125,4 +139,31 @@ function markup_divider {
 ##
 function markup_h1_divider {
   markup_h1 "================================================================================"
+}
+
+##
+# Show a prompt on 2 lines.
+#
+# - First line: the question with optional default value.
+# - Second line: a prompt to fill in the response.
+#
+# @param string the question to ask
+# @param string (optional) the default answer if nothing is filled in.
+##
+function markup_prompt {
+  local question="$1"
+  local default="$2"
+  local color="${GREEN}"
+
+  echo -e -n "${question}"
+
+  if [ "$2" != "" ]; then
+    echo -e -n " ${GREY}($2)${RESTORE}"
+  fi
+
+  echo ":"
+
+  echo -e -n "${GREY} > ${color}"
+  read
+  echo -e -n "${RESTORE}"
 }

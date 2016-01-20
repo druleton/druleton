@@ -108,13 +108,23 @@ markup_h1 "Heading 1 demo."
 
 #### markup_h2
 The `markup_h2` function is used to print secondary headings. The line will be
-printed in bright-white text.
+printed in yellow text.
 
 ```bash
 markup_h2 "Heading 2 demo."
 ```
 
 ![markup_h2][img-markup_h2]
+
+#### markup_h3
+The `markup_h3` function is used to print tertiary headings. The line will be
+printed in magenta text.
+
+```bash
+markup_h2 "Heading 3 demo."
+```
+
+![markup_h3][img-markup_h3]
 
 #### markup_success
 Use this to print a line in green text.
@@ -163,6 +173,30 @@ markup_h1_li "Second item."
 ```
 
 ![markup_h1_li][img-markup_h1_li]
+
+#### markup_li_value
+Use this to print a list of text with a colored value.
+
+```bash
+markup_li_value "Label 1" "Value 1"
+markup_li_value "Label 2" "Value 2"
+```
+
+![markup_li_value][img-markup_li_value]
+
+#### markup_prompt
+Ask for user input. The helper has 2 parameters:
+* Question : The question text to ask to the user.
+* Default : optional default value. This will be shown in grey behind the
+  question.
+
+The collected answer will be stored in the `$REPLY` variable.
+
+```bash
+markup_prompt "Question text" "default value"
+```
+
+![markup_prompt][img-markup_prompt]
 
 #### markup_divider
 This function will print out a line of `===` to the screen.
@@ -410,10 +444,13 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 [img-markup_h1_li]: ./img/hooks-helpers-markup_h1_li.png
 [img-markup_h1_divider]: ./img/hooks-helpers-markup_h1_divider.png
 [img-markup_h2]: ./img/hooks-helpers-markup_h2.png
+[img-markup_h3]: ./img/hooks-helpers-markup_h3.png
 [img-markup_success]: ./img/hooks-helpers-markup_success.png
 [img-markup_warning]: ./img/hooks-helpers-markup_warning.png
 [img-markup_error]: ./img/hooks-helpers-markup_error.png
 [img-markup_li]: ./img/hooks-helpers-markup_li.png
+[img-markup_li_value]: ./img/hooks-helpers-markup_li_value.png
+[img-markup_prompt]: ./img/hooks-helpers-markup_prompt.png
 [img-markup_divider]: ./img/hooks-helpers-markup_divider.png
 [img-markup_debug]: ./img/hooks-helpers-markup_debug.png
 [img-message_success]: ./img/hooks-helpers-message_success.png
