@@ -219,16 +219,26 @@ function init_config_save {
 # @param string The variable value
 ##
 function init_config_save_variable {
+  local file="${DIR_CONFIG}/config.sh"
   local isInteger='^[0-9]+$'
+
   local key="$1"
   local value="$2"
+
+  local valueString="\"${value}\""
   local pattern="s/^\(${key}=\).*/\1\"${value}\"/"
 
   # Do not quote integers.
   if [[ $value =~ $isInteger ]]; then
     local pattern="s/^\(${key}=\).*/\1${value}/"
+    local valueString="${value}"
   fi
 
-  sed -i.bak "${pattern}" "${DIR_CONFIG}/config.sh"
-  rm "${DIR_CONFIG}/config.sh.bak"
+  # Overwrite or append
+  if [ $(cat "${file}" | grep "^${key}=") ]; then
+    sed -i.bak "${pattern}" "${file}"
+    rm "${DIR_CONFIG}/config.sh.bak"
+  else
+    echo "${key}=${valueString}" >> "${file}"
+  fi
 }
