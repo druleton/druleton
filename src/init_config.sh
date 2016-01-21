@@ -18,23 +18,28 @@
 function init_config_run {
   markup_h1 "Configure druleton."
 
+  # Check first if there is already a config file.
   if [ -f "$DIR_CONFIG/config.sh" ]; then
     message_success "Config file already in place."
+
+    # If not installed with force, end here.
+    if [ $(option_is_set "-f") -ne 1 ] && [ $(option_is_set "--force") -ne 1 ]; then
+      return
+    fi
+  else
+    # No config file, create on based on the config_example.sh file.
+    cp "$DIR_CONFIG/config_example.sh" "$DIR_CONFIG/config.sh"
+
+    # Check if the file could be copied.
+    if [ ! -f "$DIR_CONFIG/config.sh" ]; then
+      message_error "No config file available."
+      echo
+      exit 1
+    fi
+
+    message_success "Config created based on the config/config_example.sh file."
     echo
-    return
   fi
-
-  cp "$DIR_CONFIG/config_example.sh" "$DIR_CONFIG/config.sh"
-
-  # Check if the file could be copied.
-  if [ ! -f "$DIR_CONFIG/config.sh" ]; then
-    message_error "No config file available."
-    echo
-    exit 1
-  fi
-
-  message_success "Config file copied."
-  echo
 
   init_config_file
   source "$DIR_CONFIG/config.sh"
@@ -87,6 +92,7 @@ function init_config_load_current {
 # Gather the configuration parameters.
 ##
 function init_config_collect {
+  markup_h1 "Collect config variables"
   markup_h2 "Website details"
   markup_prompt "The name of the site" "${INIT_CONFIG_SITE_NAME}"
   INIT_CONFIG_SITE_NAME="${REPLY:-$INIT_CONFIG_SITE_NAME}"
@@ -111,7 +117,7 @@ function init_config_collect {
   markup_prompt "Administrator username" "${INIT_CONFIG_ACCOUNT_NAME}"
   INIT_CONFIG_ACCOUNT_NAME="${REPLY:-$INIT_CONFIG_ACCOUNT_NAME}"
   markup_prompt "Administrator password" "${INIT_CONFIG_ACCOUNT_PASS}"
-  INIT_CONFIG_ACCOUNT_PASS="${REPLY:-$INIT_CONFIG_ACCOUNT_NAME}"
+  INIT_CONFIG_ACCOUNT_PASS="${REPLY:-$INIT_CONFIG_ACCOUNT_PASS}"
   local default_account_mail="${INIT_CONFIG_ACCOUNT_NAME}@${INIT_CONFIG_SITE_URL}"
   markup_prompt "Administrator email address" "${default_account_mail}"
   INIT_CONFIG_ACCOUNT_MAIL="${REPLY:-$default_account_mail}"
