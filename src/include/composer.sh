@@ -18,7 +18,7 @@ function composer_run {
     cmd_options="$options --no-ansi"
   fi
 
-  if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
+  if [ "$COMPOSER_USE_GLOBAL" = "1" ]; then
     cmd_composer="composer"
   fi
 
@@ -40,7 +40,7 @@ function composer_skeleton_run {
 # Make sure that a COMPOSER_USE_GLOBAL variable is set.
 ##
 function composer_variable_use_global {
-  if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
+  if [ "$COMPOSER_USE_GLOBAL" != "1" ]; then
     COMPOSER_USE_GLOBAL=0
   fi
 }

@@ -69,11 +69,11 @@ function init_composer_install {
   markup_h1 "Install composer."
   mkdir -p "$DIR_BIN/packagist"
 
-  if [ -z "$COMPOSER_USE_GLOBAL" ]; then
+  if [ "$COMPOSER_USE_GLOBAL" = "1" ]; then
+    markup_warning "Skip composer installation : globally installed composer will be used."
+  else
     curl -sS https://getcomposer.org/installer \
       | php -- --install-dir="$DIR_BIN/packagist"
-  else
-    markup_warning "Skip composer installation : globally installed composer will be used."
   fi
 }
 
@@ -81,9 +81,16 @@ function init_composer_install {
 # Update composer.
 ##
 function init_composer_update {
+  # Check first if already installed.
+  if [ "$COMPOSER_USE_GLOBAL" != "1" ] &&
+  [ ! -f "$DIR_BIN/packagist/composer.phar" ]; then
+    init_composer_install
+    return
+  fi
+
   markup_h1 "Update composer."
 
-  if [ -z "$COMPOSER_USE_GLOBAL" ]; then
+  if [ "$COMPOSER_USE_GLOBAL" != "1" ]; then
     composer_skeleton_run self-update
   else
     markup_warning "Skip composer update : globally installed composer is in use."

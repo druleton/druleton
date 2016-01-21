@@ -19,8 +19,8 @@ function init_coder_run {
   markup_h1 "Install coder."
 
   # Check if not disabled.
-  if [ ! -z "$CODER_DISABLED" ]; then
-    message_warning "Installing drupal/coder is disabled."
+  if [ "$CODER_DISABLED" = "1" ]; then
+    markup_warning "drupal/coder is disabled."
     markup " > Enable it by setting CODER_DISABLED=0 in config/config.sh."
     echo
     return

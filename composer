@@ -24,7 +24,8 @@ composer_run "${COMPOSER_OPTIONS[@]}"
 
 markup_debug
 composer_binary_in_use="local"
-if [ ! -z "$COMPOSER_USE_GLOBAL" ]; then
+
+if [ "$COMPOSER_USE_GLOBAL" = "1" ]; then
   composer_binary_in_use="global"
 fi
 markup_debug "Composer binary used : $composer_binary_in_use"
