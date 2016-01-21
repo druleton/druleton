@@ -27,9 +27,15 @@ ACCOUNT_NAME="admin"
 ACCOUNT_PASS="drupal"
 ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 
+
+
+################################################################################
+# Druleton configuration.
+################################################################################
+
 # Composer is by default downloaded during the bin/init script.
 # You can optionally use a global installed composer.
-#COMPOSER_USE_GLOBAL=1
+COMPOSER_USE_GLOBAL=0
 
 # The Drush version to use.
 #
@@ -42,9 +48,9 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 # - global : use the globally installed drush command (outside druleton).
 #
 # If the variable is not set, phar will be used.
-#DRUSH_VERSION="global"
+DRUSH_VERSION="phar"
 
 # drupal/coder is installed by default as a dependency for the bin/coder
 # command. The installation is not required on all environments.
 # Disable installing it by setting the CODER_DISABLED variable to 1 (default 0).
-#CODER_DISABLED=1
+CODER_DISABLED=0
