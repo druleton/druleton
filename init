@@ -38,12 +38,22 @@ init_confirm
 # START Script -----------------------------------------------------------------
 
 script_before_run
-init_druleton_run
-init_config_run
-init_composer_run
-init_drush_run
-init_coder_run
-init_custom_commands_run
+
+# Partial init based on the given argument.
+case "$SCRIPT_ARGUMENT" in
+  config)
+    init_config_run
+    ;;
+
+  *)
+    init_druleton_run
+    init_config_run
+    init_composer_run
+    init_drush_run
+    init_coder_run
+    init_custom_commands_run
+    ;;
+esac
 
 script_after_run
 

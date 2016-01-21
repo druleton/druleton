@@ -1,1 +1,1 @@
-  This script has no arguments.
+  config                Only create/update the config file.
