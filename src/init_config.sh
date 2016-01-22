@@ -94,66 +94,47 @@ function init_config_load_current {
 function init_config_collect {
   markup_h1 "Collect config variables"
   markup_h2 "Website details"
-  markup_prompt "The name of the site" "${INIT_CONFIG_SITE_NAME}"
-  INIT_CONFIG_SITE_NAME="${REPLY:-$INIT_CONFIG_SITE_NAME}"
-  markup_prompt "The url where the website will be hosted" "${INIT_CONFIG_SITE_URL}"
-  INIT_CONFIG_SITE_URL="${REPLY:-$INIT_CONFIG_SITE_URL}"
-  markup_prompt "The drupal install profile" "${INIT_CONFIG_SITE_PROFILE}"
-  INIT_CONFIG_SITE_PROFILE="${REPLY:-$INIT_CONFIG_SITE_PROFILE}"
+  prompt "The name of the site" "${INIT_CONFIG_SITE_NAME}"
+  INIT_CONFIG_SITE_NAME="${REPLY}"
+  prompt "The url where the website will be hosted" "${INIT_CONFIG_SITE_URL}"
+  INIT_CONFIG_SITE_URL="${REPLY}"
+  prompt "The drupal install profile" "${INIT_CONFIG_SITE_PROFILE}"
+  INIT_CONFIG_SITE_PROFILE="${REPLY}"
   echo
 
   markup_h2 "Database credentials"
-  markup_prompt "Database username" "${INIT_CONFIG_DB_USER}"
-  INIT_CONFIG_DB_USER="${REPLY:-$INIT_CONFIG_DB_USER}"
-  markup_prompt "Database password" "${INIT_CONFIG_DB_PASS}"
-  INIT_CONFIG_DB_PASS="${REPLY:-$INIT_CONFIG_DB_PASS}"
-  markup_prompt "Database name" "${INIT_CONFIG_DB_NAME}"
-  INIT_CONFIG_DB_NAME="${REPLY:-$INIT_CONFIG_DB_NAME}"
-  markup_prompt "Database hostname or IP address" "$INIT_CONFIG_DB_HOST"
-  INIT_CONFIG_DB_HOST="${REPLY:-$INIT_CONFIG_DB_HOST}"
+  prompt "Database username" "${INIT_CONFIG_DB_USER}"
+  INIT_CONFIG_DB_USER="${REPLY}"
+  prompt "Database password" "${INIT_CONFIG_DB_PASS}"
+  INIT_CONFIG_DB_PASS="${REPLY}"
+  prompt "Database name" "${INIT_CONFIG_DB_NAME}"
+  INIT_CONFIG_DB_NAME="${REPLY}"
+  prompt "Database hostname or IP address" "$INIT_CONFIG_DB_HOST"
+  INIT_CONFIG_DB_HOST="${REPLY}"
   echo
 
   markup_h2 "Drupal administrator account"
-  markup_prompt "Administrator username" "${INIT_CONFIG_ACCOUNT_NAME}"
-  INIT_CONFIG_ACCOUNT_NAME="${REPLY:-$INIT_CONFIG_ACCOUNT_NAME}"
-  markup_prompt "Administrator password" "${INIT_CONFIG_ACCOUNT_PASS}"
-  INIT_CONFIG_ACCOUNT_PASS="${REPLY:-$INIT_CONFIG_ACCOUNT_PASS}"
+  prompt "Administrator username" "${INIT_CONFIG_ACCOUNT_NAME}"
+  INIT_CONFIG_ACCOUNT_NAME="${REPLY}"
+  prompt "Administrator password" "${INIT_CONFIG_ACCOUNT_PASS}"
+  INIT_CONFIG_ACCOUNT_PASS="${REPLY}"
   local default_account_mail="${INIT_CONFIG_ACCOUNT_NAME}@${INIT_CONFIG_SITE_URL}"
-  markup_prompt "Administrator email address" "${default_account_mail}"
-  INIT_CONFIG_ACCOUNT_MAIL="${REPLY:-$default_account_mail}"
+  prompt "Administrator email address" "${default_account_mail}"
+  INIT_CONFIG_ACCOUNT_MAIL="${REPLY}"
   echo
 
   # Allow project specific config file variables.
   hook_invoke "config_collect"
 
   markup_h2 "Druleton options"
-  local composer_use_global_yn="n"
-  if [ "$INIT_CONFIG_COMPOSER_USE_GLOBAL" = "1" ]; then
-    composer_use_global_yn="y"
-  fi
-  markup_prompt "Use global composer instead of a local copy [y/n]" "${composer_use_global_yn}"
-  REPLY="${REPLY:-$composer_use_global_yn}"
-  if [[ $REPLY =~ ^[Yy1]$ ]]; then
-    INIT_CONFIG_COMPOSER_USE_GLOBAL=1
-  else
-    INIT_CONFIG_COMPOSER_USE_GLOBAL=0
-  fi
+  prompt_yn "Use global composer instead of a local copy" "${INIT_CONFIG_COMPOSER_USE_GLOBAL}"
+  INIT_CONFIG_COMPOSER_USE_GLOBAL=$REPLY
 
-  local drush_version_to_use="${INIT_CONFIG_DRUSH_VERSION:-phar}"
-  markup_prompt "Drush version to use [phar/global/branch name]" "${drush_version_to_use}"
-  INIT_CONFIG_DRUSH_VERSION="${REPLY:-$drush_version_to_use}"
+  prompt "Drush version to use [phar/global/branch name]" "${INIT_CONFIG_DRUSH_VERSION:-phar}"
+  INIT_CONFIG_DRUSH_VERSION="${REPLY}"
 
-  local coder_disabled_yn="n"
-  if [ "$INIT_CONFIG_CODER_DISABLED" = "1" ]; then
-    coder_disabled_yn="y"
-  fi
-  markup_prompt "Do not install drupal coder (y/n)?" "${coder_disabled_yn}"
-  REPLY="${REPLY:-$coder_disabled_yn}"
-  if [[ $REPLY =~ ^[Yy1]$ ]]; then
-    INIT_CONFIG_CODER_DISABLED=1
-  else
-    INIT_CONFIG_CODER_DISABLED=0
-  fi
+  prompt_yn "Disable installation of drupal coder" "${INIT_CONFIG_CODER_DISABLED}"
+  INIT_CONFIG_CODER_DISABLED=$REPLY
   echo
 }
 
@@ -185,13 +166,8 @@ function init_config_confirm {
   markup_li_value "Disable coder installation" "${INIT_CONFIG_CODER_DISABLED:--}"
 
   echo
-  markup_prompt "Is this data correct [y/n]?"
-  if [[ $REPLY =~ ^[Yy1]$ ]]; then
-    INIT_CONFIG_CONFIRMED=1
-  else
-    INIT_CONFIG_CONFIRMED=0
-  fi
-
+  prompt_confirm "Is this data correct"
+  INIT_CONFIG_CONFIRMED=$REPLY
   echo
 }
 

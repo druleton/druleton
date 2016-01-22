@@ -28,14 +28,17 @@ function init_info {
 # Confirm the init process.
 ##
 function init_confirm {
-  if [ $CONFIRMED -ne 1 ]; then
-    markup_prompt "Are you sure [y/n]?" "n"
-
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-      markup_warning "! Init aborted"
-      echo
-      exit 1
-    fi
-    echo
+  if [ $CONFIRMED -eq 1 ]; then
+    return
   fi
+
+  prompt_confirm "Are you sure" "n"
+
+  if [ $REPLY -ne 1 ]; then
+    markup_warning "! Init aborted"
+    echo
+    exit 1
+  fi
+
+  echo
 }

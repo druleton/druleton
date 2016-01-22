@@ -184,20 +184,6 @@ markup_li_value "Label 2" "Value 2"
 
 ![markup_li_value][img-markup_li_value]
 
-#### markup_prompt
-Ask for user input. The helper has 2 parameters:
-* Question : The question text to ask to the user.
-* Default : optional default value. This will be shown in grey behind the
-  question.
-
-The collected answer will be stored in the `$REPLY` variable.
-
-```bash
-markup_prompt "Question text" "default value"
-```
-
-![markup_prompt][img-markup_prompt]
-
 #### markup_divider
 This function will print out a line of `===` to the screen.
 
@@ -268,6 +254,61 @@ message_error "Error demo."
 
 ![message_error][img-message_error]
 
+
+## Ask for input
+Scripts may require input from the user. These functions help to collect that
+input:
+
+#### prompt
+Ask for user input. The helper has 2 parameters:
+* Question : The question text to ask to the user.
+* Default : optional default value. This will be shown in grey behind the
+  question. This value will be used as the REPLY when the user hits enter
+  without entering any answer.
+
+The collected answer will be stored in the `$REPLY` variable.
+
+```bash
+# Ask the question with a default value.
+prompt "Question text" "default value"
+# Store the answer in the "$ANSWER" variable.
+ANSWER="$REPLY"
+```
+
+![markup_prompt][img-prompt]
+
+
+#### prompt_yn
+Ask the user a Yes/No question. The helper has 2 parameters:
+* Question : The question text to ask to the user.
+* Default : The (optional) default value. The default value will be translated
+  to "n" (if 0, n, N) or "y" (if 1, y or Y).
+
+The helper will accept 0, n or N as no, 1, y, Y as yes. Any other value will
+trigger an error message and the question will be asked again.
+
+The $REPLY variable will always be an integer:
+* 0 : When no is the answered.
+* 1 : When yes is the answer.
+
+
+```bash
+prompt_yn "Are you sure" "n"
+ANSWER=$REPLY
+```
+
+![markup_prompt][img-prompt_yn]
+
+#### prompt_confirm
+This is the same functionality as the prompt_yn helper but the question will
+printed in another color (magenta) to attract more attention.
+
+```bash
+prompt_confirm "Are you sure" "n"
+ANSWER=$REPLY
+```
+
+![markup_prompt][img-prompt_confirm]
 
 
 ## Composer helpers
@@ -450,9 +491,11 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 [img-markup_error]: ./img/hooks-helpers-markup_error.png
 [img-markup_li]: ./img/hooks-helpers-markup_li.png
 [img-markup_li_value]: ./img/hooks-helpers-markup_li_value.png
-[img-markup_prompt]: ./img/hooks-helpers-markup_prompt.png
 [img-markup_divider]: ./img/hooks-helpers-markup_divider.png
 [img-markup_debug]: ./img/hooks-helpers-markup_debug.png
 [img-message_success]: ./img/hooks-helpers-message_success.png
 [img-message_warning]: ./img/hooks-helpers-message_warning.png
 [img-message_error]: ./img/hooks-helpers-message_error.png
+[img-prompt]: ./img/hooks-helpers-prompt.png
+[img-prompt_yn]: ./img/hooks-helpers-prompt_yn.png
+[img-prompt_confirm]: ./img/hooks-helpers-prompt_confirm.png

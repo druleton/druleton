@@ -5,7 +5,7 @@
 # Add in this script the code to save the custom variables to the config file.
 # Use the init_config_save_variable helper to save the variable to the config
 # file.
-# - The variable confg key.
+# - The variable config key.
 # - The variable value.
 #
 # Example:
