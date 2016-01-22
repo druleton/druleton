@@ -21,7 +21,7 @@
 #
 ################################################################################
 
-markup_h2 "Custom variables"
-prompt "Custom variable" "$INIT_CONFIG_CUSTOM_VARIABLE"
-INIT_CONFIG_CUSTOM_VARIABLE="${REPLY}"
-echo
+#markup_h2 "Custom variables"
+#prompt "Custom variable" "$INIT_CONFIG_CUSTOM_VARIABLE"
+#INIT_CONFIG_CUSTOM_VARIABLE="${REPLY}"
+#echo

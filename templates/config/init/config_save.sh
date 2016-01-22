@@ -15,4 +15,4 @@
 #
 ################################################################################
 
-init_config_save_variable "CUSTOM_VARIABLE" "${INIT_CONFIG_CUSTOM_VARIABLE}"
+#init_config_save_variable "CUSTOM_VARIABLE" "${INIT_CONFIG_CUSTOM_VARIABLE}"

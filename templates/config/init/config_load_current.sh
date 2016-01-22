@@ -18,4 +18,4 @@
 #
 ################################################################################
 
-INIT_CONFIG_CUSTOM_VARIABLE="${CUSTOM_VARIABLE}"
+#INIT_CONFIG_CUSTOM_VARIABLE="${CUSTOM_VARIABLE}"

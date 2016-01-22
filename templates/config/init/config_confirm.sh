@@ -19,5 +19,5 @@
 #
 ################################################################################
 
-markup_h2 "Custom variables"
-markup_li_value "Custom variable" "${INIT_CONFIG_CUSTOM_VARIABLE:--}"
+#markup_h2 "Custom variables"
+#markup_li_value "Custom variable" "${INIT_CONFIG_CUSTOM_VARIABLE:--}"
