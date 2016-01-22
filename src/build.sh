@@ -2,6 +2,82 @@
 # Functionality to compress a build into a tarbal.
 ################################################################################
 
+##
+# Build command information.
+##
+function build_info {
+  echo
+  markup_h1_divider
+  markup_h1 " ${LWHITE}Build${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
+  markup_h1_divider
+  markup_h1_li "Drupal core, contrib modules and themes will be downloaded."
+  markup_h1_li "Custom profiles, modules & themes will be copied into the site structure."
+  markup_h1_li "The site will not be installed."
+
+  if [ -d "$DIR_BUILD/web" ]; then
+    markup_h1_li "The previous build will be deleted and overwritten."
+  fi
+
+  markup_h1_divider
+  echo
+}
+
+##
+# The build script is finished information.
+##
+function build_finished {
+  markup_h1_divider
+  markup_success " Finished"
+  markup_h1_divider
+  if [ -z "$BUILD_PACKAGE_NAME" ]; then
+    markup_h1_li "Build directory : ${LWHITE}${DIR_BUILD}/web${RESTORE}"
+  else
+    markup_h1_li "Build file : ${LWHITE}${BUILD_PACKAGE_NAME}${RESTORE}"
+    markup_h1_li "Directory  : ${LWHITE}${DIR_BUILD}${RESTORE}"
+  fi
+  markup_h1_divider
+  echo
+}
+
+##
+# Confirm the build command.
+##
+function build_confirm {
+  if [ $CONFIRMED -eq 1 ]; then
+    return
+  fi
+
+  prompt_confirm "Are you sure" "n"
+
+  if [ $REPLY -ne 1 ]; then
+    markup_warning "! Build aborted"
+    echo
+    exit 1
+  fi
+
+  echo
+}
+
+##
+# Check (and create if not) if the build directory exists.
+##
+function build_check_directory {
+  if [ -d "$DIR_BUILD" ]; then
+    mkdir -p "$DIR_BUILD"
+    markup_debug "Build directory created." 1
+  fi
+}
+
+##
+# Build the drupal package using the make files.
+##
+function build_drupal_make {
+  # Change the $DIR_WEB to the build folder while we run the make files.
+  DIR_WEB_NORMAL="$DIR_WEB"
+  DIR_WEB="$DIR_BUILD/web"
+  drupal_make_run
+  DIR_WEB="$DIR_WEB_NORMAL"
+}
 
 ##
 # Function to create a package from the build result.
