@@ -300,7 +300,7 @@ ANSWER=$REPLY
 ![markup_prompt][img-prompt_yn]
 
 #### prompt_confirm
-This is the same functionality as the prompt_yn helper but the question will
+This is the same functionality as the `prompt_yn` helper but the question will
 printed in another color (magenta) to attract more attention.
 
 ```bash
@@ -309,6 +309,25 @@ ANSWER=$REPLY
 ```
 
 ![markup_prompt][img-prompt_confirm]
+
+#### prompt_confirm_or_exit
+This is the same functionality as the `prompt_confirm` helper but:
+* A negative answer will terminate the command.
+* The confirm question will automatically be confirmed if the -y (confirm) option
+  is used when calling the command.
+* The default answer will always be No.
+* If no arguments are passed the default question "Are you sure" will be asked.
+* An abort message will be printed if negative confirmation was received.
+
+The helper accepts 2 arguments:
+* (optional) The question to ask ("Are you sure" is the fallback).
+* (optional) The abort message ("Command_name aborted" is the fallback).
+
+```bash
+prompt_confirm_or_exit
+```
+
+![markup_prompt][img-prompt_confirm_or_exit]
 
 
 ## Composer helpers
@@ -499,3 +518,4 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 [img-prompt]: ./img/hooks-helpers-prompt.png
 [img-prompt_yn]: ./img/hooks-helpers-prompt_yn.png
 [img-prompt_confirm]: ./img/hooks-helpers-prompt_confirm.png
+[img-prompt_confirm_or_exit]: ./img/hooks-helpers-prompt_confirm_or_exit.png
