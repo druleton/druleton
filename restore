@@ -1,0 +1,41 @@
+#!/bin/bash
+
+################################################################################
+# Script to restore a local environment from a backup.
+#
+# This will list all available backups and ask you what backup to restore from.
+#
+# This will restore:
+# - The database.
+# - The /web directory.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# Includes.
+source "$DIR_SRC/script.sh"
+source "$DIR_SRC/restore.sh"
+source "$DIR_SRC/drupal_login.sh"
+
+# Pre script.
+restore_init
+restore_info
+prompt_confirm_or_exit
+
+# START Script -----------------------------------------------------------------
+script_before_run
+restore_run
+drupal_login_run
+script_after_run
+# END Script -------------------------------------------------------------------
+
+# Finish message.
+restore_finished
+
+# End.
+exit 0

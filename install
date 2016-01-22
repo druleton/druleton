@@ -1,0 +1,45 @@
+#!/bin/bash
+
+################################################################################
+# Script to install a new site based on the configuration.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# Includes.
+source "$DIR_SRC/script.sh"
+source "$DIR_SRC/backup.sh"
+source "$DIR_SRC/install.sh"
+source "$DIR_SRC/cleanup.sh"
+source "$DIR_SRC/drupal_make.sh"
+source "$DIR_SRC/drupal_install.sh"
+source "$DIR_SRC/drupal_modules_disable.sh"
+source "$DIR_SRC/drupal_modules_enable.sh"
+source "$DIR_SRC/drupal_login.sh"
+
+# Pre script.
+install_info
+prompt_confirm_or_exit "Are you sure" "Installation aborted"
+
+# START Script -----------------------------------------------------------------
+script_before_run
+backup_run
+cleanup_run
+drupal_make_run
+drupal_install_run
+drupal_modules_disable_run
+drupal_modules_enable_run
+drupal_login_run
+script_after_run
+# END Script -------------------------------------------------------------------
+
+# Finish message.
+install_finished
+
+# End.
+exit 0

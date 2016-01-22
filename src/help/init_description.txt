@@ -1,0 +1,12 @@
+The init script will initiate or update the project environment.
+The script will:
+  * Check if the project structure is in place (created if not).
+  * Update druleton submodule.
+  * Set/Update configuration.
+  * Install or update composer locally.
+  * Install or update drush locally (if not configured to use global drush).
+  * Symlink any custom command from within the config/bin to the bin directory.
+    This allows you to add custom commands to the project.
+
+Use the command hooks to add init extra requirements (eg. download extra
+requirements, install nodejs packages, install packages using composer, ...).

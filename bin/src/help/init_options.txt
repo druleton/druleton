@@ -1,3 +1,0 @@
-  --force (-f)          The init script will only download dependencies if they
-                        are not yet downloaded. The force option will delete the
-                        files and download them again.
