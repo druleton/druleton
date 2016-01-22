@@ -235,11 +235,11 @@ function init_config_save_variable {
   local value="$2"
 
   local valueString="\"${value}\""
-  local pattern="s/^\(${key}=\).*/\1\"${value}\"/"
+  local pattern="s#^\(${key}=\).*#\1\"${value}\"#"
 
   # Do not quote integers.
   if [[ $value =~ $isInteger ]]; then
-    local pattern="s/^\(${key}=\).*/\1${value}/"
+    local pattern="s#^\(${key}=\).*#\1${value}#"
     local valueString="${value}"
   fi
 
