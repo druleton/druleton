@@ -40,7 +40,7 @@ function init_druleton_check {
 ##
 function init_druleton_run_install {
   markup_h1 "Install druleton"
-  init_druleton_git
+  init_druleton_root
   init_druleton_config
   init_druleton_project
 }
@@ -63,9 +63,9 @@ function init_druleton_run_update {
 
 
 ##
-# Copy git & editor configuration files.
+# Copy git & editor configuration files to the root of the project.
 ##
-function init_druleton_git {
+function init_druleton_root {
   if [ ! -f "${DIR_ROOT}/.editorconfig" ]; then
     cp "${DIR_BIN}/templates/.editorconfig" "${DIR_ROOT}/"
     message_success "Copied .editorconfig file to the root of the project."
@@ -85,6 +85,13 @@ function init_druleton_git {
     message_success "Copied .gitignore file to the root of the project."
   else
     message_warning "There is already a .gitignore file."
+  fi
+
+  if [ ! -f "${DIR_ROOT}/README.md" ]; then
+    cp "${DIR_BIN}/templates/README.md" "${DIR_ROOT}/"
+    message_success "Copied README.md file to the root of the project."
+  else
+    message_warning "There is already a README.md file."
   fi
 }
 

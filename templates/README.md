@@ -1,28 +1,92 @@
-# druleton
+# PROJECT NAME
 
-[![Author][icon-author]][link-author]
-[![License : MIT][icon-license]][link-license]
-
-Druleton provides a skeleton directory structure, a configuration
-directory and a set of commands to easily set up an environment to develop,
-test, and deploy a Drupal based project. This without the need to include Drupal
-core, contrib modules, themes and libraries in the repository of this project.
-
-> This README file is a placeholder.
-> Replace the content of this file with the project specific documentation.
-
-The [druleton documentation][link-documentation] is located within the
-[`bin/docs`][link-documentation] directory.
+[![Powered by Druleton][icon-druleton]][link-druleton]
 
 
-
-## Requirements
-Druleton requires at least bash to run.
-
-[See druleton requirements][link-requirements].
+> ADD HERE THE INTRODUCTION ABOUT THE PROJECT.
 
 
-## Commands
+## Installation
+This project uses [Druleton][link-druleton] command to install, reset and
+upgrade the project.
+
+[Druleton requires][link-requirements] at least bash to run.
+
+
+### 1. Download druleton
+Druleton is by default installed as a [git submodule][link-git-submodule] of the
+project.
+
+Run the git submodule commands to download druleton:
+
+```bash
+$ git submodule init
+$ git submodule update
+```
+
+### 2. Initiate the druleton environment
+Run the `bin/init` command to setup druleton and download composer, drush &
+drupal coder.
+
+It will ask you some configuration questions and store them in the
+`config/config.sh` file.
+
+```bash
+$ bin/init
+```
+
+### 3. Install the project
+Make sure that you have:
+* You have a running webserver and the domain matches with the one entered
+  during the `bin/init` command.
+* A running MySQL server and the credentials match with the config you entered
+  during the `bin/init` command.
+
+> **Tip** : You can always change the configuration by running
+> `bin/init -f config`
+
+```bash
+$ bin/install
+```
+
+Drupal core and modules will be downloaded, drupal will be installed, a browser
+will open and load your website.
+
+
+## Upgrade druleton, composer, drush and Drupal coder
+You can upgrade druleton and the installed 3th-party tools by running the `init`
+command:
+
+```bash
+$ bin/init
+```
+
+
+## Upgrade the project
+You can upgrade your project by:
+
+1. Pull in all changes from git
+
+   ```bash
+   $ git pull
+   ```
+2. Run the `upgrade` command:
+
+   ```bash
+   $ bin/upgrade
+   ```
+
+> **Tip** : The `upgrade` command will create a full backup of the current state
+> before upgrading the project.
+
+
+## Configuration
+There is a directory with configuration files (`config`).
+
+[See druleton configuration documentation][link-config].
+
+
+## More commands
 Druleton contains a set of bash scripts (commands):
 
 - [`bin/init`][link-command-init] : Setup or update the druleton environment.
@@ -46,29 +110,22 @@ Druleton contains a set of bash scripts (commands):
 
 
 
-## Configuration
-Druleton requires a minimal configuration to get started.
+[icon-druleton]: https://img.shields.io/badge/powered%20by-druleton-blue.svg?style=flat-square
+[link-druleton]: https://github.com/druleton/druleton
 
-[See druleton configuration documentation][link-config].
+[link-git-submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
+[link-documentation]: https://github.com/druleton/druleton/blob/master/docs/README.md
+[link-requirements]: https://github.com/druleton/druleton/blob/master/docs/requirements.md
+[link-config]: https://github.com/druleton/druleton/blob/master/docs/config.md
 
-
-[icon-author]: https://img.shields.io/badge/author-%40sgrame-blue.svg?style=flat-square
-[icon-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
-
-[link-author]: https://twitter.com/sgrame
-[link-license]: bin/LICENSE.md
-
-[link-documentation]: bin/docs/README.md
-[link-config]: bin/docs/config.md
-[link-requirements]: bin/docs/requirements.md
-[link-command-init]: bin/docs/command-init.md
-[link-command-install]: bin/docs/command-install.md
-[link-command-reset]: bin/docs/command-reset.md
-[link-command-upgrade]: bin/docs/command-upgrade.md
-[link-command-build]: bin/docs/command-build.md
-[link-command-backup]: bin/docs/command-backup.md
-[link-command-restore]: bin/docs/command-restore.md
-[link-command-composer]: bin/docs/command-composer.md
-[link-command-drush]: bin/docs/command-drush.md
-[link-command-coder]: bin/docs/command-coder.md
+[link-command-init]: https://github.com/druleton/druleton/blob/master/docs/command-init.md
+[link-command-install]: https://github.com/druleton/druleton/blob/master/docs/command-install.md
+[link-command-reset]: https://github.com/druleton/druleton/blob/master/docs/command-reset.md
+[link-command-upgrade]: https://github.com/druleton/druleton/blob/master/docs/command-upgrade.md
+[link-command-build]: https://github.com/druleton/druleton/blob/master/docs/command-build.md
+[link-command-backup]: https://github.com/druleton/druleton/blob/master/docs/command-backup.md
+[link-command-restore]: https://github.com/druleton/druleton/blob/master/docs/command-restore.md
+[link-command-composer]: https://github.com/druleton/druleton/blob/master/docs/command-composer.md
+[link-command-drush]: https://github.com/druleton/druleton/blob/master/docs/command-drush.md
+[link-command-coder]: https://github.com/druleton/druleton/blob/master/docs/command-coder.md
