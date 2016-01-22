@@ -2,6 +2,62 @@
 # Functionality to backup a local (working) Drupal environment.
 ################################################################################
 
+##
+# Initiate the backup command.
+##
+function backup_init {
+  # Get the backup options.
+  OPTION_BACKUP_ONLY_DB=$( option_is_set "--only-db" )
+  OPTION_BACKUP_ONLY_FILES=$( option_is_set "--only-files" )
+  OPTION_BACKUP_ONLY_WEB=$( option_is_set "--only-web" )
+}
+
+##
+# Backup command information.
+##
+function backup_info {
+  echo
+  markup_h1_divider
+  markup_h1 " ${LWHITE}Backup${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
+  markup_h1_divider
+  markup_h1 " This will backup:"
+  if [ $OPTION_BACKUP_ONLY_DB -eq 1 ]; then
+    markup_h1_li "The database."
+  fi
+  if [ $OPTION_BACKUP_ONLY_FILES -eq 1 ]; then
+    markup_h1_li "The sites/default/files directory."
+  fi
+  if [ $OPTION_BACKUP_ONLY_WEB -eq 1 ]; then
+    markup_h1_li "The /web directory."
+  fi
+  if [ $OPTION_BACKUP_ONLY_DB -ne 1 ] && [ $OPTION_BACKUP_ONLY_FILES -ne 1 ] && [ $OPTION_BACKUP_ONLY_WEB -ne 1 ]; then
+    markup_h1_li "The database."
+    markup_h1_li "The /web directory."
+  fi
+  markup_h1
+  markup_h1 "The code in /project will not be included in the backup."
+  markup_h1_divider
+  echo
+}
+
+##
+# Confirm the backup command.
+##
+function backup_confirm {
+  if [ $CONFIRMED -eq 1 ]; then
+    return
+  fi
+
+  prompt_confirm "Are you sure" "n"
+
+  if [ $REPLY -ne 1 ]; then
+    markup_warning "! Backup aborted"
+    echo
+    exit 1
+  fi
+
+  echo
+}
 
 ##
 # Function to run the actual backup (if not disabled).
