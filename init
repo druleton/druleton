@@ -1,0 +1,50 @@
+#!/bin/bash
+
+################################################################################
+# Script to initiate or update the project environment.
+#
+# This will:
+# - Create a symlink to any config/bin/commandname from within the bin/
+#   directory.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# Includes.
+source "$DIR_SRC/script.sh"
+source "$DIR_SRC/init.sh"
+source "$DIR_SRC/init_coder.sh"
+source "$DIR_SRC/init_config.sh"
+source "$DIR_SRC/init_composer.sh"
+source "$DIR_SRC/init_custom_commands.sh"
+source "$DIR_SRC/init_druleton.sh"
+source "$DIR_SRC/init_drush.sh"
+source "$DIR_SRC/init_structure.sh"
+
+# Pre command.
+init_init
+init_info
+prompt_confirm_or_exit
+
+# START Script -----------------------------------------------------------------
+script_before_run
+init_structure_run
+init_druleton_run
+init_config_run
+init_composer_run
+init_drush_run
+init_coder_run
+init_custom_commands_run
+script_after_run
+# END Script -------------------------------------------------------------------
+
+# Finish message.
+init_finished
+
+# End.
+exit 0

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+################################################################################
+# Script to backup a working Drupal installation.
+#
+# This will backup:
+# - The database.
+# - The /web directory.
+#
+# The code in /project will not be included in the backup.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# Includes.
+source "$DIR_SRC/script.sh"
+source "$DIR_SRC/backup.sh"
+source "$DIR_SRC/script_after.sh"
+
+# Pre script.
+backup_init
+backup_info
+prompt_confirm_or_exit
+
+# START Script -----------------------------------------------------------------
+script_before_run
+backup_run
+script_after_run
+# END Script -------------------------------------------------------------------
+
+# Done.
+exit 0

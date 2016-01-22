@@ -3,53 +3,205 @@
 [![Author][icon-author]][link-author]
 [![License : MIT][icon-license]][link-license]
 
-Druleton provides a skeleton directory structure, a configuration
-directory and a set of commands to easily set up an environment to develop,
-test, and deploy a Drupal based project. This without the need to include Drupal
-core, contrib modules, themes and libraries in the repository of this project.
+Set of bash scripts and configuration files to install, reset, upgrade, backup,
+restore and build a Drupal project without the need to have Core and Contributed
+code in the repository.
 
-> This README file is a placeholder.
-> Replace the content of this file with the project specific documentation.
+The name "druleton" is a combination of **dru**pal and ske**leton**.
 
-The [druleton documentation][link-documentation] is located within the
-[`bin/docs`][link-documentation] directory.
+* [See the documentation about druleton][link-docs].
 
 
 
-## Requirements
-Druleton requires at least bash to run.
-
-[See druleton requirements][link-requirements].
+## Installation
+[See the quick-start guide][link-quick-start] how to install druleton.
 
 
 ## Commands
-Druleton contains a set of bash scripts (commands):
+Druleton provides commands to create a new site and support in development and
+deployment.
 
-- [`bin/init`][link-command-init] : Setup or update the druleton environment.
-- [`bin/install`][link-command-install] : Download core and required contributed
-  modules, themes and libraries and install the project.
-- [`bin/reset`][link-command-reset] : Reset an installed project back to its
-  freshly installed state.
-- [`bin/upgrade`][link-command-upgrade]: Upgrade an installed project.
-- [`bin/build`][link-command-build] : Create a package of the project.
-- [`bin/backup`][link-command-backup] : Create a backup of the installed project.
-- [`bin/restore`][link-command-restore] : Restore the project from one of the
-  created backups.
-- [`bin/composer`][link-command-composer] : A wrapper around a globally installed or
-  local copy of the composer binary.
-- [`bin/drush`][link-command-drush] : Run a drush command within the `web`
-  directory.
-- [`bin/coder`][link-command-coder] : Run code inspections using the
-  drupal/coder standards.
+Each command has a help section that explains the options for it. View the help
+by running the command with the `-h` switch.
 
-[See druleton documentation][link-documentation].
+Example:
+
+```Shell
+$ bin/install -h
+```
 
 
+### bin/init
+The `bin/init` command is used to setup the druleton environment.
 
-## Configuration
-Druleton requires a minimal configuration to get started.
+It will check the project file structure and create the missing parts.
 
-[See druleton configuration documentation][link-config].
+It will download tools like composer and add them to the `bin` directory. It
+will also scan the `config/bin` directory if there are custom, project specific,
+commands and add them to the `bin` directory.
+
+You can run this command anytime, it will update the tools and rescan the
+`config/bin` directory.
+
+```Shell
+$ bin/init
+```
+
+[More information about this command][link-command-init].
+
+
+### bin/install
+The `bin/install` command will download Core & Contributed (modules, themes &
+libraries) as defined in the make file(s), and will install the website with
+the settings in the config/config.sh file.
+
+When the installation is finished, a browser will be opened and you will be
+logged in as platform administrator (user 1).
+
+If there is already a working installation, a backup of it will be taken.
+
+```Shell
+$ bin/install
+```
+
+[More information about this command][link-command-install].
+
+
+### bin/reset
+The `bin/reset` command will do the same as install without downloading the Core
+and Contributed projects. Use this to reset an already installed website to its
+fresh-install state.
+
+A backup will be taken before the reset is run.
+
+The `sites/default/settings.php` file, the `sites/default/files` directory and
+the database will be removed before the site is reinstalled.
+
+```bash
+$ bin/reset
+```
+
+[More information about this command][link-command-reset].
+
+
+### bin/upgrade
+The `bin/upgrade` command will download Core & Contributed code based on the
+make files and run the update-db command. Use this to update core and
+contributed to their latest version or to apply a patch.
+
+A backup will be taken before the reset is run.
+
+The existing settings.php, files directory and database will be kept.
+
+```bash
+$ bin/upgrade
+```
+
+[More information about this command][link-command-upgrade].
+
+
+### bin/build
+The `bin/build` command will create a deployment package (code) in the `/build`
+directory.
+
+```bash
+$ bin/build
+```
+
+[More information about this command][link-command-build].
+
+
+### bin/backup
+The `bin/backup` command will take a backup of the web directory and the
+database. The backup will be stored in the `backup` directory.
+
+You can limit the backup to just the web or files directory or just the database
+by passing them as arguments.
+
+```bash
+$ bin/backup
+```
+
+[More information about this command][link-command-backup].
+
+
+### bin/restore
+The `bin/restore` command will list the available backups from the `backup`
+directory and let you choose which one to restore. It will restore the `/web`
+directory and the database.
+
+If there is a working environment: a backup of it will be created before the
+restore is run.
+
+```bash
+$ bin/restore
+```
+
+[More information about this command][link-command-restore].
+
+
+### bin/composer
+The `bin/composer` command is a wrapper around the composer.phar binary.
+
+```bash
+$ bin/composer
+```
+
+[More information about this command][link-command-composer].
+
+
+### bin/drush
+The `bin/drush` command is a wrapper around drush. It will always run the drush
+command within the `web` directory.
+
+```bash
+$ bin/drush
+```
+
+[More information about this command][link-command-drush].
+
+
+### bin/coder
+The `bin/coder` command is a wrapper around the phpcs (PHP Code Sniffer)
+binary. It has the proper default settings for the Drupal standards.
+
+```bash
+$ bin/coder
+```
+
+[More information about this command][link-command-coder].
+
+
+
+## More commands
+
+### Composer
+The `bin/init` command will download and install composer locally. It can be
+called using following command:
+
+```
+$ bin/composer
+```
+
+### Custom commands
+It is possible to add your own, project specific, commands.
+
+[See the custom commands documentation][link-config-bin].
+
+
+
+## Alter commands by implementing hooks
+Each command has a set of steps it runs trough. All the code related to those
+steps are located in the `bin` and `bin/src` directories. This code should not
+be altered/hacked.
+
+Druleton provides hooks that are called before and after each step so
+extra scripts can be added and run.
+
+The hooks can be implemented only for specific environments by adding the
+environment name as postfix to the hook.
+
+See [hooks documentation][link-hooks].
 
 
 
@@ -57,18 +209,23 @@ Druleton requires a minimal configuration to get started.
 [icon-license]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 
 [link-author]: https://twitter.com/sgrame
-[link-license]: bin/LICENSE.md
+[link-license]: LICENSE.md
 
-[link-documentation]: bin/docs/README.md
-[link-config]: bin/docs/config.md
-[link-requirements]: bin/docs/requirements.md
-[link-command-init]: bin/docs/command-init.md
-[link-command-install]: bin/docs/command-install.md
-[link-command-reset]: bin/docs/command-reset.md
-[link-command-upgrade]: bin/docs/command-upgrade.md
-[link-command-build]: bin/docs/command-build.md
-[link-command-backup]: bin/docs/command-backup.md
-[link-command-restore]: bin/docs/command-restore.md
-[link-command-composer]: bin/docs/command-composer.md
-[link-command-drush]: bin/docs/command-drush.md
-[link-command-coder]: bin/docs/command-coder.md
+[link-drupal-requirements]: https://www.drupal.org/requirements
+[link-drush]: https://github.com/drush-ops/drush
+[link-drupalconsole]: http://drupalconsole.com/
+
+[link-docs]: docs/README.md
+[link-command-init]: docs/command-init.md
+[link-command-install]: docs/command-install.md
+[link-command-reset]: docs/command-reset.md
+[link-command-upgrade]: docs/command-upgrade.md
+[link-command-build]: docs/command-build.md
+[link-command-backup]: docs/command-backup.md
+[link-command-restore]: docs/command-restore.md
+[link-command-composer]: docs/command-composer.md
+[link-command-drush]: docs/command-drush.md
+[link-command-coder]: docs/command-coder.md
+[link-hooks]: docs/hooks.md
+[link-config-bin]: config-bin.sh
+[link-quick-start]: docs/quick-start.md

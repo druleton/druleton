@@ -1,0 +1,17 @@
+
+# The config file is environment (local, dev, tst, prd, ...) different and
+# contains sensitive data (passwords).
+# This file should never be in a repository!
+config/config.sh
+
+# The backups folder is used to store local backups whan one of the scripts is
+# performing destructive operations. No need for it in the repository.
+/backup
+
+# The build folder is used when building the whole project to be packaged or
+# uploaded. No need to be stored in the repository.
+/build
+
+# The reason of this project is to avoid core and contrib code to be stored in
+# the project repository. Do not store what can be build using make files.
+/web

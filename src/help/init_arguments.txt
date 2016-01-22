@@ -1,0 +1,9 @@
+  Without argumunt all init steps will run.
+  Use argment to run a single step:
+  structure             Only check and add missing structure elements.
+  druleton              Only update druleton.
+  config                Only create or update the config file.
+  composer              Only install or update composer.
+  drush                 Only install or update drush.
+  coder                 Only install or update drupal coder.
+  custom                Only create the custom commands symlinks.
