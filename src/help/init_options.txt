@@ -1,3 +1,12 @@
+  --skip-structure      Do not check and/or create the file structure.
+  --skip-druleton       Do not check and/or update drulaton submodule.
+  --skip-config         Do not check and/or set the config file.
+  --skip-composer       Do not install/update composer.
+  --skip-drush          Do not check and install drush.
+  --skip-coder          Do not install/update composer.
+  --skip-custom         Do not check and symlink custom commands.
   --force (-f)          The init script will only download dependencies if they
                         are not yet downloaded. The force option will delete the
                         files and download them again.
+                        It will also foce the config file step to prompt for all
+                        the variables.
