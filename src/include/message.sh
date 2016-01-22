@@ -28,3 +28,12 @@ function message_warning {
 function message_error {
   markup " ${RED}✗ $1"
 }
+
+##
+# Function to show a tip message.
+#
+# @param string message
+##
+function message_info {
+  markup " ${CYAN}ⓘ  $1"
+}

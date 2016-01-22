@@ -78,6 +78,17 @@ function markup_error {
 }
 
 ##
+# Show a line of text as info.
+#
+# The whole line will be shown in cyan.
+#
+# @param string text to show in the markup.
+##
+function markup_info {
+  markup "${CYAN}$1"
+}
+
+##
 # Show an item as a list item.
 #
 # @param string The text to show in the bullet.

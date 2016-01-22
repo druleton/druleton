@@ -153,6 +153,15 @@ markup_error "Error demo."
 
 ![markup_error][img-markup_error]
 
+#### markup_info
+Use this to print a line in cyan.
+
+```bash
+markup_info "Info demo."
+```
+
+![markup_info][img-markup_info]
+
 #### markup_li
 Print a line as a list item. The line will be prefixed with a bullet.
 
@@ -253,6 +262,16 @@ message_error "Error demo."
 ```
 
 ![message_error][img-message_error]
+
+#### message_info
+This function will print out the text prefixed with an i (ⓘ). All text will be
+printed in cyan.
+
+```bash
+message_info "Information or tip message."
+```
+
+![message_info][img-message_info]
 
 
 ## Ask for input
@@ -508,6 +527,7 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 [img-markup_success]: ./img/hooks-helpers-markup_success.png
 [img-markup_warning]: ./img/hooks-helpers-markup_warning.png
 [img-markup_error]: ./img/hooks-helpers-markup_error.png
+[img-markup_info]: ./img/hooks-helpers-markup_info.png
 [img-markup_li]: ./img/hooks-helpers-markup_li.png
 [img-markup_li_value]: ./img/hooks-helpers-markup_li_value.png
 [img-markup_divider]: ./img/hooks-helpers-markup_divider.png
@@ -515,6 +535,7 @@ file_copy_subdirectories "/path/to/source_directory" "/path/to/target_directory"
 [img-message_success]: ./img/hooks-helpers-message_success.png
 [img-message_warning]: ./img/hooks-helpers-message_warning.png
 [img-message_error]: ./img/hooks-helpers-message_error.png
+[img-message_info]: ./img/hooks-helpers-message_info.png
 [img-prompt]: ./img/hooks-helpers-prompt.png
 [img-prompt_yn]: ./img/hooks-helpers-prompt_yn.png
 [img-prompt_confirm]: ./img/hooks-helpers-prompt_confirm.png
