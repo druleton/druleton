@@ -15,10 +15,17 @@
 # The hooks will be called without and with environment suffix.
 ##
 function init_drush_run {
+  if [ $INIT_OPTION_SKIP_DRUSH -eq 1 ]; then
+    markup_debug "Skipped : Install/Update drush."
+    markup_debug
+    return
+  fi
+
   # Hook before install/update composer.
   hook_invoke "init_drush_before"
 
-  markup_h1 "Install drush."
+  markup_h1 "Install drush"
+
   if [ "$DRUSH_VERSION" == "global" ]; then
     markup_warning "Skip drush installation : globally installed drush will be used."
 

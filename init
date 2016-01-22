@@ -24,6 +24,7 @@ source "$DIR_SRC/init_composer.sh"
 source "$DIR_SRC/init_custom_commands.sh"
 source "$DIR_SRC/init_druleton.sh"
 source "$DIR_SRC/init_drush.sh"
+source "$DIR_SRC/init_structure.sh"
 
 # Pre command.
 init_init
@@ -32,7 +33,13 @@ prompt_confirm_or_exit
 
 # START Script -----------------------------------------------------------------
 script_before_run
-init_run
+init_structure_run
+init_druleton_run
+init_config_run
+init_composer_run
+init_drush_run
+init_coder_run
+init_custom_commands_run
 script_after_run
 # END Script -------------------------------------------------------------------
 

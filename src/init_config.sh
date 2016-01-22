@@ -2,6 +2,16 @@
 # Functionality to install or update the configuration file.
 ################################################################################
 
+##
+# Default init info.
+##
+function init_config_info {
+  echo
+  markup_h1_divider
+  markup_h1 " ${LWHITE}Set/Update configuration${LBLUE} for website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
+  markup_h1_divider
+  echo
+}
 
 ##
 # Install (or update) & configure drupal/coder packages.
@@ -16,7 +26,14 @@
 # The hooks will only be called if installing coder is not disabled.
 ##
 function init_config_run {
-  markup_h1 "Configure druleton."
+  # Check if skipped.
+  if [ $INIT_OPTION_SKIP_CONFIG -eq 1 ]; then
+    markup_debug "Skipped : Configuration."
+    markup_debug
+    return
+  fi
+
+  markup_h1 "Configuration"
 
   # Check first if there is already a config file.
   if [ -f "$DIR_CONFIG/config.sh" ]; then
@@ -24,6 +41,8 @@ function init_config_run {
 
     # If not installed with force, end here.
     if [ $(option_is_set "-f") -ne 1 ] && [ $(option_is_set "--force") -ne 1 ]; then
+      message_info "Run \"${RESTORE}bin/init -f config${CYAN}\" to change an existing config file."
+      echo
       return
     fi
   else
@@ -42,8 +61,9 @@ function init_config_run {
   fi
 
   init_config_file
+
+  # Reload the config file as it has changed.
   source "$DIR_CONFIG/config.sh"
-  echo
 }
 
 ##

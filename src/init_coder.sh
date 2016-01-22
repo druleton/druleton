@@ -16,12 +16,19 @@
 # The hooks will only be called if installing coder is not disabled.
 ##
 function init_coder_run {
-  markup_h1 "Install coder."
+  # Check not skipped.
+  if [ $INIT_OPTION_SKIP_CODER -eq 1 ]; then
+    markup_debug "Skipped : Install/update drupal coder."
+    markup_debug
+    return
+  fi
+
+  markup_h1 "Install coder"
 
   # Check if not disabled.
   if [ "$CODER_DISABLED" = "1" ]; then
     markup_warning "drupal/coder is disabled."
-    markup " > Enable it by setting CODER_DISABLED=0 in config/config.sh."
+    markup_info "Enable it by setting CODER_DISABLED=0 in config/config.sh."
     echo
     return
   fi

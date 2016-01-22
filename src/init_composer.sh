@@ -15,6 +15,12 @@
 # The hooks will be called without and with environment suffix.
 ##
 function init_composer_run {
+  if [ $INIT_OPTION_SKIP_COMPOSER -eq 1 ]; then
+    markup_debug "Skipped : Install/Update composer."
+    markup_debug
+    return
+  fi
+
   # Hook before install/update composer.
   hook_invoke "init_composer_before"
 
@@ -66,11 +72,12 @@ function init_composer_with_force {
 # Install composer by downloading phar file locally.
 ##
 function init_composer_install {
-  markup_h1 "Install composer."
+  markup_h1 "Install composer"
   mkdir -p "$DIR_BIN/packagist"
 
   if [ "$COMPOSER_USE_GLOBAL" = "1" ]; then
-    markup_warning "Skip composer installation : globally installed composer will be used."
+    message_warning "Skip composer installation : globally installed composer will be used."
+    markup_info "Use local installed composer by setting COMPOSER_GLOBAL=0 in config/config.sh."
   else
     curl -sS https://getcomposer.org/installer \
       | php -- --install-dir="$DIR_BIN/packagist"
@@ -88,12 +95,13 @@ function init_composer_update {
     return
   fi
 
-  markup_h1 "Update composer."
+  markup_h1 "Update composer"
 
   if [ "$COMPOSER_USE_GLOBAL" != "1" ]; then
     composer_skeleton_run self-update
   else
     markup_warning "Skip composer update : globally installed composer is in use."
+    markup_info "Use local installed composer by setting COMPOSER_GLOBAL=0 in config/config.sh."
   fi
 }
 

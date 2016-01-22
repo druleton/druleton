@@ -16,7 +16,15 @@
 # The hooks will be called without and with environment suffix.
 ##
 function init_custom_commands_run {
+  # Check if skipped.
+  if [ $INIT_OPTION_SKIP_CUSTOM -eq 1 ]; then
+    markup_debug "Skipped : Symlinking custom commands."
+    markup_debug
+    return
+  fi
+
   markup_h1 "Symlink custom commands"
+
   if [ ! -d "$DIR_CONFIG_BIN" ]; then
     message_warning "There is no config/bin directory to symlink from."
     return
@@ -25,6 +33,7 @@ function init_custom_commands_run {
   local commands=$(find "$DIR_CONFIG_BIN" -maxdepth 1 -type f | awk -F"/" '{print $NF}' | grep -v '\.')
   if [ -z "$commands" ]; then
     message_warning "There are no commands within the config/bin directory to symlink to."
+    echo
     return
   fi
 
