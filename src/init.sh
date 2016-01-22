@@ -25,6 +25,16 @@ function init_info {
 }
 
 ##
+# The init script is finished information.
+##
+function build_finished {
+  markup_h1_divider
+  markup_success " Finished"
+  markup_h1_divider
+  echo
+}
+
+##
 # Confirm the init process.
 ##
 function init_confirm {
@@ -41,4 +51,25 @@ function init_confirm {
   fi
 
   echo
+}
+
+##
+# Run the init script.
+##
+function init_run {
+  # Partial init based on the given argument.
+  case "$SCRIPT_ARGUMENT" in
+    config)
+      init_config_run
+      ;;
+
+    *)
+      init_druleton_run
+      init_config_run
+      init_composer_run
+      init_drush_run
+      init_coder_run
+      init_custom_commands_run
+      ;;
+  esac
 }

@@ -26,45 +26,22 @@ source "$DIR_SRC/init_druleton.sh"
 source "$DIR_SRC/init_drush.sh"
 
 
-# Init
+# Pre command.
 init_init
-
-# Information.
 init_info
-
-# Confirmation.
-init_confirm
+prompt_confirm_or_exit
 
 # START Script -----------------------------------------------------------------
 
 script_before_run
-
-# Partial init based on the given argument.
-case "$SCRIPT_ARGUMENT" in
-  config)
-    init_config_run
-    ;;
-
-  *)
-    init_druleton_run
-    init_config_run
-    init_composer_run
-    init_drush_run
-    init_coder_run
-    init_custom_commands_run
-    ;;
-esac
-
+init_run
 script_after_run
 
 # END Script -------------------------------------------------------------------
 
 
 # Finish message.
-markup_h1_divider
-markup_success " Finished"
-markup_h1_divider
-echo
+init_finished
 
 
 exit 0
