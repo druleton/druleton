@@ -2,6 +2,63 @@
 # Functionality to restore a local Drupal installation from backup files.
 ################################################################################
 
+##
+# Init the restore command.
+##
+function restore_init {
+  # Get the backup options.
+  OPTION_RESTORE_ONLY_DB=$( option_is_set "--only-db" )
+  OPTION_RESTORE_ONLY_FILES=$( option_is_set "--only-files" )
+  OPTION_RESTORE_ONLY_WEB=$( option_is_set "--only-web" )
+}
+
+##
+# Show information about the restore command.
+##
+function restore_info {
+  echo
+  markup_h1_divider
+  markup_h1 " ${LWHITE}Restore${LBLUE} website ${WHITE}$SITE_NAME${LBLUE} ($ENVIRONMENT)"
+  markup_h1_divider
+  markup_h1 " This will restore:"
+
+  # Restore parts.
+  if [ $OPTION_RESTORE_ONLY_DB -eq 1 ]; then
+    markup_h1_li "The database."
+  fi
+  if [ $OPTION_RESTORE_ONLY_FILES -eq 1 ]; then
+    markup_h1_li "The sites/default/files directory."
+  fi
+  if [ $OPTION_RESTORE_ONLY_WEB -eq 1 ]; then
+    markup_h1_li "The /web directory."
+  fi
+  if [ $OPTION_RESTORE_ONLY_DB -ne 1 ] && [ $OPTION_RESTORE_ONLY_FILES -ne 1 ] && [ $OPTION_RESTORE_ONLY_WEB -ne 1 ]; then
+    markup_h1_li "The database."
+    markup_h1_li "The /web directory."
+  fi
+
+  # Restore from given backup directory?
+  if [ ! -z "$SCRIPT_ARGUMENT" ]; then
+    echo
+    markup_h1 " The backup will be restored from backup/${LWHITE}$SCRIPT_ARGUMENT${LBLUE}"
+  fi
+
+  markup_h1_divider
+  echo
+}
+
+##
+# Restore command has finished.
+##
+function restore_finished {
+  markup_h1_divider
+  markup_success " Finished"
+  markup_h1_divider
+  markup_h1_li "Site Code : ${LWHITE}$DIR_WEB${RESTORE}"
+  markup_h1_li "Site URL  : ${LWHITE}$SITE_URL${RESTORE}"
+  markup_h1_divider
+  echo
+}
 
 ##
 # Function to run the restore process.
@@ -19,8 +76,6 @@ function restore_run {
   if [ "$?" -eq 1 ]; then
     exit
   fi
-
-
 }
 
 ##
