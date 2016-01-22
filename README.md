@@ -13,6 +13,10 @@ The name "druleton" is a combination of **dru**pal and ske**leton**.
 
 
 
+## Installation
+[See the quick-start guide][link-quick-start] how to install druleton.
+
+
 ## Commands
 Druleton provides commands to create a new site and support in development and
 deployment.
@@ -28,10 +32,13 @@ $ bin/install -h
 
 
 ### bin/init
-The `bin/init` command is used to setup the druleton environment. It will
-download tools like composer and add them to the `bin` directory. It will also
-scan the `config/bin` directory if there are custom, project specific, commands
-and add them to the `bin` directory.
+The `bin/init` command is used to setup the druleton environment.
+
+It will check the project file structure and create the missing parts.
+
+It will download tools like composer and add them to the `bin` directory. It
+will also scan the `config/bin` directory if there are custom, project specific,
+commands and add them to the `bin` directory.
 
 You can run this command anytime, it will update the tools and rescan the
 `config/bin` directory.
@@ -221,3 +228,4 @@ See [hooks documentation][link-hooks].
 [link-command-coder]: docs/command-coder.md
 [link-hooks]: docs/hooks.md
 [link-config-bin]: config-bin.sh
+[link-quick-start]: docs/quick-start.md

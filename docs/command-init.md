@@ -1,5 +1,8 @@
 # bin/init command
 The `bin/init` command is used to setup druleton and project environment.
+
+It will check the project file structure and create the missing parts.
+
 It will download tools like composer and add them to the `bin` directory. It
 will also scan the `config/bin` directory if there are custom, project specific,
 commands and add them to the `bin` directory.
@@ -7,7 +10,7 @@ commands and add them to the `bin` directory.
 You can run this command anytime, it will update the tools and rescan the
 `config/bin` directory.
 
-```bash
+```Shell
 $ bin/init
 ```
 
@@ -45,7 +48,7 @@ and install tools like drush.
 Composer will be downloaded or updated into the `bin` directory. It can be
 called using the following command:
 
-```bash
+```Shell
 $ bin/composer
 ```
 
@@ -86,7 +89,7 @@ See [custom commands documentation][link-config-bin]
 Command options documentation can be viewed in the command line interface by
 running the command with the `-h` or `--help` option.
 
-```bash
+```Shell
 $ bin/init -h
 ```
 

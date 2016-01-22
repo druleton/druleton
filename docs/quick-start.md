@@ -8,41 +8,89 @@ Make sure that your environment meets the
 [minimal requirements][link-requirements].
 
 
-## Configuration
-Create the `config/config.sh` file by creating a copy of the
-`config/config_example.sh` file.
+## Installation
 
-Open the file and fill in the blanks.
+### Preparation
 
-See [configuration documentation][link-config-config].
+#### Create a directory
+Create a directory as working space for your project.
 
+#### Init git for your project
+This is optional: if you use git, this is the time to initiate it in the newly
+created directory.
 
+```Shell
+$ cd /path/to/your/project/directory
+$ git init
+```
 
-## Create a database
-Create a MySQL or MariaDB database with the name and credentials as entered in
-the config file.
+#### Create a database
+Create a MySQL or MariaDB database. Grant a user access to it.
 
-
-
-## Create a vhost
+#### Create a vhost
 Add an Apache vHost (or use a subdirectory of an existing vhost) and point it
 to the `web` directory (who does not exist yet) within the root of this
-directory structure. Use the same vhost URL as defined in the config file.
+directory structure.
+
+
+### Add druleton to your project
+There are 2 options to add druleton:
+
+##### 1. As a GIT submodule
+Druleton [code is hosted on github][link-druleton-github]. If git is used to
+version your project code, you can add druleton as a submodule to that project.
+
+Add druleton submodule as bin directory in your project:
+
+```Shell
+$ git submodule add https://github.com/druleton/druleton bin
+$ git submodule init
+$ git submodule update
+```
+
+By default the master branch is used. This is always the latest most stable
+version.
+
+Optionaly you can switch to the develop branch:
+```Shell
+$ cd bin
+$ git checkout develop
+```
+
+Or specific tag:
+```Shell
+$ cd bin
+$ git checkout tags/0.4.0
+```
+
+> **Warning** : The directory structure of druleton drastically changed between
+> before version 0.4.0 and 0.4.0. Do not install druleton as a submodule with an
+> older version.
+
+##### 2. Download zip file
+[Download the latest druleton version][link-druleton-version-latest] from
+GitHub. Or [download a specific version][link-druleton-versions].
+
+Extract it within your project directory and rename the druleton directory to
+`bin`.
 
 
 
 ## Run the init command
-Druleton has some 3th party dependencies that are not included in the `bin`
-directory. They need to be installed by running the `bin/init` command:
+The `bin/init` command will setup the project file structure for you.
 
 ```bash
 $ bin/init
 ```
 
 This command will:
+- Setup the config & project directories within your project workspace.
+- It will ask you for the website details and database credentials and save them
+  to the `config/config.sh` file.
 - Download Composer and install it in the `bin` directory.
 - Use composer to download and install Drush (and its dependencies)locally in
   the `bin/vendor` directory.
+- Use composer to download and install Drupal coder (and its dependencies).
 - Create symlinks from within the `bin` directory to the optional custom
   commands as defined in the `config/bin` directory.
 
@@ -96,5 +144,9 @@ Now that you have a running installation you can start extending the project:
 [link-config-modules]: config-modules.md
 [link-project]: project.md
 [link-hooks]: hooks.md
+
+[link-druleton-github]: https://github.com/druleton/druleton/tree/master
+[link-druleton-versions]: https://github.com/druleton/druleton/releases
+[link-druleton-version-latest]: https://github.com/druleton/druleton/releases/latest
 
 [link-overview]: README.md
