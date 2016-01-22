@@ -7,9 +7,9 @@
 # All configuration is in the config directory
 ################################################################################
 
+
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
-
 
 # START Script -----------------------------------------------------------------
 
@@ -36,7 +36,5 @@ echo
 
 # END Script -------------------------------------------------------------------
 
-
-
-
+# End.
 exit 0

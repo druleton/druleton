@@ -14,7 +14,6 @@ source $(dirname $0)/src/bootstrap.sh
 # Include resources.
 source "$DIR_SRC/drupal_coder.sh"
 
-
 # START Script -----------------------------------------------------------------
 
 markup_debug
@@ -39,5 +38,5 @@ echo
 
 # END Script -------------------------------------------------------------------
 
-
+# End.
 exit 0

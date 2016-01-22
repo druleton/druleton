@@ -17,9 +17,6 @@
 # Bootstrap the script.
 source $(dirname $0)/src/bootstrap.sh
 
-# Show script information.
-
-
 # Includes.
 source "$DIR_SRC/script.sh"
 source "$DIR_SRC/restore.sh"

@@ -41,5 +41,5 @@ script_after_run
 # Finish message.
 reset_finished
 
-End.
+# End.
 exit 0
