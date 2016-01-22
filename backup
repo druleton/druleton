@@ -25,7 +25,7 @@ source "$DIR_SRC/script_after.sh"
 # Pre script.
 backup_init
 backup_info
-backup_confirm
+prompt_confirm_or_exit
 
 # START Script -----------------------------------------------------------------
 script_before_run

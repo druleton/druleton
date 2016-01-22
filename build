@@ -18,7 +18,7 @@ source "$DIR_SRC/drupal_make.sh"
 
 # Pre script.
 build_info
-build_confirm
+prompt_confirm_or_exit
 
 # START Script -----------------------------------------------------------------
 script_before_run

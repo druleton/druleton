@@ -40,25 +40,6 @@ function build_finished {
 }
 
 ##
-# Confirm the build command.
-##
-function build_confirm {
-  if [ $CONFIRMED -eq 1 ]; then
-    return
-  fi
-
-  prompt_confirm "Are you sure" "n"
-
-  if [ $REPLY -ne 1 ]; then
-    markup_warning "! Build aborted"
-    echo
-    exit 1
-  fi
-
-  echo
-}
-
-##
 # Check (and create if not) if the build directory exists.
 ##
 function build_check_directory {

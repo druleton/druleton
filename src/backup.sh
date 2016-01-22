@@ -41,25 +41,6 @@ function backup_info {
 }
 
 ##
-# Confirm the backup command.
-##
-function backup_confirm {
-  if [ $CONFIRMED -eq 1 ]; then
-    return
-  fi
-
-  prompt_confirm "Are you sure" "n"
-
-  if [ $REPLY -ne 1 ]; then
-    markup_warning "! Backup aborted"
-    echo
-    exit 1
-  fi
-
-  echo
-}
-
-##
 # Function to run the actual backup (if not disabled).
 #
 # This function will trigger 2 "hooks" in the config/<script-name>/ directory:
