@@ -4,6 +4,13 @@
 ## [Unreleased][1.x.x]
 ### Changed
 - #27 : Moved repository to the druleton organisation and renamed the project.
+- #26 : Removed all project specific code from druleton and improve `bin/init`:
+  - Move the bin directory to the root of the project so it can be included as a
+    git submodule in druleton powered projects.
+  - Extended the `bin/init` script so it creates the directory structure for a
+    new project.
+- #25 : Extended the `bin/init` script so it asks for the configuration variables
+  and writes them to the `config/config.sh` file.
 
 
 
