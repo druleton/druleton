@@ -1,6 +1,12 @@
 # Changelog
 
 
+## [1.x.x]
+### Fixed
+- #42 : Fixed error while saving a config variable with an /.
+
+
+
 ## [0.4.0] - 2016-01-22
 ### Changed
 - #27 : Moved repository to the druleton organisation and renamed the project.
