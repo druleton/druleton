@@ -43,13 +43,11 @@ version your project code, you can add druleton as a submodule to that project.
 Add druleton submodule as bin directory in your project:
 
 ```Shell
-$ git submodule add https://github.com/druleton/druleton bin
-$ git submodule init
-$ git submodule update
+$ git submodule add -b master https://github.com/druleton/druleton bin
+$ git commit -m "Added druleton as submodule"
 ```
 
-By default the master branch is used. This is always the latest most stable
-version.
+By default the master branch is used. This is always the latest version.
 
 Optionaly you can switch to the develop branch:
 ```Shell
@@ -64,8 +62,8 @@ $ git checkout tags/0.4.0
 ```
 
 > **Warning** : The directory structure of druleton drastically changed between
-> before version 0.4.0 and 0.4.0. Do not install druleton as a submodule with an
-> older version.
+> version 0.3.0 and 0.4.0. Do not install druleton as a submodule with an
+> older version then 0.4.0.
 
 ##### 2. Download zip file
 [Download the latest druleton version][link-druleton-version-latest] from

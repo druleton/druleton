@@ -20,7 +20,6 @@ project.
 Run the git submodule commands to download druleton:
 
 ```bash
-$ git submodule init
 $ git submodule update
 ```
 
