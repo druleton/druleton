@@ -227,5 +227,5 @@ See [hooks documentation][link-hooks].
 [link-command-drush]: docs/command-drush.md
 [link-command-coder]: docs/command-coder.md
 [link-hooks]: docs/hooks.md
-[link-config-bin]: config-bin.sh
+[link-config-bin]: docs/config-bin.sh
 [link-quick-start]: docs/quick-start.md
