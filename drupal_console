@@ -1,0 +1,37 @@
+#!/bin/bash
+
+################################################################################
+# Script that acts as a wrapper around the drupal console cli tool.
+#
+# The wrapper will always execute drupal console within the web directory.
+#
+# ! Do not change this file !
+# All configuration is in the config directory
+################################################################################
+
+
+# Bootstrap the script.
+source $(dirname $0)/src/bootstrap.sh
+
+# START Script -----------------------------------------------------------------
+
+markup_debug
+markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
+markup_debug
+
+# Create the global $DRUPAL_CONSOLE_OPTIONS array.
+drupal_console_filter_options
+
+drupal_console "${DRUPAL_CONSOLE_OPTIONS[@]}"
+
+markup_debug
+markup_debug "Drupal Console binary used : $DRUPAL_CONSOLE_VERSION"
+markup_debug "Drupal Console params : $drupal_console_params"
+
+markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
+echo
+
+# END Script -------------------------------------------------------------------
+
+# End.
+exit 0
