@@ -1,5 +1,5 @@
 ################################################################################
-# Hook information for the bin/drupal_console script.
+# Hook information for the bin/drupal script.
 ################################################################################
 
 # Common hook information.
