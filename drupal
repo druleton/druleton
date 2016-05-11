@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Script that acts as a wrapper around the drupal console cli tool.
+# Script that acts as a wrapper around the Drupal Console tool.
 #
 # The wrapper will always execute drupal console within the web directory.
 #
