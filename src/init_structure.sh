@@ -88,8 +88,8 @@ function init_structure_project {
 # Copy the example scripts directory to the root of the project.
 ##
 function init_structure_scripts {
-  if [ ! -d "${DIR_PROJECT}" ]; then
-    cp -R "${DIR_BIN}/templates/scripts" "${DIR_PROJECT}"
+  if [ ! -d "${DIR_SCRIPTS}" ]; then
+    cp -R "${DIR_BIN}/templates/scripts" "${DIR_SCRIPTS}"
     message_success "Copied the scripts directory to the root of the project."
   else
     message_warning "There is already a scripts directory."
