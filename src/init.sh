@@ -11,6 +11,7 @@ function init_init {
   INIT_OPTION_SKIP_DRULETON=1
   INIT_OPTION_SKIP_CONFIG=1
   INIT_OPTION_SKIP_COMPOSER=1
+  INIT_OPTION_SKIP_DRUPAL_CONSOLE=1
   INIT_OPTION_SKIP_DRUSH=1
   INIT_OPTION_SKIP_CODER=1
   INIT_OPTION_SKIP_CUSTOM=1
@@ -33,6 +34,10 @@ function init_init {
       INIT_OPTION_SKIP_COMPOSER=0
       ;;
 
+    drupal-console)
+      INIT_OPTION_SKIP_DRUPAL_CONSOLE=0
+      ;;
+
     drush)
       INIT_OPTION_SKIP_DRUSH=0
       ;;
@@ -51,6 +56,7 @@ function init_init {
       INIT_OPTION_SKIP_DRULETON=$(option_is_set "--skip-druleton")
       INIT_OPTION_SKIP_CONFIG=$(option_is_set "--skip-config")
       INIT_OPTION_SKIP_COMPOSER=$(option_is_set "--skip-composer")
+      INIT_OPTION_SKIP_DRUPAL_CONSOLE=$(option_is_set "--skip-drupal-console")
       INIT_OPTION_SKIP_DRUSH=$(option_is_set "--skip-drush")
       INIT_OPTION_SKIP_CODER=$(option_is_set "--skip-coder")
       INIT_OPTION_SKIP_CUSTOM=$(option_is_set "--skip-custom")
@@ -84,6 +90,9 @@ function init_info {
   fi
   if [ $INIT_OPTION_SKIP_COMPOSER -ne 1 ]; then
     markup_h1_li "Composer will be installed or updated in the bin/ directory."
+  fi
+  if [ $INIT_OPTION_SKIP_DRUPAL_CONSOLE -ne 1 ]; then
+    markup_h1_li "Drupal Console will be installed (or global installed drupal console will be used)."
   fi
   if [ $INIT_OPTION_SKIP_DRUSH -ne 1 ]; then
     markup_h1_li "Drush will be installed (or global installed drush will be used)."

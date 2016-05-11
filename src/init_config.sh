@@ -104,6 +104,7 @@ function init_config_load_current {
   hook_invoke "config_load_current"
 
   INIT_CONFIG_COMPOSER_USE_GLOBAL="${COMPOSER_USE_GLOBAL}"
+  INIT_CONFIG_DRUPAL_CONSOLE_VERSION="${DRUPAL_CONSOLE_VERSION}"
   INIT_CONFIG_DRUSH_VERSION="${DRUSH_VERSION}"
   INIT_CONFIG_CODER_DISABLED="${CODER_DISABLED}"
 }
@@ -150,6 +151,9 @@ function init_config_collect {
   prompt_yn "Use global composer instead of a local copy" "${INIT_CONFIG_COMPOSER_USE_GLOBAL}"
   INIT_CONFIG_COMPOSER_USE_GLOBAL=$REPLY
 
+  prompt "Drupal Console version to use [phar/global/branch name]" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION:-phar}"
+  INIT_CONFIG_DRUPAL_CONSOLE_VERSION="${REPLY}"
+
   prompt "Drush version to use [phar/global/branch name]" "${INIT_CONFIG_DRUSH_VERSION:-phar}"
   INIT_CONFIG_DRUSH_VERSION="${REPLY}"
 
@@ -182,6 +186,7 @@ function init_config_confirm {
 
   markup_h2 "Druleton options"
   markup_li_value "Use global composer" "${INIT_CONFIG_COMPOSER_USE_GLOBAL:--}"
+  markup_li_value "Drupal Console version to use" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION:--}"
   markup_li_value "Drush version to use" "${INIT_CONFIG_DRUSH_VERSION:--}"
   markup_li_value "Disable coder installation" "${INIT_CONFIG_CODER_DISABLED:--}"
 
@@ -214,6 +219,7 @@ function init_config_save {
   hook_invoke "config_save"
 
   init_config_save_variable "COMPOSER_USE_GLOBAL" "${INIT_CONFIG_COMPOSER_USE_GLOBAL}"
+  init_config_save_variable "DRUPAL_CONSOLE_VERSION" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION}"
   init_config_save_variable "DRUSH_VERSION" "${INIT_CONFIG_DRUSH_VERSION}"
   init_config_save_variable "CODER_DISABLED" "${INIT_CONFIG_CODER_DISABLED}"
 
