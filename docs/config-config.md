@@ -42,6 +42,7 @@ parameters in the `config.sh` file.
 > to the database server.
 
 - **DB_HOST** : The database hostname or IP address (`$DB_HOST`).
+- **DB_PORT** : The database port number (`$DB_PORT`).
 - **DB_USER** : The database username (`$DB_USER`).
 - **DB_PASS** : The database password (`$DB_PASS`).
 - **DB_NAME** : The database name (`$DB_NAME`).
@@ -110,6 +111,7 @@ DB_USER="localuser"
 DB_PASS="localpass"
 DB_NAME="druleton"
 DB_HOST="localhost"
+DB_PORT="3306"
 
 # Administrator account (user 1).
 ACCOUNT_NAME="admin"
