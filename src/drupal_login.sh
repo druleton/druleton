@@ -24,7 +24,7 @@ function drupal_login_run {
   # Open on-time-login in browser.
   markup_h1 "Open browser and login"
   if [ `drupal_is_installed` -eq 1 ]; then
-    drupal_drush uli -l "$SITE_URL" /
+    drupal_console user:login:url 1 --uri="$SITE_URL"
   else
     message_error "No working Drupal installation to login to."
   fi
