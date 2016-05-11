@@ -34,7 +34,7 @@ function drupal_console_run {
     cmd_drupal_console="$DIR_BIN/packagist/vendor/bin/drupal"
   fi
 
-  $cmd_drush "$@"
+  $cmd_drupal_console "$@"
 }
 
 ##

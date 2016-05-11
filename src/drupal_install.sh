@@ -32,10 +32,20 @@ function drupal_install_run {
   markup_debug "  - DB user   : $DB_USER"
   markup_debug "  - DB pass   : $DB_PASS"
 
-  drupal_console site:install $SITE_PROFILE --langcode=en --db-type=mysql --db-host=$DB_PORT
-  --db-name=$DB_NAME --db-user=$DB_USER --db-pass=$DB_PASS --db-port=$DB_PORT
-  --site-name="$SITE_NAME" --site-mail=$ACCOUNT_MAIL
-  --account-name=$ACCOUNT_NAME --account-mail=$ACCOUNT_MAIL --account-pass=$ACCOUNT_PASS -n
+  drupal_console site:install -n \
+    $SITE_PROFILE \
+    --langcode=en \
+    --db-type=mysql \
+    --db-host=$DB_HOST \
+    --db-name=$DB_NAME \
+    --db-user=$DB_USER \
+    --db-pass=$DB_PASS \
+    --db-port=$DB_PORT \
+    --site-name="$SITE_NAME" \
+    --site-mail=$ACCOUNT_MAIL \
+    --account-name=$ACCOUNT_NAME \
+    --account-mail=$ACCOUNT_MAIL \
+    --account-pass=$ACCOUNT_PASS
   echo
 
 

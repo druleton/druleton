@@ -37,6 +37,16 @@ function composer_skeleton_run {
 }
 
 ##
+# Run a composer command within the Drupal web directory context.
+#
+# Use this to perform composer commands on the set of packages required and
+# installed for the Drupal website located in the web directory.
+##
+function composer_drupal_run {
+  composer_run "$@" --working-dir="$DIR_ROOT"
+}
+
+##
 # Make sure that a COMPOSER_USE_GLOBAL variable is set.
 ##
 function composer_variable_use_global {
