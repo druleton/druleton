@@ -21,7 +21,7 @@ DB_USER=""
 DB_PASS=""
 DB_NAME="my_site_db"
 DB_HOST="localhost"
-DB_PORT="3306"
+DB_PORT=3306
 
 # Administrator account (user 1).
 ACCOUNT_NAME="admin"
