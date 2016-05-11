@@ -21,7 +21,7 @@
 # The hooks will be called without and with environment suffix.
 ##
 function drupal_modules_enable_run {
-  # Run any script before we run the make files.
+  # Run any script before we run the composer files.
   hook_invoke drupal_modules_enable_before
 
   # 1. Enable modules.
@@ -36,12 +36,12 @@ function drupal_modules_enable_run {
   # 4. Enable modules specific for the script name and environment.
   drupal_modules_enable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_enable_$ENVIRONMENT.sh"
 
-  # Run any script after we did run the make files.
+  # Run any script after we did run the composer files.
   hook_invoke drupal_modules_enable_after
 }
 
 ##
-# Run the make files.
+# Run the composer files.
 #
 # @param The file name of the script that contains the config array.
 ##

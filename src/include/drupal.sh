@@ -7,7 +7,7 @@
 # Run drush from within the Drupal root ($DIR_WEB folder).
 #
 # Use this if you need to run the drush command from within the actual web root.
-# Do not use it when installing the make files.
+# Do not use it when installing the composer files.
 #
 #
 ##

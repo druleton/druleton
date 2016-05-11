@@ -121,7 +121,7 @@ From now on [all commands][link-commands] can be used.
 ## Next steps
 Now that you have a running installation you can start extending the project:
 
-- [Add extra required modules by adding make files][link-config-make].
+- [Add extra required modules by adding composer files][link-config-composer].
 - [Enable extra modules after the installation process][link-config-modules].
 - [Add custom install profiles, modules, themes and libraries][link-project].
 - [Extend the commands by implementing their hooks][link-hooks].
@@ -138,7 +138,7 @@ Now that you have a running installation you can start extending the project:
 [link-documentation]: README.md
 [link-commands]: README.md#commands
 [link-config-bin]: config-bin.md
-[link-config-make]: config-make.sh
+[link-config-composer]: config-composer.sh
 [link-config-modules]: config-modules.md
 [link-project]: project.md
 [link-hooks]: hooks.md

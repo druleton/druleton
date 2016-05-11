@@ -16,7 +16,7 @@ source "$DIR_SRC/script.sh"
 source "$DIR_SRC/backup.sh"
 source "$DIR_SRC/install.sh"
 source "$DIR_SRC/cleanup.sh"
-source "$DIR_SRC/drupal_make.sh"
+source "$DIR_SRC/drupal_composer.sh"
 source "$DIR_SRC/drupal_install.sh"
 source "$DIR_SRC/drupal_modules_disable.sh"
 source "$DIR_SRC/drupal_modules_enable.sh"
@@ -30,7 +30,7 @@ prompt_confirm_or_exit "Are you sure" "Installation aborted"
 script_before_run
 backup_run
 cleanup_run
-drupal_make_run
+drupal_composer_run
 drupal_install_run
 drupal_modules_disable_run
 drupal_modules_enable_run

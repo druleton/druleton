@@ -1,5 +1,5 @@
 The upgrade script will upgrade an existing website in the web directory by
-downloading the latest Drupal core, contrib modules & themes using the make
+downloading the latest Drupal core, contrib modules & themes using the composer
 files in the configuration directory and run the Drupal upgrade script.
 
 The sites/default directory will be kept, all other files in the web directory

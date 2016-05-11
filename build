@@ -14,7 +14,7 @@ source $(dirname $0)/src/bootstrap.sh
 # Includes.
 source "$DIR_SRC/script.sh"
 source "$DIR_SRC/build.sh"
-source "$DIR_SRC/drupal_make.sh"
+source "$DIR_SRC/drupal_composer.sh"
 
 # Pre script.
 build_info
@@ -23,7 +23,7 @@ prompt_confirm_or_exit
 # START Script -----------------------------------------------------------------
 script_before_run
 build_check_directory
-build_drupal_make
+build_drupal_composer
 build_package_run
 script_after_run
 # END Script -------------------------------------------------------------------

@@ -1,8 +1,8 @@
 
-################################################################################
-# Use this file to add custom script steps that should run after the make files
-# have run for the build script.
-################################################################################
+##############################################################################
+# Use this file to add custom script steps that should run after the composer
+# files have run for the build script.
+##############################################################################
 
 
 # Add the custom code from the project folder.

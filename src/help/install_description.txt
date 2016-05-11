@@ -1,5 +1,5 @@
 The install script will install a new website in the web directory by
-downloading Drupal core, contrib modules & themes using the make files in the
+downloading Drupal core, contrib modules & themes using the composer files in the
 configuration directory.
 
   If there is a working installation:

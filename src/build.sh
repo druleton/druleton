@@ -50,13 +50,13 @@ function build_check_directory {
 }
 
 ##
-# Build the drupal package using the make files.
+# Build the drupal package using the composer files.
 ##
-function build_drupal_make {
-  # Change the $DIR_WEB to the build folder while we run the make files.
+function build_drupal_composer {
+  # Change the $DIR_WEB to the build folder while we run the composer files.
   DIR_WEB_NORMAL="$DIR_WEB"
   DIR_WEB="$DIR_BUILD/web"
-  drupal_make_run
+  drupal_composer_run
   DIR_WEB="$DIR_WEB_NORMAL"
 }
 

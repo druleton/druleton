@@ -1,6 +1,6 @@
 # bin/install command
 The `bin/install` command will download Core & Contributed (modules, themes &
-libraries) as defined in the [make file(s)][link-config-make], and will install
+libraries) as defined in the [composer file(s)][link-config-composer], and will install
 the website with the settings in the [`config/config.sh`][link-config-config]
 file.
 
@@ -26,13 +26,13 @@ stored in the `backup` directory.
 #### 2. Cleanup
 The directories, as defined in `config/install/cleanup.sh` will be deleted.
 
-#### 3. Make
+#### 3. Composer
 Drupal core, contributed modules, themes and libraries will be downloaded and
 unpacked in the `web` directory.
 
 The core version and the modules, themes and libraries as well as optional
-patches that needs to be applied to them, are defined in the make files.
-See [make configuration documentation][link-config-make].
+patches that needs to be applied to them, are defined in the composer files.
+See [composer configuration documentation][link-config-composer].
 
 #### 4. Drupal installation
 Drupal will be installed using the installation profile and database credentials
@@ -126,12 +126,12 @@ This hook is included and run before the cleanup of the directories is run.
 #### config/install/cleanup_after(_\<env\>).sh
 This hook is included and run after the cleanup of the directories is run.
 
-#### config/install/drupal_make_before(_\<env\>).sh
-This hook is included and run before the make files are processed, downloaded
+#### config/install/drupal_composer_before(_\<env\>).sh
+This hook is included and run before the composer files are processed, downloaded
 and unpacked.
 
-#### config/install/drupal_make_after(_\<env\>).sh
-This hook is included and run after the make files are processed, downloaded
+#### config/install/drupal_composer_after(_\<env\>).sh
+This hook is included and run after the composer files are processed, downloaded
 and unpacked.
 
 #### config/install/drupal_install_before(_\<env\>).sh
@@ -182,7 +182,7 @@ This hook is included and run when the script is finished.
 
 
 [link-config-config]: config-config.md
-[link-config-make]: config-make.md
+[link-config-composer]: config-composer.md
 [link-hooks]: hooks.md
 
 [link-overview]: README.md
