@@ -19,7 +19,7 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-# Create the global $CODER_OPTIONS array.
+# Create the global $DRUSH_OPTIONS array.
 drupal_drush_filter_options
 
 drupal_drush "${DRUSH_OPTIONS[@]}"
