@@ -13,11 +13,11 @@ The command will perform following script steps:
 
 #### 1. Composer
 Drupal core, contributed modules, themes and libraries will be downloaded and
-unpacked in the `build/web` directory as defined in the
+unpacked in the `build/current` directory as defined in the
 [composer file(s)][link-config-composer].
 
 #### 2. Create package
-The build in the `build/web` directory will be packed in an archive file
+The build in the `build/current` directory will be packed in an archive file
 (tar.gz).
 
 If no package name is given, an unique name will be created using:

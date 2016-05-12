@@ -1,5 +1,5 @@
-# Composer file(s)
-Druleton uses composer files to download and extract the Drupal
+# Composer file
+Druleton uses a composer file to download and extract the Drupal
 Core, contributed modules and themes as well as 3th party libraries.
 
 [Read more about composer files][link-composer].
@@ -19,77 +19,77 @@ Using composer files gives us the advantage that we can:
   theme.
 
 
-
-## The `config/composer` directory
-This directory contains multiple `composer` files. By bundeling modules that
-provide together required functionality makes it easier to reuse these files in
-multiple projects.
-
-Examples:
-- A composer file containing all modules and 3th party libraries to add a WYSIWYG
-  editor to the platform (ckeditor module, ckeditor javascript library).
-- A composer file containing all modules and 3th party libraries to support media
-  management (media, media_youtube, the dependencies for the media modules,
-  the plupload javascript library, integration with the WYSIWYG editor, ...).
-
-
 #### Composer file structure
-Each file should start by defining the Drupal version to download for followed
-with a short description what kind of functionality it will add.
+A starting point for the general `composer.json` file can be found in the templates
+folder of Druleton.
+This file is copied automatically to the root of your project when running the
+command `bin/init` for the first time.
 
-List then for each module and or theme the version you want followed with the
-directory (within the `sites/all` directory) where the module or theme should be
-saved.
+The `composer.json` file must contain all requirements of the project as well as
+eventual patches to be applied to those requirements.
 
-The path will be automatically prefixed with the type of download:
-- For a module with subdir = contrib set : the module will be extracted to
-  `web/sites/all/modules/contrib/MODULE_NAME`.
-- For a theme with subdir = contrib set : the theme will be extracted to
-  `web/sites/all/theme/contrib/THEME_NAME`.
+Requirements in this context means either Drupal modules, Drupal themes, Drupal
+profiles, libraries or other 3rd party code.
+
+The installer-paths section (to be found in the extra section of the
+composer.json file) defines where each type of requirement will be extracted to:
+- Drupal Core (which is a requirement too) will be extraced to `web/core`.
+- Drupal Contributed modules will be extracted to `web/modules/contrib/{$name}`.
+- Drupal Contributed Profiles will be extracted to `web/profiles/contrib/{$name}`.
+- Drupal Contributed Themes will be extracted to `web/profiles/contrib/{$name}`.
 
 [See the composer file syntax for further info][link-composer].
 
-Example of a composer file called `config/composer/administration/composer.json`.
+Example of a composer file called `templates/composer.json`.
 
-```php
-core = 7.x
-api = 2
-
-; Modules to make the life of a Drupal admin more pleasant.
-
-projects[admin_menu][subdir] = "contrib"
-projects[admin_menu][version] = "3.0-rc5"
-
-projects[admin_views][subdir] = "contrib"
-projects[admin_views][version] = "1.5"
-...
-
-...
-; Themes to upgrade the admin backend.
-
-projects[adminimal_theme][subdir] = "contrib"
-projects[adminimal_theme][version] = "1.22"
-projects[adminimal_theme][type] = "theme"
-```
-
-
-#### _core/composer.json
-There is one file that is required for the platform and that is the
-`config/composer/_core/composer.json` file.
-
-This one will be used to determine what Drupal core should be downloaded and
-what (optional) patches should be applied to it.
-
-> **Note** : do not add any modules to this composer file, use the make bundle files
-  for it.
-
-Example file:
-
-```php
-core = 7.x
-api = 2
-
-projects[drupal][version] = "7.39"
+```json
+{
+  "name": "Druleton",
+  "description": "Druleton project template with composer",
+  "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.drupal-composer.org"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.0.20",
+    "drupal-composer/drupal-scaffold": "^1.3.1",
+    "cweagans/composer-patches": "~1.0",
+    "drupal/core": "~8.1"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ]
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::buildScaffold",
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::buildScaffold",
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ]
+  },
+  "extra": {
+    "installer-paths": {
+      "web/core": ["type:drupal-core"],
+      "web/modules/contrib/{$name}": ["type:drupal-module"],
+      "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "web/themes/contrib/{$name}": ["type:drupal-theme"]
+    },
+    "enable-patching": true
+  }
+}
 ```
 
 
@@ -100,32 +100,6 @@ To upgrade a working platform:
   want to upgrade or define what patches that should be applied to them.
 - Run the `bin/upgrade` command to download the versions as defined and apply
   the patches.
-
-
-
-## The make configuration file(s)
-The `config` directory contains one `drupal_composer.sh` config array and optionally
-environment specific config arrays (eg. `drupal_composer_dev.sh`,
-`drupal_composer_prod.sh`).
-
-These files list, in an array, what composer file bundles from the `config/composer`
-directory should be used during the make step in the install and upgrade
-commands. Do not include the `config/composer/_core/composer.json` file in these arrays as
-that composer file will always be run first.
-
-The `drupal_composer.sh` file will always be used to download and unpack the
-required core, modules, themes and libraries. The environment specific will only
-be used if they match the environment set when calling the commands who have
-make steps.
-
-Example:
-
-```
-MAKE_FILES=(
-  "minimal/composer.json"
-  "administration/composer.json"
-)
-```
 
 
 
