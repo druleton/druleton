@@ -67,7 +67,7 @@ function drupal_modules_enable_run_file {
 
   # Enable all modules in configuration.
   for module_enable in ${MODULES_ENABLE[@]}; do
-    drupal_drush -y en ${module_enable}
+    drupal_console module:install ${module_enable}
   done
   echo
 }

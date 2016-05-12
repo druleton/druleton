@@ -6,7 +6,7 @@
 ##
 # Run drupal console from within the Drupal root ($DIR_WEB folder).
 #
-# Use this if you need to run the drush command from within the actual web root.
+# Use this if you need to run the Drupal Console command from within the actual web root.
 # Do not use it when installing the composer files.
 #
 #

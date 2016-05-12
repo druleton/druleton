@@ -145,7 +145,7 @@ function backup_run_database {
   local backup_destination="$1"
 
   cd "$backup_destination"
-  drupal_drush sql-dump > "$backup_destination/db.sql"
+  drupal_console database:dump --file="$backup_destination/db.sql"
   if [[ $? -eq 0 ]]; then
     tar -czf "db.tar.gz" "db.sql"
     rm "$backup_destination/db.sql"

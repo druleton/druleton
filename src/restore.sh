@@ -252,12 +252,12 @@ function restore_run_database {
   fi
 
   # Delete the database content.
-  drupal_drush -y sql-drop
+  drupal_console database:drop
 
   # Restore the database from the backup.
   cd "$backup_directory"
   tar -xzf "db.tar.gz"
-  drupal_drush sql-cli < "db.sql"
+  drupal_console database:restore --file="db.sql"
 
   # Return the result.
   if [ $? -ne 0 ]; then

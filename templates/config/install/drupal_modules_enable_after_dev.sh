@@ -14,7 +14,7 @@ chmod -R u+w "$DIR_WEB/sites/default"
 echo
 
 
-# Enable the theme debugging.
-markup_h1 "Enable theme debugging"
-drupal_drush vset theme_debug 1
+# Enable development mode.
+markup_h1 "Enable development mode"
+drupal_console site:mode dev
 echo

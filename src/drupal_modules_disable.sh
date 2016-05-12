@@ -67,7 +67,7 @@ function drupal_modules_disable_run_file {
 
   # Disable all modules in configuration.
   for module_disable in ${MODULES_DISABLE[@]}; do
-    drupal_drush -y dis ${module_disable}
+    drupal_console module:uninstall ${module_disable}
   done
   echo
 }
