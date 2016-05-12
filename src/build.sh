@@ -14,7 +14,7 @@ function build_info {
   markup_h1_li "Custom profiles, modules & themes will be copied into the site structure."
   markup_h1_li "The site will not be installed."
 
-  if [ -d "$DIR_BUILD/web" ]; then
+  if [ -d "$DIR_BUILD/current" ]; then
     markup_h1_li "The previous build will be deleted and overwritten."
   fi
 
@@ -30,7 +30,7 @@ function build_finished {
   markup_success " Finished"
   markup_h1_divider
   if [ -z "$BUILD_PACKAGE_NAME" ]; then
-    markup_h1_li "Build directory : ${LWHITE}${DIR_BUILD}/web${RESTORE}"
+    markup_h1_li "Build directory : ${LWHITE}${DIR_BUILD}/current${RESTORE}"
   else
     markup_h1_li "Build file : ${LWHITE}${BUILD_PACKAGE_NAME}${RESTORE}"
     markup_h1_li "Directory  : ${LWHITE}${DIR_BUILD}${RESTORE}"
@@ -53,11 +53,79 @@ function build_check_directory {
 # Build the drupal package using the composer files.
 ##
 function build_drupal_composer {
-  # Change the $DIR_WEB to the build folder while we run the composer files.
+  # Create current build folder in build directory.
+  mkdir -p "$DIR_BUILD/current"
+
+  # Copy composer files to build directory.
+  build_drupal_composer_copy_composer_files
+
+  # Change the $DIR_ROOT to the build folder while we run the composer file.
+  DIR_ROOT_NORMAL="$DIR_ROOT"
   DIR_WEB_NORMAL="$DIR_WEB"
-  DIR_WEB="$DIR_BUILD/web"
+  DIR_ROOT="$DIR_BUILD/current"
+  DIR_WEB="$DIR_BUILD/current/web"
+
   drupal_composer_run
+
+  # Reset $DIR_ROOT and $DIR_WEB.
+  DIR_ROOT="$DIR_ROOT_NORMAL"
   DIR_WEB="$DIR_WEB_NORMAL"
+
+  # Cleanup composer files in current build folder.
+  build_drupal_composer_cleanup_composer_files
+}
+
+##
+# Copy the composer files from the DIR_ROOT to the DIR_BUILD in order to
+# be able to run them there.
+##
+function build_drupal_composer_copy_composer_files {
+  COMPOSER_FILE="$DIR_ROOT/composer.json"
+  COMPOSER_LOCK_FILE="$DIR_ROOT/composer.lock"
+  COMPOSER_SCRIPTS_FOLDER="$DIR_ROOT/scripts"
+
+  if [ -f "$COMPOSER_FILE" ]; then
+    message_success "Composer: composer.json file copied to current build folder"
+    cp -f $COMPOSER_FILE "$DIR_BUILD/current/composer.json"
+  else
+    message_error "Error while copying the composer.json file"
+    return
+  fi
+
+  if [ -f "$COMPOSER_LOCK_FILE" ]; then
+    message_success "Composer: composer.lock file copied to current build folder"
+    cp -f $COMPOSER_LOCK_FILE "$DIR_BUILD/current/composer.lock"
+  fi
+
+  if [ -d "$COMPOSER_SCRIPTS_FOLDER" ]; then
+    message_success "Composer: scripts folder copied to current build folder"
+    cp -rf $COMPOSER_SCRIPTS_FOLDER "$DIR_BUILD/current/scripts"
+  fi
+}
+
+##
+# Cleanup the composer files from the current build folder as we don't
+# need them for packaging.
+##
+function build_drupal_composer_cleanup_composer_files {
+  COMPOSER_FILE="$DIR_BUILD/current/composer.json"
+  COMPOSER_LOCK_FILE="$DIR_BUILD/current/composer.lock"
+  COMPOSER_SCRIPTS_FOLDER="$DIR_BUILD/current/scripts"
+
+  if [ -f "$COMPOSER_FILE" ]; then
+    message_success "Composer: composer.json removed from current build folder"
+    rm -f $COMPOSER_FILE
+  fi
+
+  if [ -f "$COMPOSER_LOCK_FILE" ]; then
+    message_success "Composer: composer.lock file removed from current build folder"
+    rm -f $COMPOSER_LOCK_FILE
+  fi
+
+  if [ -d "$COMPOSER_SCRIPTS_FOLDER" ]; then
+    message_success "Composer: scripts folder removed from current build folder"
+    rm -rf $COMPOSER_SCRIPTS_FOLDER
+  fi
 }
 
 ##
@@ -94,7 +162,7 @@ function build_package_run {
   fi
 
   # Create the package.
-  tar -czf "$BUILD_PACKAGE_NAME" "web"
+  tar -czf "$BUILD_PACKAGE_NAME" -C "current" .
   if [ $? -ne 1 ]; then
     message_success "Package created."
     markup_debug "Package : $BUILD_PACKAGE_NAME"
@@ -102,8 +170,8 @@ function build_package_run {
     message_error "Error while creating package"
   fi
 
-  # Remove the web directory as this is now part of the package.
-  rm -R web
+  # Remove the current build directory as this is now part of the package.
+  rm -R current
   if [ $? -ne 1 ]; then
     message_success "Cleaned up the build directory."
   else
