@@ -65,7 +65,7 @@ function build_drupal_composer {
   DIR_ROOT="$DIR_BUILD/current"
   DIR_WEB="$DIR_BUILD/current/web"
 
-  drupal_composer_run
+  drupal_composer_install_run
 
   # Reset $DIR_ROOT and $DIR_WEB.
   DIR_ROOT="$DIR_ROOT_NORMAL"

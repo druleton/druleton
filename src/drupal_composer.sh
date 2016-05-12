@@ -19,7 +19,7 @@
 #
 # The hooks will be called without and with environment suffix.
 ##
-function drupal_composer_run {
+function drupal_composer_install_run {
   # Run any script before we run the composer files.
   hook_invoke drupal_composer_before
 
@@ -31,57 +31,49 @@ function drupal_composer_run {
   fi
 
   # Compose Drupal core.
-  markup_h1 "Download Drupal core"
-  markup_h2 "composer.json"
+  markup_h1 "Download Drupal core & other requirements"
+  markup_h2 "Composer Install"
   composer_drupal_run install
-  echo
-
-#  # 1. Default composer files.
-#  drupal_composer_run_file "$DIR_CONFIG/drupal_composer.sh"
-#
-#  # 2. Composer files specific for the environment.
-#  drupal_composer_run_file "$DIR_CONFIG/drupal_composer_$ENVIRONMENT.sh"
-#
-#  # 3. Composer files specific for the script name.
-#  drupal_composer_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_composer.sh"
-#
-#  # 4. Composer files specific for the script name and environment.
-#  drupal_composer_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_composer_$ENVIRONMENT.sh"
 
 
   # Run any script after we did run the composer files.
   hook_invoke drupal_composer_after
 }
 
+
 ##
-# Run the composer files.
+# Function to update core & contrib modules and themes based on the composer
+# files.
 #
-# @param The file name of the script that contains the config array.
+# This script will try to load the composer config from 4 files:
+#   1. config/drupal_composer.sh
+#   2. config/drupal_composer_<environment>.sh
+#   3. config/<script-name>/drupal_composer.sh
+#   4. config/<script-name>/drupal_composer_<environment>.sh
+#
+# This script will trigger 2 "hooks" in the config/<script-name>/ directory:
+# - drupal_composer_before : Scripts that should run before the user is logged in.
+# - drupal_composer_after  : Scripts that should run after the user id logged in.
+#
+# The hooks will be called without and with environment suffix.
 ##
-#function drupal_composer_run_file {
-#  # Reset the variable.
-#  local COMPOSER_FILES=()
-#  local drupal_composer_file="$1"
-#
-#  # Check if file exists.
-#  if [ ! -f "$drupal_composer_file" ]; then
-#    markup_debug "Composer file does not exists : $drupal_composer_file"
-#    return
-#  fi
-#
-#  markup_h1 "Composer configuration $drupal_composer_file"
-#  source "$drupal_composer_file"
-#
-#  # Check if there are composer files in the config.
-#  if [ ${#COMPOSER_FILES[@]} -eq 0 ]; then
-#    markup "No composer files in configuration."
-#    return
-#  fi
-#
-#  # Run all composer files in the configuration.
-#  for composer_file in ${COMPOSER_FILES[@]}; do
-#    markup_h2 "${composer_file}"
-#    composer_drupal_run "$DIR_CONFIG/composer/${composer_file}"
-#  done
-#  echo
-#}
+function drupal_composer_update_run {
+  # Run any script before we run the composer files.
+  hook_invoke drupal_composer_before
+
+
+  # Make sure that the web directory does not exists.
+  if [ -d "$DIR_WEB" ]; then
+    drupal_sites_default_unprotect
+    rm -R "$DIR_WEB"
+  fi
+
+  # Compose Drupal core.
+  markup_h1 "Update Drupal core & other requirements"
+  markup_h2 "Composer Update"
+  composer_drupal_run update
+
+
+  # Run any script after we did run the composer files.
+  hook_invoke drupal_composer_after
+}

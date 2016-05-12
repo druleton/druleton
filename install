@@ -30,7 +30,7 @@ prompt_confirm_or_exit "Are you sure" "Installation aborted"
 script_before_run
 backup_run
 cleanup_run
-drupal_composer_run
+drupal_composer_install_run
 drupal_install_run
 drupal_modules_disable_run
 drupal_modules_enable_run

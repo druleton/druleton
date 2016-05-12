@@ -33,7 +33,7 @@ script_before_run
 backup_run
 backup_run_sites_default_directory
 cleanup_run
-drupal_composer_run
+drupal_composer_update_run
 restore_run_sites_default_directory
 drupal_upgrade_run
 drupal_login_run
