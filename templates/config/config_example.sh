@@ -21,6 +21,7 @@ DB_USER=""
 DB_PASS=""
 DB_NAME="my_site_db"
 DB_HOST="localhost"
+DB_PORT=3306
 
 # Administrator account (user 1).
 ACCOUNT_NAME="admin"
@@ -36,6 +37,19 @@ ACCOUNT_MAIL="$ACCOUNT_NAME@$SITE_URL"
 # Composer is by default downloaded during the bin/init script.
 # You can optionally use a global installed composer.
 COMPOSER_USE_GLOBAL=0
+
+# The Drupal Console version to use.
+#
+# Options:
+# - phar : use the drush.phar file as the local drush binary. This is the
+#   default option.
+# - branch or tag name : use a specific version by setting the variable to the
+#   proper branch or tag name (eg. dev-master).
+#   See https://github.com/hechoendrupal/DrupalConsole.
+# - global : use the globally installed drupal console command (outside druleton).
+#
+# If the variable is not set, phar will be used.
+DRUPAL_CONSOLE_VERSION="phar"
 
 # The Drush version to use.
 #

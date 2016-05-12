@@ -2,8 +2,8 @@
 Put custom modules in this directory.
 
 Each subdirectory in this directory will be symlinked to the
-`web/sites/all/modules` directory during install & upgrade. Or copied into
-`build/web/sites/all/modules` during build.
+`web/modules` directory during install & upgrade. Or copied into
+`build/current/web/modules` during build.
 
 > **Tip** : Create a subdirectory to put custom modules in (eg. `custom`,
 `features`, ...).

@@ -21,7 +21,7 @@
 # The hooks will be called without and with environment suffix.
 ##
 function drupal_modules_disable_run {
-  # Run any script before we run the make files.
+  # Run any script before we run the composer files.
   hook_invoke drupal_modules_disable_before
 
   # 1. Disable modules.
@@ -36,12 +36,12 @@ function drupal_modules_disable_run {
   # 4. Disable modules specific for the script name and environment.
   drupal_modules_disable_run_file "$DIR_CONFIG/$SCRIPT_NAME/drupal_modules_disable_$ENVIRONMENT.sh"
 
-  # Run any script after we did run the make files.
+  # Run any script after we did run the composer files.
   hook_invoke drupal_modules_disable_after
 }
 
 ##
-# Run the make file.
+# Run the composer file.
 #
 # @param The file name of the script that contains the config array.
 ##
@@ -67,7 +67,7 @@ function drupal_modules_disable_run_file {
 
   # Disable all modules in configuration.
   for module_disable in ${MODULES_DISABLE[@]}; do
-    drupal_drush -y dis ${module_disable}
+    drupal_console module:uninstall ${module_disable}
   done
   echo
 }

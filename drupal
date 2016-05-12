@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ################################################################################
-# Script that acts as a wrapper around the drush cli tool.
+# Script that acts as a wrapper around the Drupal Console tool.
 #
-# The wrapper will always execute drush within the web directory.
+# The wrapper will always execute drupal console within the web directory.
 #
 # ! Do not change this file !
 # All configuration is in the config directory
@@ -19,14 +19,14 @@ markup_debug
 markup_debug "Start : $(date '+%Y-%m-%d %H:%M:%S')"
 markup_debug
 
-# Create the global $DRUSH_OPTIONS array.
-drupal_drush_filter_options
+# Create the global $DRUPAL_CONSOLE_OPTIONS array.
+drupal_console_filter_options
 
-drupal_drush "${DRUSH_OPTIONS[@]}"
+drupal_console "${DRUPAL_CONSOLE_OPTIONS[@]}"
 
 markup_debug
-markup_debug "Drush binary used : $DRUSH_VERSION"
-markup_debug "Drush params : $drush_params"
+markup_debug "Drupal Console binary used : $DRUPAL_CONSOLE_VERSION"
+markup_debug "Drupal Console params : $drupal_console_params"
 
 markup "${GREY}Finished : $(date '+%Y-%m-%d %H:%M:%S')"
 echo

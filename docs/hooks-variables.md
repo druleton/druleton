@@ -68,7 +68,7 @@ backups `backup`. Each backup will be stored in its own subdirectory.
 #### `$DIR_BUILD`
 The full directory path where the build will be stored. Each build will by
 default be compressed in a tar.gz file within this folder. The build itself
-will happen in the `build/web` directory.
+will happen in the `build/current` directory.
 
 #### `$DRUPAL_INSTALLED`
 Is there a working Drupal installation 1/0.

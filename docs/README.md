@@ -17,7 +17,7 @@ Overview of all druleton documentation:
 - [bin/reset](command-reset.md) : Reset an existing project back to the
   fresh-installed state.
 - [bin/upgrade](command-upgrade.md) : Upgrade an existing project by downloading
-  core & contributed as defined in the make files, and update drupal by running
+  core & contributed as defined in the composer files, and update drupal by running
   `drush updb` command afterwards.
 - [bin/build](command-build.md) : Create a package of the project ready to be
   deployed on production.
@@ -38,8 +38,8 @@ Commands installed during the init command:
 ## Configuration
 - [config](config.md) : The structure of the `config` directory.
 - [config.sh](config-config.md) : The global configuration file.
-- [make files](config-make.md) : How to add contrib modules, themes and
-  libraries using the make file configuration.
+- [composer files](config-composer.md) : How to add contrib modules, themes and
+  libraries using the composer file configuration.
 - [modules](config-modules.md) : Enable and Disable modules during install and
   reset.
 - [cleanup](config-cleanup.md) : Delete directories and files when the `web`

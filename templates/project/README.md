@@ -12,11 +12,11 @@ project you are building.
 
 Integrating this code into the project can be done by symlinking them into the
 web directory by implemnting one of the hooks (see
-`config/install/drupal_make_after.sh`) for an example.
+`config/install/drupal_composer_after.sh`) for an example.
 
 Including the custom functionality code into the build is done by copying the
 project (sub)directories into the build (see
-`config/build/drupal_make_after.sh`) for an example.
+`config/build/drupal_composer_after.sh`) for an example.
 
 [See druleton documentation about project][link-project].
 

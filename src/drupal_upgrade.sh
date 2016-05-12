@@ -1,5 +1,5 @@
 ################################################################################
-# Functionality to upgrade Drupal using the drush updb command.
+# Functionality to upgrade Drupal using Drupal Console commands.
 ################################################################################
 
 
@@ -27,8 +27,13 @@ function drupal_upgrade_run {
   hook_invoke "drupal_upgrade_before"
 
   # Do Drupal upgrade.
-  drupal_drush -y updb
-  drupal_drush cc all
+  #
+  # Drupal Console's update:execute command does the following:
+  #  - Switch site into maintenance mode
+  #  - Executing required previous updates
+  #  - Operating in maintenance mode off
+  #  - Rebuilding cache(s)
+  drupal_console update:execute all
   echo
 
   # Trigger the after hook(s).

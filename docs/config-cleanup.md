@@ -4,7 +4,7 @@ included.
 
 This cleanup deletes the directories and/or files that will be recreated during
 the command run. Example: remove the `web` directory before the command
-recreates it by processing the make files.
+recreates it by processing the composer files.
 
 Define what directories and/or files by adding them to the `CLEANUP_DIRECTORIES`
 and/or `CLEANUP_FILES` arrays in the `config/install/cleanup.sh` and/or

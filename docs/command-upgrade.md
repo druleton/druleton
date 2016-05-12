@@ -1,6 +1,6 @@
 # bin/upgrade command
 The `bin/upgrade` command will download Core & Contributed code based on the
-make files and run the update-db command. Use this to update core and
+composer files and run the update-db command. Use this to update core and
 contributed to their latest version or to apply a patch.
 
 A backup will be taken before the reset is run.
@@ -24,12 +24,12 @@ directory.
 #### 2. Move web/sites/default directory to temporary location
 The `web/sites/default` directory and its content is moved outside the web
 directory. This because the fact that the web directory will be deleted and
-replaced by running the make files.
+replaced by running the composer files.
 
 #### 3. Cleanup
 The directories, as defined in `config/upgrade/cleanup.sh` will be deleted.
 
-#### 4. Make
+#### 4. Composer
 Drupal core, contributed modules, themes and libraries will be downloaded and
 unpacked in the `web` directory.
 
@@ -116,12 +116,12 @@ This hook is included and run before the cleanup of the directories is run.
 #### config/upgrade/cleanup_after(_\<env\>).sh
 This hook is included and run after the cleanup of the directories is run.
 
-#### config/upgrade/drupal_make_before(_\<env\>).sh
-This hook is included and run before the make files are processed, downloaded
+#### config/upgrade/drupal_composer_before(_\<env\>).sh
+This hook is included and run before the composer files are processed, downloaded
 and unpacked.
 
-#### config/upgrade/drupal_make_after(_\<env\>).sh
-This hook is included and run after the make files are processed, downloaded
+#### config/upgrade/drupal_composer_after(_\<env\>).sh
+This hook is included and run after the composer files are processed, downloaded
 and unpacked.
 
 #### config/upgrade/restore_sites_default_before(_\<env\>).sh

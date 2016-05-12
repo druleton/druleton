@@ -11,13 +11,13 @@ $ bin/build
 ## What does this command do?
 The command will perform following script steps:
 
-#### 1. Make
+#### 1. Composer
 Drupal core, contributed modules, themes and libraries will be downloaded and
-unpacked in the `build/web` directory as defined in the
-[make file(s)][link-config-make].
+unpacked in the `build/current` directory as defined in the
+[composer file(s)][link-config-composer].
 
 #### 2. Create package
-The build in the `build/web` directory will be packed in an archive file
+The build in the `build/current` directory will be packed in an archive file
 (tar.gz).
 
 If no package name is given, an unique name will be created using:
@@ -76,12 +76,12 @@ The following hooks are supported (in the order as they will be included):
 #### config/build/script_before(_\<env\>).sh
 This hook is included and run before the script will run its first step.
 
-#### config/build/drupal_make_before(_\<env\>).sh
-This hook is included and run before the make files are processed, downloaded
+#### config/build/drupal_composer_before(_\<env\>).sh
+This hook is included and run before the composer files are processed, downloaded
 and unpacked.
 
-#### config/build/drupal_make_after(_\<env\>).sh
-This hook is included and run after the make files are processed, downloaded
+#### config/build/drupal_composer_after(_\<env\>).sh
+This hook is included and run after the composer files are processed, downloaded
 and unpacked.
 
 > **Tip**: This is the proper hook to copy the custom functionality from the
@@ -104,7 +104,7 @@ This hook is included and run when the script is finished.
 
 
 [link-config-config]: config-config.md
-[link-config-make]: config-make.md
+[link-config-composer]: config-composer.md
 [link-hooks]: hooks.md
 
 [link-overview]: README.md

@@ -27,17 +27,25 @@ function drupal_install_run {
   markup_debug "  - Password  : $ACCOUNT_PASS"
   markup_debug "  - Email     : $ACCOUNT_MAIL"
   markup_debug "  - DB host   : $DB_HOST"
+  markup_debug "  - DB port   : $DB_PORT"
   markup_debug "  - DB name   : $DB_NAME"
   markup_debug "  - DB user   : $DB_USER"
   markup_debug "  - DB pass   : $DB_PASS"
 
-  drupal_drush -y si \
-    --account-name="$ACCOUNT_NAME" \
-    --account-pass="$ACCOUNT_PASS" \
-    --account-mail="$ACCOUNT_MAIL" \
+  drupal_console site:install -n \
+    $SITE_PROFILE \
+    --langcode=en \
+    --db-type=mysql \
+    --db-host=$DB_HOST \
+    --db-name=$DB_NAME \
+    --db-user=$DB_USER \
+    --db-pass=$DB_PASS \
+    --db-port=$DB_PORT \
     --site-name="$SITE_NAME" \
-    --db-url="mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME" \
-    $SITE_PROFILE
+    --site-mail=$ACCOUNT_MAIL \
+    --account-name=$ACCOUNT_NAME \
+    --account-mail=$ACCOUNT_MAIL \
+    --account-pass=$ACCOUNT_PASS
   echo
 
 

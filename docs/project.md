@@ -7,8 +7,8 @@ This is the directory where the actual development is done.
 > **Note** The code within the `project` directory is optional. You can setup a
 > demo website with configuration and hooks only.
 
-Druleton has the `config/build/drupal_make_after.sh`,
-`config/install/drupal_make_after.sh` and `config/upgrade/drupal_make_after.sh`
+Druleton has the `config/build/drupal_composer_after.sh`,
+`config/install/drupal_composer_after.sh` and `config/upgrade/drupal_composer_after.sh`
 hook implemented. The code in those hooks will automatically copy (for build
 command) or symlink (install & upgrade) the custom profiles, modules, themes and
 libraries from within the project directory.
@@ -59,8 +59,8 @@ project/profiles/profile_name/libraries/...
 ```
 
 Adding the custom install profile and its modules, themes and libraries is done
-using the `config/install/drupal_make_after.sh` and
-`config/upgrade/drupal_make_after.sh` hook:
+using the `config/install/drupal_composer_after.sh` and
+`config/upgrade/drupal_composer_after.sh` hook:
 
 ```bash
 markup_h2 "Profiles"
@@ -101,7 +101,7 @@ project/libraries/library_name2
 ```
 
 Adding the custom modules, themes and libraries is done using the
-`config/install/drupal_make_after.sh` and `config/upgrade/drupal_make_after.sh`
+`config/install/drupal_composer_after.sh` and `config/upgrade/drupal_composer_after.sh`
 hook:
 
 ```bash

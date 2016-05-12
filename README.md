@@ -52,7 +52,7 @@ $ bin/init
 
 ### bin/install
 The `bin/install` command will download Core & Contributed (modules, themes &
-libraries) as defined in the make file(s), and will install the website with
+libraries) as defined in the composer file(s), and will install the website with
 the settings in the config/config.sh file.
 
 When the installation is finished, a browser will be opened and you will be
@@ -86,7 +86,7 @@ $ bin/reset
 
 ### bin/upgrade
 The `bin/upgrade` command will download Core & Contributed code based on the
-make files and run the update-db command. Use this to update core and
+composer files and run the update-db command. Use this to update core and
 contributed to their latest version or to apply a patch.
 
 A backup will be taken before the reset is run.

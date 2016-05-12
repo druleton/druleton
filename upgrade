@@ -3,7 +3,7 @@
 ################################################################################
 # Script to upgrade an existing site based on the configuration by replacing
 # core & contrib by removing the web directory and download again based on the
-# make files.
+# composer files.
 #
 # ! Do not change this file !
 # All configuration is in the config directory
@@ -18,7 +18,7 @@ source "$DIR_SRC/script.sh"
 source "$DIR_SRC/upgrade.sh"
 source "$DIR_SRC/backup.sh"
 source "$DIR_SRC/cleanup.sh"
-source "$DIR_SRC/drupal_make.sh"
+source "$DIR_SRC/drupal_composer.sh"
 source "$DIR_SRC/restore.sh"
 source "$DIR_SRC/drupal_upgrade.sh"
 source "$DIR_SRC/drupal_login.sh"
@@ -33,7 +33,7 @@ script_before_run
 backup_run
 backup_run_sites_default_directory
 cleanup_run
-drupal_make_run
+drupal_composer_update_run
 restore_run_sites_default_directory
 drupal_upgrade_run
 drupal_login_run

@@ -95,6 +95,7 @@ function init_config_load_current {
   INIT_CONFIG_DB_PASS="${DB_PASS}"
   INIT_CONFIG_DB_NAME="${DB_NAME}"
   INIT_CONFIG_DB_HOST="${DB_HOST}"
+  INIT_CONFIG_DB_PORT="${DB_PORT}"
 
   INIT_CONFIG_ACCOUNT_NAME="${ACCOUNT_NAME}"
   INIT_CONFIG_ACCOUNT_PASS="${ACCOUNT_PASS}"
@@ -104,6 +105,7 @@ function init_config_load_current {
   hook_invoke "config_load_current"
 
   INIT_CONFIG_COMPOSER_USE_GLOBAL="${COMPOSER_USE_GLOBAL}"
+  INIT_CONFIG_DRUPAL_CONSOLE_VERSION="${DRUPAL_CONSOLE_VERSION}"
   INIT_CONFIG_DRUSH_VERSION="${DRUSH_VERSION}"
   INIT_CONFIG_CODER_DISABLED="${CODER_DISABLED}"
 }
@@ -131,6 +133,8 @@ function init_config_collect {
   INIT_CONFIG_DB_NAME="${REPLY}"
   prompt "Database hostname or IP address" "$INIT_CONFIG_DB_HOST"
   INIT_CONFIG_DB_HOST="${REPLY}"
+  prompt "Database port number" "$INIT_CONFIG_DB_PORT"
+  INIT_CONFIG_DB_PORT="${REPLY}"
   echo
 
   markup_h2 "Drupal administrator account"
@@ -149,6 +153,9 @@ function init_config_collect {
   markup_h2 "Druleton options"
   prompt_yn "Use global composer instead of a local copy" "${INIT_CONFIG_COMPOSER_USE_GLOBAL}"
   INIT_CONFIG_COMPOSER_USE_GLOBAL=$REPLY
+
+  prompt "Drupal Console version to use [phar/global/branch name]" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION:-phar}"
+  INIT_CONFIG_DRUPAL_CONSOLE_VERSION="${REPLY}"
 
   prompt "Drush version to use [phar/global/branch name]" "${INIT_CONFIG_DRUSH_VERSION:-phar}"
   INIT_CONFIG_DRUSH_VERSION="${REPLY}"
@@ -172,6 +179,7 @@ function init_config_confirm {
   markup_li_value "Password" "${INIT_CONFIG_DB_PASS:--}"
   markup_li_value "Database name" "${INIT_CONFIG_DB_NAME:--}"
   markup_li_value "hostname/IP address" "${INIT_CONFIG_DB_HOST:--}"
+  markup_li_value "port number" "${INIT_CONFIG_DB_PORT:--}"
   markup_h2 "Drupal administrator account"
   markup_li_value "username" "${INIT_CONFIG_ACCOUNT_NAME:--}"
   markup_li_value "password" "${INIT_CONFIG_ACCOUNT_PASS:--}"
@@ -182,6 +190,7 @@ function init_config_confirm {
 
   markup_h2 "Druleton options"
   markup_li_value "Use global composer" "${INIT_CONFIG_COMPOSER_USE_GLOBAL:--}"
+  markup_li_value "Drupal Console version to use" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION:--}"
   markup_li_value "Drush version to use" "${INIT_CONFIG_DRUSH_VERSION:--}"
   markup_li_value "Disable coder installation" "${INIT_CONFIG_CODER_DISABLED:--}"
 
@@ -205,6 +214,7 @@ function init_config_save {
   init_config_save_variable "DB_PASS" "${INIT_CONFIG_DB_PASS}"
   init_config_save_variable "DB_NAME" "${INIT_CONFIG_DB_NAME}"
   init_config_save_variable "DB_HOST" "${INIT_CONFIG_DB_HOST}"
+  init_config_save_variable "DB_PORT" "${INIT_CONFIG_DB_PORT}"
 
   init_config_save_variable "ACCOUNT_NAME" "${INIT_CONFIG_ACCOUNT_NAME}"
   init_config_save_variable "ACCOUNT_PASS" "${INIT_CONFIG_ACCOUNT_PASS}"
@@ -214,6 +224,7 @@ function init_config_save {
   hook_invoke "config_save"
 
   init_config_save_variable "COMPOSER_USE_GLOBAL" "${INIT_CONFIG_COMPOSER_USE_GLOBAL}"
+  init_config_save_variable "DRUPAL_CONSOLE_VERSION" "${INIT_CONFIG_DRUPAL_CONSOLE_VERSION}"
   init_config_save_variable "DRUSH_VERSION" "${INIT_CONFIG_DRUSH_VERSION}"
   init_config_save_variable "CODER_DISABLED" "${INIT_CONFIG_CODER_DISABLED}"
 

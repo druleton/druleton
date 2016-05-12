@@ -16,6 +16,7 @@ function init_structure_run {
   init_structure_root
   init_structure_config
   init_structure_project
+  init_structure_scripts
   echo
 }
 
@@ -42,6 +43,13 @@ function init_structure_root {
     message_success "Copied .gitignore file to the root of the project."
   else
     message_warning "There is already a .gitignore file."
+  fi
+
+  if [ ! -f "${DIR_ROOT}/composer.json" ]; then
+    cp "${DIR_BIN}/templates/composer.json" "${DIR_ROOT}/"
+    message_success "Copied composer.json file to the root of the project."
+  else
+    message_warning "There is already a composer.json file."
   fi
 
   if [ ! -f "${DIR_ROOT}/README.md" ]; then
@@ -73,5 +81,17 @@ function init_structure_project {
     message_success "Copied the project directory to the root of the project."
   else
     message_warning "There is already a project directory."
+  fi
+}
+
+##
+# Copy the example scripts directory to the root of the project.
+##
+function init_structure_scripts {
+  if [ ! -d "${DIR_SCRIPTS}" ]; then
+    cp -R "${DIR_BIN}/templates/scripts" "${DIR_SCRIPTS}"
+    message_success "Copied the scripts directory to the root of the project."
+  else
+    message_warning "There is already a scripts directory."
   fi
 }

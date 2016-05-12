@@ -13,5 +13,5 @@ config/config.sh
 /build
 
 # The reason of this project is to avoid core and contrib code to be stored in
-# the project repository. Do not store what can be build using make files.
+# the project repository. Do not store what can be build using composer files.
 /web
